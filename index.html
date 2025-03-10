@@ -44,9 +44,9 @@
     </style>
 </head>
 <body>
-    <h1>曲リスト</h1>
+    <h1>歌える曲リスト</h1>
 
-    <input type="text" id="searchInput" placeholder="検索ワードを入力..." onkeyup="filterTable()">
+    <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索..." onkeyup="filterTable()">
     
     <label for="filterArtist">アーティストでフィルター:</label>
     <select id="filterArtist" onchange="filterTable()">
@@ -146,28 +146,38 @@
         <option value="泰葉">泰葉</option>
         <option value="大原櫻子">大原櫻子</option>
         <option value="大塚愛">大塚愛</option>
-        <option value="沢田知可子">沢田知可子</option>
-        <option value="竹内まりや">竹内まりや</option>
-        <option value="中島みゆき">中島みゆき</option>
-        <option value="中島美嘉">中島美嘉</option>
-        <option value="椎名林檎">椎名林檎</option>
-        <option value="渡辺真知子">渡辺真知子</option>
-        <option value="渡辺美里">渡辺美里</option>
-        <option value="徳永英明">徳永英明</option>
-        <option value="柏原芳恵">柏原芳恵</option>
-        <option value="八神純子">八神純子</option>
-        <option value="飯島真理">飯島真理</option>
-        <option value="尾崎豊">尾崎豊</option>
-        <option value="浜崎あゆみ">浜崎あゆみ</option>
-        <option value="平松愛理">平松愛理</option>
-        <option value="米米CLUB">米米CLUB</option>
-        <option value="堀江美都子">堀江美都子</option>
-        <option value="本田美奈子.">本田美奈子.</option>
-        <option value="麻丘めぐみ">麻丘めぐみ</option>
-        <option value="木村弓">木村弓</option>
-        <option value="薬師丸ひろ子">薬師丸ひろ子</option>
-        <option value="緑黄色社会">緑黄色社会</option>
-        <option value="諫山実生">諫山実生</option>
+        <option value="沢田知可子">沢田知可子</td>
+        <option value="竹内まりや">竹内まりや</td>
+        <option value="中島みゆき">中島みゆき</td>
+        <option value="中島美嘉">中島美嘉</td>
+        <option value="椎名林檎">椎名林檎</td>
+        <option value="渡辺真知子">渡辺真知子</td>
+        <option value="渡辺美里">渡辺美里</td>
+        <option value="徳永英明">徳永英明</td>
+        <option value="柏原芳恵">柏原芳恵</td>
+        <option value="八神純子">八神純子</td>
+        <option value="飯島真理">飯島真理</td>
+        <option value="尾崎豊">尾崎豊</td>
+        <option value="浜崎あゆみ">浜崎あゆみ</td>
+        <option value="平松愛理">平松愛理</td>
+        <option value="米米CLUB">米米CLUB</td>
+        <option value="堀江美都子">堀江美都子</td>
+        <option value="本田美奈子.">本田美奈子.</td>
+        <option value="麻丘めぐみ">麻丘めぐみ</td>
+        <option value="木村弓">木村弓</td>
+        <option value="薬師丸ひろ子">薬師丸ひろ子</td>
+        <option value="緑黄色社会">緑黄色社会</td>
+        <option value="諫山実生">諫山実生</td>
+    </select>
+
+    <label for="filterGenre">ジャンルでフィルター:</label>
+    <select id="filterGenre" onchange="filterTable()">
+        <option value="">すべて</option>
+        <option value="令和">令和</option>
+        <option value="平成">平成</option>
+        <option value="昭和">昭和</option>
+        <option value="洋楽">洋楽</option>
+        <option value="裏声">裏声</option>
     </select>
 
     <table id="songTable">
@@ -379,14 +389,14 @@
                         showRow = false; // Exclude if genre does not match
                     }
                 }
-                
+
                 // Filter by search input
                 if (searchInput) {
                     const titleText = tdTitle.textContent.toLowerCase();
                     if (!tdArtist.textContent.toLowerCase().includes(searchInput) && 
                         !titleText.includes(searchInput) && 
                         !tdGenre.textContent.toLowerCase().includes(searchInput)) {
-                        showRow = false; // Exclude if title, artist or genre does not match search
+                        showRow = false; // Exclude if title, artist, or genre does not match search
                     }
                 }
 
