@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歌える曲リスト</title>
+    <title>歌ったことのある曲リスト</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -261,22 +261,22 @@
 
         function sortTable(n) {
             const table = document.getElementById("songTable");
-            let switching = true;
-            let dir = "asc"; 
-            let switchcount = 0;
+            let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            switching = true; // Start by saying: "turn on switching"
+            dir = "asc"; // Set the sorting direction to ascending
 
             while (switching) {
-                switching = false;
-                const rows = table.rows;
+                switching = false; // Start by saying: no switching is done
+                rows = table.rows;
 
-                for (let i = 1; i < (rows.length - 1); i++) {
-                    let shouldSwitch = false;
-                    const x = rows[i].getElementsByTagName("TD")[n];
-                    const y = rows[i + 1].getElementsByTagName("TD")[n];
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false; // Set the default shouldSwitch to false
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
 
                     if (dir === "asc") {
                         if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
+                            shouldSwitch = true; // If the next row should be higher than the current row
                             break;
                         }
                     } else if (dir === "desc") {
@@ -288,12 +288,12 @@
                 }
                 if (shouldSwitch) {
                     rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchcount++;
+                    switching = true; // A switch has been done, we need to keep switching.
+                    switchcount++; // Each time a switch is done, increase this count by 1
                 } else {
                     if (switchcount === 0 && dir === "asc") {
-                        dir = "desc";
-                        switching = true;
+                        dir = "desc"; // If no switching has been done AND the direction is "asc",
+                        switching = true; // set the direction to "desc" and run the while loop again.
                     }
                 }
             }
