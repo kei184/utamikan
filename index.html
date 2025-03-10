@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>曲リスト</title>
+    <title>歌える曲リスト</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,15 +34,19 @@
         tr:hover {
             background-color: #ddd;
         }
-        #filterArtist, #filterGenre {
+        #searchInput, #filterArtist, #filterGenre {
             margin-bottom: 20px;
             padding: 10px;
+            width: 30%;
             border: 1px solid #ccc;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
-    <h1>私の歌える曲リスト</h1>
+    <h1>曲リスト</h1>
+
+    <input type="text" id="searchInput" placeholder="検索ワードを入力..." onkeyup="filterTable()">
     
     <label for="filterArtist">アーティストでフィルター:</label>
     <select id="filterArtist" onchange="filterTable()">
@@ -164,16 +168,6 @@
         <option value="薬師丸ひろ子">薬師丸ひろ子</option>
         <option value="緑黄色社会">緑黄色社会</option>
         <option value="諫山実生">諫山実生</option>
-    </select>
-
-    <label for="filterGenre">ジャンルでフィルター:</label>
-    <select id="filterGenre" onchange="filterTable()">
-        <option value="">すべて</option>
-        <option value="令和">令和</option>
-        <option value="平成">平成</option>
-        <option value="昭和">昭和</option>
-        <option value="洋楽">洋楽</option>
-        <option value="裏声">裏声</option>
     </select>
 
     <table id="songTable">
@@ -358,6 +352,7 @@
 
     <script>
         function filterTable() {
+            const searchInput = document.getElementById("searchInput").value.toLowerCase();
             const artistInput = document.getElementById("filterArtist").value;
             const genreInput = document.getElementById("filterGenre").value;
             const table = document.getElementById("songTable");
@@ -365,19 +360,33 @@
 
             for (let i = 1; i < tr.length; i++) {
                 const tdArtist = tr[i].getElementsByTagName("td")[0];
+                const tdTitle = tr[i].getElementsByTagName("td")[1];
                 const tdGenre = tr[i].getElementsByTagName("td")[2];
 
-                let showRow = true; // Assume we want to show this row
+                // Assume we want to show this row
+                let showRow = true; 
 
+                // Filter by artist
                 if (artistInput && tdArtist) {
                     if (tdArtist.textContent.trim() !== artistInput) {
                         showRow = false; // Exclude if artist does not match
                     }
                 }
 
+                // Filter by genre
                 if (genreInput && tdGenre) {
                     if (tdGenre.textContent.trim() !== genreInput) {
                         showRow = false; // Exclude if genre does not match
+                    }
+                }
+                
+                // Filter by search input
+                if (searchInput) {
+                    const titleText = tdTitle.textContent.toLowerCase();
+                    if (!tdArtist.textContent.toLowerCase().includes(searchInput) && 
+                        !titleText.includes(searchInput) && 
+                        !tdGenre.textContent.toLowerCase().includes(searchInput)) {
+                        showRow = false; // Exclude if title, artist or genre does not match search
                     }
                 }
 
