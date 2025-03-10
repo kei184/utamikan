@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歌ったことのある曲リスト</title>
+    <title>歌える曲リスト</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,10 +27,6 @@
         th {
             background-color: #4CAF50;
             color: white;
-            cursor: pointer; /* Sort table by clicking */
-        }
-        th:hover {
-            background-color: #45a049;
         }
         tr:nth-child(even) {
             background-color: #f2f2f2;
@@ -38,25 +34,154 @@
         tr:hover {
             background-color: #ddd;
         }
-        #searchInput {
+        #filterArtist, #filterGenre {
             margin-bottom: 20px;
             padding: 10px;
-            width: 100%;
             border: 1px solid #ccc;
         }
     </style>
 </head>
 <body>
-    <h1>うたったことのある曲リスト</h1>
+    <h1>私の歌える曲リスト</h1>
     
-    <input type="text" id="searchInput" placeholder="検索ワードを入力..." onkeyup="filterTable()">
+    <label for="filterArtist">アーティストでフィルター:</label>
+    <select id="filterArtist" onchange="filterTable()">
+        <option value="">すべて</option>
+        <option value="Ado">Ado</option>
+        <option value="aiko">aiko</option>
+        <option value="Aimer">Aimer</option>
+        <option value="AKB48">AKB48</option>
+        <option value="back number">back number</option>
+        <option value="BEGIN">BEGIN</option>
+        <option value="Buono!">Buono!</option>
+        <option value="Co shu Nie">Co shu Nie</option>
+        <option value="DREAMS COME TRUE">DREAMS COME TRUE</option>
+        <option value="Every Little Thing">Every Little Thing</option>
+        <option value="Frankie Valli">Frankie Valli</option>
+        <option value="hitomi">hitomi</option>
+        <option value="HY">HY</option>
+        <option value="JITTERIN'JINN">JITTERIN'JINN</option>
+        <option value="Kiroro">Kiroro</option>
+        <option value="Libera">Libera</option>
+        <option value="MAHO堂">MAHO堂</option>
+        <option value="MISIA">MISIA</option>
+        <option value="mona">mona</option>
+        <option value="Myuk">Myuk</option>
+        <option value="ORIGINAL LOVE">ORIGINAL LOVE</option>
+        <option value="SHISHAMO">SHISHAMO</option>
+        <option value="Superfly">Superfly</option>
+        <option value="Uru">Uru</option>
+        <option value="YEN TOWN BAND">YEN TOWN BAND</option>
+        <option value="YOASOBI">YOASOBI</option>
+        <option value="YUI">YUI</option>
+        <option value="ZARD">ZARD</option>
+        <option value="あいみょん">あいみょん</option>
+        <option value="アイルランド民謡">アイルランド民謡</option>
+        <option value="アン・ルイス">アン・ルイス</option>
+        <option value="アンジェラ・アキ">アンジェラ・アキ</option>
+        <option value="いきものがかり">いきものがかり</option>
+        <option value="いしだあゆみ">いしだあゆみ</option>
+        <option value="ヴィレッジ・シンガーズ">ヴィレッジ・シンガーズ</option>
+        <option value="ケルティック・ウーマン / シークレット・ガーデン">ケルティック・ウーマン / シークレット・ガーデン</option>
+        <option value="ザ・ピーナッツ">ザ・ピーナッツ</option>
+        <option value="スターダストレビュー">スターダストレビュー</option>
+        <option value="ずっと真夜中でいいのに。">ずっと真夜中でいいのに。</option>
+        <option value="スピッツ">スピッツ</option>
+        <option value="セリーヌ・ディオン">セリーヌ・ディオン</option>
+        <option value="ディズニー映画『アナと雪の女王』より">ディズニー映画『アナと雪の女王』より</option>
+        <option value="ディズニー映画『ムーラン』より">ディズニー映画『ムーラン』より</option>
+        <option value="テレサ・テン">テレサ・テン</option>
+        <option value="とた">とた</option>
+        <option value="ドリーミング">ドリーミング</option>
+        <option value="フィンガー5">フィンガー5</option>
+        <option value="プリンセス プリンセス">プリンセス プリンセス</option>
+        <option value="ムッシュかまやつ">ムッシュかまやつ</option>
+        <option value="ゆず">ゆず</option>
+        <option value="ヨルシカ">ヨルシカ</option>
+        <option value="レベッカ">レベッカ</option>
+        <option value="亜蘭知子">亜蘭知子</option>
+        <option value="絢香">絢香</option>
+        <option value="安全地帯">安全地帯</option>
+        <option value="杏里">杏里</option>
+        <option value="伊藤由奈">伊藤由奈</option>
+        <option value="井上陽水">井上陽水</option>
+        <option value="奥華子">奥華子</option>
+        <option value="岡本真夜">岡本真夜</option>
+        <option value="夏川りみ">夏川りみ</option>
+        <option value="岩崎宏美">岩崎宏美</option>
+        <option value="岩崎良美">岩崎良美</option>
+        <option value="喜納昌吉&チャンプルーズ">喜納昌吉&チャンプルーズ</option>
+        <option value="久保田早紀">久保田早紀</option>
+        <option value="久保田利伸">久保田利伸</option>
+        <option value="久保田利伸 with ナオミ・キャンベル">久保田利伸 with ナオミ・キャンベル</option>
+        <option value="京都府民謡">京都府民謡</option>
+        <option value="玉置浩二">玉置浩二</option>
+        <option value="広瀬香美">広瀬香美</option>
+        <option value="荒井由実">荒井由実</option>
+        <option value="高橋洋子">高橋洋子</option>
+        <option value="今井美樹">今井美樹</option>
+        <option value="山口百恵">山口百恵</option>
+        <option value="山崎まさよし">山崎まさよし</option>
+        <option value="讃美歌">讃美歌</option>
+        <option value="紙ふうせん">紙ふうせん</option>
+        <option value="柴咲コウ">柴咲コウ</option>
+        <option value="手嶌葵">手嶌葵</option>
+        <option value="十明">十明</option>
+        <option value="小田和正">小田和正</option>
+        <option value="小柳ゆき">小柳ゆき</option>
+        <option value="小林麻美">小林麻美</option>
+        <option value="松原みき">松原みき</option>
+        <option value="松田聖子">松田聖子</option>
+        <option value="松任谷由実">松任谷由実</option>
+        <option value="森高千里">森高千里</option>
+        <option value="秦基博">秦基博</option>
+        <option value="菅田将暉">菅田将暉</option>
+        <option value="石川さゆり">石川さゆり</option>
+        <option value="石川ひとみ">石川ひとみ</option>
+        <option value="太田裕美">太田裕美</option>
+        <option value="泰葉">泰葉</option>
+        <option value="大原櫻子">大原櫻子</option>
+        <option value="大塚愛">大塚愛</option>
+        <option value="沢田知可子">沢田知可子</option>
+        <option value="竹内まりや">竹内まりや</option>
+        <option value="中島みゆき">中島みゆき</option>
+        <option value="中島美嘉">中島美嘉</option>
+        <option value="椎名林檎">椎名林檎</option>
+        <option value="渡辺真知子">渡辺真知子</option>
+        <option value="渡辺美里">渡辺美里</option>
+        <option value="徳永英明">徳永英明</option>
+        <option value="柏原芳恵">柏原芳恵</option>
+        <option value="八神純子">八神純子</option>
+        <option value="飯島真理">飯島真理</option>
+        <option value="尾崎豊">尾崎豊</option>
+        <option value="浜崎あゆみ">浜崎あゆみ</option>
+        <option value="平松愛理">平松愛理</option>
+        <option value="米米CLUB">米米CLUB</option>
+        <option value="堀江美都子">堀江美都子</option>
+        <option value="本田美奈子.">本田美奈子.</option>
+        <option value="麻丘めぐみ">麻丘めぐみ</option>
+        <option value="木村弓">木村弓</option>
+        <option value="薬師丸ひろ子">薬師丸ひろ子</option>
+        <option value="緑黄色社会">緑黄色社会</option>
+        <option value="諫山実生">諫山実生</option>
+    </select>
+
+    <label for="filterGenre">ジャンルでフィルター:</label>
+    <select id="filterGenre" onchange="filterTable()">
+        <option value="">すべて</option>
+        <option value="令和">令和</option>
+        <option value="平成">平成</option>
+        <option value="昭和">昭和</option>
+        <option value="洋楽">洋楽</option>
+        <option value="裏声">裏声</option>
+    </select>
 
     <table id="songTable">
         <thead>
             <tr>
-                <th onclick="sortTable(0)">Artist</th>
-                <th onclick="sortTable(1)">Title</th>
-                <th onclick="sortTable(2)">Genre</th>
+                <th>Artist</th>
+                <th>Title</th>
+                <th>Genre</th>
             </tr>
         </thead>
         <tbody>
@@ -233,69 +358,30 @@
 
     <script>
         function filterTable() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toLowerCase();
+            const artistInput = document.getElementById("filterArtist").value;
+            const genreInput = document.getElementById("filterGenre").value;
             const table = document.getElementById("songTable");
             const tr = table.getElementsByTagName("tr");
 
             for (let i = 1; i < tr.length; i++) {
                 const tdArtist = tr[i].getElementsByTagName("td")[0];
-                const tdTitle = tr[i].getElementsByTagName("td")[1];
                 const tdGenre = tr[i].getElementsByTagName("td")[2];
 
-                if (tdArtist || tdTitle || tdGenre) {
-                    const artistText = tdArtist.textContent || tdArtist.innerText;
-                    const titleText = tdTitle.textContent || tdTitle.innerText;
-                    const genreText = tdGenre.textContent || tdGenre.innerText;
-                    
-                    if (artistText.toLowerCase().indexOf(filter) > -1 || 
-                        titleText.toLowerCase().indexOf(filter) > -1 || 
-                        genreText.toLowerCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
+                let showRow = true; // Assume we want to show this row
+
+                if (artistInput && tdArtist) {
+                    if (tdArtist.textContent.trim() !== artistInput) {
+                        showRow = false; // Exclude if artist does not match
                     }
                 }
-            }
-        }
 
-        function sortTable(n) {
-            const table = document.getElementById("songTable");
-            let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            switching = true; // Start by saying: "turn on switching"
-            dir = "asc"; // Set the sorting direction to ascending
-
-            while (switching) {
-                switching = false; // Start by saying: no switching is done
-                rows = table.rows;
-
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false; // Set the default shouldSwitch to false
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
-
-                    if (dir === "asc") {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true; // If the next row should be higher than the current row
-                            break;
-                        }
-                    } else if (dir === "desc") {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
+                if (genreInput && tdGenre) {
+                    if (tdGenre.textContent.trim() !== genreInput) {
+                        showRow = false; // Exclude if genre does not match
                     }
                 }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true; // A switch has been done, we need to keep switching.
-                    switchcount++; // Each time a switch is done, increase this count by 1
-                } else {
-                    if (switchcount === 0 && dir === "asc") {
-                        dir = "desc"; // If no switching has been done AND the direction is "asc",
-                        switching = true; // set the direction to "desc" and run the while loop again.
-                    }
-                }
+
+                tr[i].style.display = showRow ? "" : "none"; // Display or hide the row based on the filters
             }
         }
     </script>
