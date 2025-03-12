@@ -31,7 +31,7 @@ app.get('/getSheetData', async (req, res) => {
         const response = await fetch(url);
         const data = await response.json();
 
-        // 🔹 追加のCORSヘッダーを手動で設定
+        // 🔹 CORS ヘッダーを追加
         res.setHeader('Access-Control-Allow-Origin', 'https://kei184.github.io');
         res.setHeader('Access-Control-Allow-Methods', 'GET');
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
