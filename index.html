@@ -3,51 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>うたったことのある曲リスト</title>
+    <title>🍊 うたったことのある曲リスト 🍊</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 20px;
             padding: 20px;
-            background-color: #fff5e6;
-            background-image: url('https://www.transparenttextures.com/patterns/food.png');
+            background: linear-gradient(135deg, #ffcc80, #ff9800);
+            color: #5c3d00;
         }
         h1 {
-            color: #d2691e;
+            color: #fff;
             text-align: center;
-            font-size: 2em;
+            font-size: 2.5em;
+            background-color: #ff9800;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
         .filter-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 20px;
+            justify-content: center;
+            gap: 15px;
             margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .filter-group {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
         }
         .filter-group label {
-            font-weight: normal;
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 3px;
+            font-weight: bold;
+            font-size: 1em;
+            color: #ff6f00;
+            margin-bottom: 5px;
         }
         .filter-group select, .filter-group input {
-            padding: 8px;
-            border: 1px solid #ffa500;
+            padding: 10px;
+            border: 2px solid #ff9800;
             border-radius: 5px;
-            background-color: #ffebcd;
+            background-color: #fff3e0;
             font-size: 1em;
-            width: 200px;
+            width: 220px;
         }
-        #filterGenre {
-            width: auto;
-            min-width: 100px;
-            max-width: 300px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            border: 1px solid #ff9800;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #ff6f00;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #fff3e0;
+        }
+        tr:hover {
+            background-color: #ffcc80;
+        }
+        #load-button {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 20px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        #load-button:hover {
+            background-color: #ff6f00;
         }
     </style>
 </head>
@@ -55,17 +96,17 @@
     <h1>🍊 うたったことのある曲リスト 🍊</h1>
     <div class="filter-container">
         <div class="filter-group">
-            <label for="searchInput">検索</label>
+            <label for="searchInput">🔍 検索</label>
             <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索..." onkeyup="filterTable()">
         </div>
         <div class="filter-group">
-            <label for="filterArtist">アーティスト</label>
+            <label for="filterArtist">🎤 アーティスト</label>
             <select id="filterArtist" onchange="filterTable()">
                 <option value="">すべて</option>
             </select>
         </div>
         <div class="filter-group">
-            <label for="filterGenre">ジャンル</label>
+            <label for="filterGenre">🎶 ジャンル</label>
             <select id="filterGenre" onchange="filterTable()">
                 <option value="">すべて</option>
             </select>
@@ -74,63 +115,14 @@
     <table id="songTable">
         <thead>
             <tr>
-                <th>アーティスト</th>
-                <th>曲名</th>
-                <th>ジャンル</th>
+                <th>🎤 アーティスト</th>
+                <th>🎵 曲名</th>
+                <th>🎶 ジャンル</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
     <button id="load-button">🍊 データ読み込み 🍊</button>
-    <script>
-        function filterTable() {
-            const searchInput = document.getElementById("searchInput").value.toLowerCase().normalize("NFKC");
-            const artistInput = document.getElementById("filterArtist").value;
-            const genreInput = document.getElementById("filterGenre").value;
-            const table = document.getElementById("songTable");
-            const tr = table.getElementsByTagName("tr");
-            for (let i = 1; i < tr.length; i++) {
-                const tdArtist = tr[i].getElementsByTagName("td")[0];
-                const tdTitle = tr[i].getElementsByTagName("td")[1];
-                const tdGenre = tr[i].getElementsByTagName("td")[2];
-                let showRow = true;
-                if (searchInput) {
-                    const artistText = tdArtist ? tdArtist.textContent.toLowerCase() : "";
-                    const titleText = tdTitle ? tdTitle.textContent.toLowerCase() : "";
-                    const genreText = tdGenre ? tdGenre.textContent.toLowerCase() : "";
-                    if (!artistText.includes(searchInput) && !titleText.includes(searchInput) && !genreText.includes(searchInput)) {
-                        showRow = false;
-                    }
-                }
-                tr[i].style.display = showRow ? "" : "none";
-            }
-        }
-document.getElementById('load-button').addEventListener('click', function() {
-    fetch('https://utamikan.onrender.com/getSheetData') // 正しいURLを指定
-        .then(response => response.json())
-        .then(data => {
-            console.log("取得したデータ:", data); // デバッグ用
-            const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
-            tableBody.innerHTML = '';
-
-            if (data.values && data.values.length > 1) {
-                data.values.slice(1).forEach(row => {
-                    if (row.length >= 3) {
-                        const tr = document.createElement("tr");
-                        tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
-                        tableBody.appendChild(tr);
-                    }
-                });
-            } else {
-                console.warn("データが空です！");
-            }
-            filterTable();
-        })
-        .catch(error => {
-            console.error('データ取得エラー:', error);
-        });
-});
-    </script>
 </body>
 </html>
