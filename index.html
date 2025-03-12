@@ -106,27 +106,28 @@
                 tr[i].style.display = showRow ? "" : "none";
             }
         }
-        document.getElementById('load-button').addEventListener('click', function() {
-            fetch('/getSheetData')
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
-                    tableBody.innerHTML = '';
-                    if (data.values && data.values.length > 1) {
-                        data.values.slice(1).forEach(row => {
-                            if (row.length >= 3) {
-                                const tr = document.createElement("tr");
-                                tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
-                                tableBody.appendChild(tr);
-                            }
-                        });
+document.getElementById('load-button').addEventListener('click', function() {
+    fetch('/getSheetData')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+
+            if (data.values && data.values.length > 1) {
+                data.values.slice(1).forEach(row => {
+                    if (row.length >= 3) {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+                        tableBody.appendChild(tr);
                     }
-                    filterTable();
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
                 });
+            }
+            filterTable();
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
         });
+});
     </script>
 </body>
 </html>
