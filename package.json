@@ -8,13 +8,13 @@
 }
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kei184/utamikan.git"
+    "url": "git+https://github.com/kei184/utamikan"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kei184/utamikan/issues"
+    "url": "https://github.com/kei184/utamikan/"
   },
   "homepage": "https://github.com/kei184/utamikan#readme",
   "dependencies": {
