@@ -107,9 +107,10 @@
             }
         }
 document.getElementById('load-button').addEventListener('click', function() {
-    fetch('https://utamikan.onrender.com/getSheetData') // RenderのURLを使用
+    fetch('https://utamikan.onrender.com/getSheetData') // 正しいURLを指定
         .then(response => response.json())
         .then(data => {
+            console.log("取得したデータ:", data); // デバッグ用
             const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
             tableBody.innerHTML = '';
 
@@ -121,6 +122,8 @@ document.getElementById('load-button').addEventListener('click', function() {
                         tableBody.appendChild(tr);
                     }
                 });
+            } else {
+                console.warn("データが空です！");
             }
             filterTable();
         })
