@@ -107,7 +107,7 @@
             }
         }
 document.getElementById('load-button').addEventListener('click', function() {
-    fetch('/getSheetData') // Renderのバックエンド経由で取得
+    fetch('https://utamikan.onrender.com/getSheetData') // Renderのバックエンド経由で取得
         .then(response => response.json())
         .then(data => {
             const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
