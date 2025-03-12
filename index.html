@@ -409,44 +409,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スプレッドシートデータの表示</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>リスト</title>
 </head>
 <body>
+  <button id="loadSpreadsheet">スプレッドシートを読み込む</button>
+  <ul id="songList"></ul>
 
-<h1>スプレッドシートデータ</h1>
-<div id="data-list"></div>
-<button id="load-button">データ読み込み</button>
-
-<script>
-    document.getElementById('load-button').addEventListener('click', function() {
-        const sheetId = '1VfJK5dFMW03slpZhhVMKpyR00Nb0X4XHoidBRXRutq4'; // スプレッドシートID
-        const apiKey = 'AIzaSyDExCYuaq_4KUKe9r-e9SBgrSl-voXcl7o'; // 取得したAPIキー
-        const range = 'シート1!A1:C500'; // データを取得したい範囲（例）
-
-        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`)
-            .then(response => response.json())
-            .then(data => {
-                const values = data.values;
-                const dataList = document.getElementById('data-list');
-                dataList.innerHTML = ''; // リストをクリア
-
-                if (values) {
-                    values.forEach(row => {
-                        const rowDiv = document.createElement('div');
-                        rowDiv.textContent = row.join(', '); // 各行をコンマで区切って表示
-                        dataList.appendChild(rowDiv);
-                    });
-                } else {
-                    dataList.textContent = 'データがありません。';
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    });
-</script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
