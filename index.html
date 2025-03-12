@@ -18,6 +18,24 @@
             text-align: center;
             font-size: 2em;
         }
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .filter-container label {
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+        .filter-container select, .filter-container input {
+            padding: 10px;
+            border: 2px solid #ffa500;
+            border-radius: 5px;
+            background-color: #ffebcd;
+            font-size: 1em;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -41,51 +59,39 @@
         tr:hover {
             background-color: #ffdead;
         }
-        #searchInput, #load-button {
-            margin-bottom: 10px;
-            padding: 10px;
-            width: 30%;
-            border: 2px solid #ffa500;
-            border-radius: 5px;
-            background-color: #ffebcd;
-            font-size: 1em;
-        }
         #load-button {
             display: block;
             margin: 20px auto;
+            padding: 10px;
             background-color: #ffa500;
             color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 1.2em;
         }
         #load-button:hover {
             background-color: #ff8c00;
-        }
-        label {
-            display: inline-block;
-            margin-bottom: 2px;
-        }
-        select {
-            display: block;
-            margin-top: 0;
-            width: auto;
-            max-width: 100%;
         }
     </style>
 </head>
 <body>
     <h1>🍊 うたったことのある曲リスト 🍊</h1>
   
-    <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索..." onkeyup="filterTable()">
+    <div class="filter-container">
+        <label for="searchInput">検索</label>
+        <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索..." onkeyup="filterTable()">
+        
+        <label for="filterArtist">アーティスト</label>
+        <select id="filterArtist" onchange="filterTable()">
+            <option value="">すべて</option>
+        </select>
     
-    <label for="filterArtist">アーティスト</label>
-    <select id="filterArtist" onchange="filterTable()">
-        <option value="">すべて</option>
-    </select>
-
-    <label for="filterGenre">ジャンル</label>
-    <select id="filterGenre" onchange="filterTable()">
-        <option value="">すべて</option>
-    </select>
+        <label for="filterGenre">ジャンル</label>
+        <select id="filterGenre" onchange="filterTable()">
+            <option value="">すべて</option>
+        </select>
+    </div>
 
     <table id="songTable">
         <thead>
@@ -121,7 +127,7 @@
                 if (genreInput && tdGenre && tdGenre.textContent.trim() !== genreInput) {
                     showRow = false;
                 }
-                if (searchInput && tdTitle) {
+                if (searchInput) {
                     if (!tdArtist.textContent.toLowerCase().includes(searchInput) && 
                         !tdTitle.textContent.toLowerCase().includes(searchInput) && 
                         !tdGenre.textContent.toLowerCase().includes(searchInput)) {
