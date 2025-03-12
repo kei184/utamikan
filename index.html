@@ -21,25 +21,28 @@
         .filter-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
+            justify-content: flex-start;
+            gap: 20px;
             margin-bottom: 20px;
         }
         .filter-group {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
         }
         .filter-group label {
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: normal;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 3px;
         }
         .filter-group select, .filter-group input {
-            padding: 10px;
-            border: 2px solid #ffa500;
+            padding: 8px;
+            border: 1px solid #ffa500;
             border-radius: 5px;
             background-color: #ffebcd;
             font-size: 1em;
+            width: 200px;
         }
         table {
             width: 100%;
@@ -89,13 +92,13 @@
             <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索..." onkeyup="filterTable()">
         </div>
         <div class="filter-group">
-            <label for="filterArtist">アーティストを選ぶ</label>
+            <label for="filterArtist">アーティスト</label>
             <select id="filterArtist" onchange="filterTable()">
                 <option value="">すべて</option>
             </select>
         </div>
         <div class="filter-group">
-            <label for="filterGenre">ジャンルを選ぶ</label>
+            <label for="filterGenre">ジャンル</label>
             <select id="filterGenre" onchange="filterTable()">
                 <option value="">すべて</option>
             </select>
@@ -136,7 +139,7 @@
                 if (genreInput && tdGenre && tdGenre.textContent.trim() !== genreInput) {
                     showRow = false;
                 }
-                if (searchInput && tdTitle && tdArtist && tdGenre) {
+                if (searchInput && tdTitle) {
                     if (!tdArtist.textContent.toLowerCase().includes(searchInput) && 
                         !tdTitle.textContent.toLowerCase().includes(searchInput) && 
                         !tdGenre.textContent.toLowerCase().includes(searchInput)) {
