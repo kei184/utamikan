@@ -10,41 +10,60 @@
             line-height: 1.6;
             margin: 20px;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: #fff5e6;
+            background-image: url('https://www.transparenttextures.com/patterns/food.png');
         }
         h1 {
-            color: #333;
+            color: #d2691e;
+            text-align: center;
+            font-size: 2em;
         }
         table {
             width: 100%;
             border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid #ffa500;
+            padding: 10px;
             text-align: left;
         }
         th {
-            background-color: #f58905;
+            background-color: #ff8c00;
             color: white;
         }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #ffdab9;
         }
         tr:hover {
-            background-color: #ddd;
+            background-color: #ffdead;
         }
-        #searchInput, #filterArtist, #filterGenre {
+        #searchInput, #filterArtist, #filterGenre, #load-button {
             margin-bottom: 20px;
             padding: 10px;
             width: 30%;
-            border: 1px solid #ccc;
-            display: inline-block;
+            border: 2px solid #ffa500;
+            border-radius: 5px;
+            background-color: #ffebcd;
+            font-size: 1em;
+        }
+        #load-button {
+            display: block;
+            margin: 20px auto;
+            background-color: #ffa500;
+            color: white;
+            cursor: pointer;
+        }
+        #load-button:hover {
+            background-color: #ff8c00;
         }
     </style>
 </head>
 <body>
-    <h1>うたったことのある曲リスト</h1>
+    <h1>🍊 うたったことのある曲リスト 🍊</h1>
 
     <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索..." onkeyup="filterTable()">
     
@@ -70,7 +89,7 @@
         </tbody>
     </table>
 
-    <button id="load-button">データ読み込み</button>
+    <button id="load-button">🍊 データ読み込み 🍊</button>
 
     <script>
         function filterTable() {
