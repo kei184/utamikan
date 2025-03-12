@@ -125,25 +125,6 @@
     </table>
     <button id="load-button">🍊 データ読み込み 🍊</button>
     
-    <script>
-    function filterTable() {
-        const searchInput = document.getElementById('searchInput').value.toLowerCase();
-        const artistInput = document.getElementById('filterArtist').value.toLowerCase();
-        const genreInput = document.getElementById('filterGenre').value.toLowerCase();
-        const tableRows = document.querySelectorAll('#songTable tbody tr');
-
-        tableRows.forEach(row => {
-            const artist = row.cells[0].textContent.toLowerCase();
-            const title = row.cells[1].textContent.toLowerCase();
-            const genre = row.cells[2].textContent.toLowerCase();
-
-            const matchesSearch = !searchInput || artist.includes(searchInput) || title.includes(searchInput);
-            const matchesArtist = !artistInput || artist.includes(artistInput);
-            const matchesGenre = !genreInput || genre.includes(genreInput);
-
-            row.style.display = matchesSearch && matchesArtist && matchesGenre ? '' : 'none';
-        });
-    }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
