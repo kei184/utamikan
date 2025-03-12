@@ -422,8 +422,8 @@
 <script>
     document.getElementById('load-button').addEventListener('click', function() {
         const sheetId = '1VfJK5dFMW03slpZhhVMKpyR00Nb0X4XHoidBRXRutq4'; // スプレッドシートID
-        const apiKey = 'YOUR_API_KEY'; // 取得したAPIキー
-        const range = 'シート1!A1:B10'; // データを取得したい範囲（例）
+        const apiKey = 'AIzaSyDExCYuaq_4KUKe9r-e9SBgrSl-voXcl7o'; // 取得したAPIキー
+        const range = 'シート1!A1:C500'; // データを取得したい範囲（例）
 
         fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`)
             .then(response => response.json())
