@@ -41,8 +41,8 @@
         tr:hover {
             background-color: #ffdead;
         }
-        #searchInput, #filterArtist, #filterGenre, #load-button {
-            margin-bottom: 20px;
+        #searchInput, #load-button {
+            margin-bottom: 10px;
             padding: 10px;
             width: 30%;
             border: 2px solid #ffa500;
@@ -60,19 +60,30 @@
         #load-button:hover {
             background-color: #ff8c00;
         }
+        label {
+            display: inline-block;
+            margin-bottom: 2px;
+        }
+        select {
+            display: block;
+            margin-top: 0;
+            width: auto;
+            max-width: 100%;
+        }
     </style>
 </head>
 <body>
     <h1>🍊 うたったことのある曲リスト 🍊</h1>
-
+  
+    <label>検索</label>
     <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索..." onkeyup="filterTable()">
     
-    <p><label for="filterArtist">アーティスト</label></p>
+    <label for="filterArtist">アーティスト</label>
     <select id="filterArtist" onchange="filterTable()">
         <option value="">すべて</option>
     </select>
 
-    <p><label for="filterGenre">ジャンル</label></p>
+    <label for="filterGenre">ジャンル</label>
     <select id="filterGenre" onchange="filterTable()">
         <option value="">すべて</option>
     </select>
@@ -121,43 +132,6 @@
                 tr[i].style.display = showRow ? "" : "none";
             }
         }
-
-        document.getElementById('load-button').addEventListener('click', function() {
-            const sheetId = '1VfJK5dFMW03slpZhhVMKpyR00Nb0X4XHoidBRXRutq4';
-            const apiKey = 'AIzaSyDExCYuaq_4KUKe9r-e9SBgrSl-voXcl7o';
-            const range = 'シート1!A1:C500';
-
-            fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`)
-                .then(response => response.json())
-                .then(data => {
-                    const values = data.values;
-                    const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
-                    tableBody.innerHTML = '';
-
-                    const artistFilter = document.getElementById("filterArtist");
-                    const genreFilter = document.getElementById("filterGenre");
-                    const artistSet = new Set();
-                    const genreSet = new Set();
-
-                    if (values && values.length > 1) {
-                        values.slice(1).forEach(row => { // 1行目をスキップ
-                            if (row.length >= 3) {
-                                const tr = document.createElement("tr");
-                                tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
-                                tableBody.appendChild(tr);
-                                artistSet.add(row[0]);
-                                genreSet.add(row[2]);
-                            }
-                        });
-                    }
-                    
-                    artistFilter.innerHTML = '<option value="">すべて</option>' + Array.from(artistSet).map(artist => `<option value="${artist}">${artist}</option>`).join('');
-                    genreFilter.innerHTML = '<option value="">すべて</option>' + Array.from(genreSet).map(genre => `<option value="${genre}">${genre}</option>`).join('');
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                });
-        });
     </script>
 </body>
 </html>
