@@ -1,12 +1,17 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const cors = require('cors'); // CORS用のミドルウェア
+const cors = require('cors'); // CORS用ミドルウェア
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors()); // すべてのドメインからのアクセスを許可
+// 🔹 CORS設定（GitHub Pagesのドメインを許可）
+app.use(cors({
+    origin: 'https://kei184.github.io', // GitHub PagesのURL
+    methods: ['GET'],
+    allowedHeaders: ['Content-Type']
+}));
 
 app.use(express.static('public')); // フロントエンドのファイルを提供
 
@@ -25,7 +30,12 @@ app.get('/getSheetData', async (req, res) => {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        res.setHeader('Access-Control-Allow-Origin', '*'); // どこからでもアクセス可能にする
+
+        // 🔹 追加のCORSヘッダーを手動で設定
+        res.setHeader('Access-Control-Allow-Origin', 'https://kei184.github.io');
+        res.setHeader('Access-Control-Allow-Methods', 'GET');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
         res.json(data);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch data' });
