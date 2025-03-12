@@ -44,6 +44,9 @@
             font-size: 1em;
             width: 200px;
         }
+        #filterGenre {
+            width: 100px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -165,7 +168,7 @@
                     const genreSet = new Set();
 
                     if (values && values.length > 1) {
-                        values.slice(1).forEach(row => { // 1行目をスキップ
+                        values.slice(1).forEach(row => {
                             if (row.length >= 3) {
                                 const tr = document.createElement("tr");
                                 tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
