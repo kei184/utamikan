@@ -1,26 +1,26 @@
-const express = require('express');
-const fetch = require('node-fetch');
-require('dotenv').config();
+<script>
+document.getElementById('load-button').addEventListener('click', function() {
+    fetch('https://utamikan.onrender.com/getSheetData') // RenderのバックエンドURL
+        .then(response => response.json())
+        .then(data => {
+            console.log("取得したデータ:", data); // デバッグ用
+            const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.get('/getSheetData', async (req, res) => {
-    const sheetId = '1VfJK5dFMW03slpZhhVMKpyR00Nb0X4XHoidBRXRutq4';
-    const range = 'シート1!A1:C500';
-    const apiKey = process.env.GOOGLE_API_KEY; // 環境変数で管理
-
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`;
-
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data' });
-    }
+            if (data.values && data.values.length > 1) {
+                data.values.slice(1).forEach(row => {
+                    if (row.length >= 3) {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+                        tableBody.appendChild(tr);
+                    }
+                });
+            } else {
+                console.warn("データが空です！");
+            }
+        })
+        .catch(error => {
+            console.error('データ取得エラー:', error);
+        });
 });
-
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+</script>
