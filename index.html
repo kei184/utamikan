@@ -45,50 +45,14 @@
             width: 200px;
         }
         #filterGenre {
-            width: 100px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        th, td {
-            border: 1px solid #ffa500;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #ff8c00;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #ffdab9;
-        }
-        tr:hover {
-            background-color: #ffdead;
-        }
-        #load-button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px;
-            background-color: #ffa500;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
-        }
-        #load-button:hover {
-            background-color: #ff8c00;
+            width: auto;
+            min-width: 100px;
+            max-width: 300px;
         }
     </style>
 </head>
 <body>
     <h1>🍊 うたったことのある曲リスト 🍊</h1>
-  
     <div class="filter-container">
         <div class="filter-group">
             <label for="searchInput">検索</label>
@@ -107,7 +71,6 @@
             </select>
         </div>
     </div>
-
     <table id="songTable">
         <thead>
             <tr>
@@ -119,67 +82,46 @@
         <tbody>
         </tbody>
     </table>
-
     <button id="load-button">🍊 データ読み込み 🍊</button>
-
     <script>
         function filterTable() {
-            const searchInput = document.getElementById("searchInput").value.toLowerCase();
+            const searchInput = document.getElementById("searchInput").value.toLowerCase().normalize("NFKC");
             const artistInput = document.getElementById("filterArtist").value;
             const genreInput = document.getElementById("filterGenre").value;
             const table = document.getElementById("songTable");
             const tr = table.getElementsByTagName("tr");
-
             for (let i = 1; i < tr.length; i++) {
                 const tdArtist = tr[i].getElementsByTagName("td")[0];
                 const tdTitle = tr[i].getElementsByTagName("td")[1];
                 const tdGenre = tr[i].getElementsByTagName("td")[2];
                 let showRow = true;
-
-                if (artistInput && tdArtist && tdArtist.textContent.trim() !== artistInput) {
-                    showRow = false;
-                }
-                if (genreInput && tdGenre && tdGenre.textContent.trim() !== genreInput) {
-                    showRow = false;
-                }
-                if (searchInput && tdTitle) {
-                    if (!tdArtist.textContent.toLowerCase().includes(searchInput) && 
-                        !tdTitle.textContent.toLowerCase().includes(searchInput) && 
-                        !tdGenre.textContent.toLowerCase().includes(searchInput)) {
+                if (searchInput) {
+                    const artistText = tdArtist ? tdArtist.textContent.toLowerCase() : "";
+                    const titleText = tdTitle ? tdTitle.textContent.toLowerCase() : "";
+                    const genreText = tdGenre ? tdGenre.textContent.toLowerCase() : "";
+                    if (!artistText.includes(searchInput) && !titleText.includes(searchInput) && !genreText.includes(searchInput)) {
                         showRow = false;
                     }
                 }
                 tr[i].style.display = showRow ? "" : "none";
             }
         }
-
         document.getElementById('load-button').addEventListener('click', function() {
-            const sheetId = '1VfJK5dFMW03slpZhhVMKpyR00Nb0X4XHoidBRXRutq4';
-            const apiKey = 'AIzaSyDExCYuaq_4KUKe9r-e9SBgrSl-voXcl7o';
-            const range = 'シート1!A1:C500';
-
-            fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`)
+            fetch('/getSheetData')
                 .then(response => response.json())
                 .then(data => {
-                    const values = data.values;
                     const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
                     tableBody.innerHTML = '';
-                    const artistSet = new Set();
-                    const genreSet = new Set();
-
-                    if (values && values.length > 1) {
-                        values.slice(1).forEach(row => {
+                    if (data.values && data.values.length > 1) {
+                        data.values.slice(1).forEach(row => {
                             if (row.length >= 3) {
                                 const tr = document.createElement("tr");
                                 tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
                                 tableBody.appendChild(tr);
-                                artistSet.add(row[0]);
-                                genreSet.add(row[2]);
                             }
                         });
                     }
-                    document.getElementById("filterArtist").innerHTML = '<option value="">すべて</option>' + Array.from(artistSet).map(artist => `<option value="${artist}">${artist}</option>`).join('');
-                    document.getElementById("filterGenre").innerHTML = '<option value="">すべて</option>' + Array.from(genreSet).map(genre => `<option value="${genre}">${genre}</option>`).join('');
+                    filterTable();
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
