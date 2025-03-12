@@ -120,8 +120,8 @@
                     const artistSet = new Set();
                     const genreSet = new Set();
 
-                    if (values) {
-                        values.forEach(row => {
+                    if (values && values.length > 1) {
+                        values.slice(1).forEach(row => { // 1行目をスキップ
                             if (row.length >= 3) {
                                 const tr = document.createElement("tr");
                                 tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
