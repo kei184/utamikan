@@ -146,6 +146,39 @@
                 tr[i].style.display = showRow ? "" : "none";
             }
         }
+
+        document.getElementById('load-button').addEventListener('click', function() {
+            const sheetId = '1VfJK5dFMW03slpZhhVMKpyR00Nb0X4XHoidBRXRutq4';
+            const apiKey = 'AIzaSyDExCYuaq_4KUKe9r-e9SBgrSl-voXcl7o';
+            const range = 'シート1!A1:C500';
+
+            fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    const values = data.values;
+                    const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
+                    tableBody.innerHTML = '';
+                    const artistSet = new Set();
+                    const genreSet = new Set();
+
+                    if (values && values.length > 1) {
+                        values.slice(1).forEach(row => { // 1行目をスキップ
+                            if (row.length >= 3) {
+                                const tr = document.createElement("tr");
+                                tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+                                tableBody.appendChild(tr);
+                                artistSet.add(row[0]);
+                                genreSet.add(row[2]);
+                            }
+                        });
+                    }
+                    document.getElementById("filterArtist").innerHTML = '<option value="">すべて</option>' + Array.from(artistSet).map(artist => `<option value="${artist}">${artist}</option>`).join('');
+                    document.getElementById("filterGenre").innerHTML = '<option value="">すべて</option>' + Array.from(genreSet).map(genre => `<option value="${genre}">${genre}</option>`).join('');
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
     </script>
 </body>
 </html>
