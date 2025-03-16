@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     data.values.slice(1).forEach(row => {
                         if (row.length >= 3) {
                             const tr = document.createElement("tr");
-                            tr.innerHTML = `<td><span class="math-inline">\{row\[0\]\}</td\><td\></span>{row[1]}</td><td>${row[2]}</td>`;
+                            tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
                             tableBody.appendChild(tr);
                         }
                     });
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         artistSelect.innerHTML = '<option value="">すべて</option>';
         artistSet.forEach(artist => {
             const option = document.createElement('option');
-            option.value = artist.toLowerCase();
+            option.value = artist.toLowerCase(); // 必要に応じて artist に変更
             option.textContent = artist;
             artistSelect.appendChild(option);
         });
@@ -68,11 +68,28 @@ document.addEventListener('DOMContentLoaded', function() {
         genreSelect.innerHTML = '<option value="">すべて</option>';
         genreSet.forEach(genre => {
             const option = document.createElement('option');
-            option.value = genre.toLowerCase();
+            option.value = genre.toLowerCase(); // 必要に応じて genre に変更
             option.textContent = genre;
             genreSelect.appendChild(option);
         });
     }
 
     function filterTable() {
-        const searchText = searchInput.
+        const searchText = searchInput.value.toLowerCase();
+        const artist = artistSelect.value.toLowerCase();
+        const genre = genreSelect.value.toLowerCase();
+        const rows = tableBody.querySelectorAll('tr');
+
+        rows.forEach(row => {
+            const artistText = row.cells[0].textContent.toLowerCase();
+            const titleText = row.cells[1].textContent.toLowerCase();
+            const genreText = row.cells[2].textContent.toLowerCase();
+
+            const isArtistMatch = !artist || artistText.includes(artist);
+            const isTitleMatch = !searchText || titleText.includes(searchText);
+            const isGenreMatch = !genre || genreText.includes(genre);
+
+            row.style.display = isArtistMatch && isTitleMatch && isGenreMatch ? '' : 'none';
+        });
+    }
+});
