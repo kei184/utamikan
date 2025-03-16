@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         artistSelect.innerHTML = '<option value="">すべて</option>';
         artistSet.forEach(artist => {
             const option = document.createElement('option');
-            option.value = artist.toLowerCase(); // 必要に応じて artist に変更
+            option.value = artist.toLowerCase();
             option.textContent = artist;
             artistSelect.appendChild(option);
         });
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         genreSelect.innerHTML = '<option value="">すべて</option>';
         genreSet.forEach(genre => {
             const option = document.createElement('option');
-            option.value = genre.toLowerCase(); // 必要に応じて genre に変更
+            option.value = genre.toLowerCase();
             option.textContent = genre;
             genreSelect.appendChild(option);
         });
