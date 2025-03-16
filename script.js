@@ -77,19 +77,4 @@ function filterTable() {
         row.style.display = matchesSearch && matchesArtist && matchesGenre ? '' : 'none';
     });
 }
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.action === "doSomething") {
-    // 非同期処理
-    setTimeout(function() {
-      try {
-        // 何らかの処理
-        let result = doSomethingAsync(request.data);
-        sendResponse({ result: result });
-      } catch (error) {
-        console.error("Error in listener:", error);
-        sendResponse({ error: error.message });
-      }
-    }, 1000);
-    return true; // 非同期応答を示す
-  }
-});
+
