@@ -75,15 +75,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function filterTable() {
-        const searchText = searchInput.value.toLowerCase();
-        const artist = artistSelect.value.toLowerCase();
-        const genre = genreSelect.value.toLowerCase();
-        const rows = tableBody.querySelectorAll('tr');
-
-        rows.forEach(row => {
-            const artistText = row.cells[0].textContent.toLowerCase();
-            const titleText = row.cells[1].textContent.toLowerCase();
-            const genreText = row.cells[2].textContent.toLowerCase();
-
-            const isArtistMatch = !artist || artistText.includes(artist);
-            const isTitleMatch = !searchText || titleText
+        const searchText = searchInput.
