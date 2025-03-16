@@ -86,3 +86,4 @@ document.addEventListener('DOMContentLoaded', function() {
             const genreText = row.cells[2].textContent.toLowerCase();
 
             const isArtistMatch = !artist || artistText.includes(artist);
+            const isTitleMatch = !searchText || titleText
