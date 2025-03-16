@@ -1,16 +1,17 @@
 document.getElementById('load-button').addEventListener('click', function() {
-    console.log("データ読み込みボタンが押されました"); // デバッグ用
+    console.log("データ読み込みボタンが押されました");
 
     fetch('https://utamikan.onrender.com/getSheetData')
         .then(response => {
             if (!response.ok) {
+                console.error(`HTTPエラー: ${response.status}`);
                 throw new Error(`HTTPエラー: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
             console.log("取得したデータ:", data);
-            const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
+            const tableBody = document.getElementById('songTable').querySelector('tbody');
             tableBody.innerHTML = '';
 
             if (data.values && data.values.length > 1) {
@@ -21,19 +22,19 @@ document.getElementById('load-button').addEventListener('click', function() {
                         tableBody.appendChild(tr);
                     }
                 });
-                updateFilters(data); // 🔹 フィルターの選択肢を更新
-                filterTable(); // 🔹 フィルターを適用
+                updateFilters(data);
+                filterTable();
             } else {
                 console.warn("データが空です！");
+                document.getElementById('error-message').textContent = "データが空です。";
             }
         })
         .catch(error => {
             console.error('データ取得エラー:', error);
-            alert("データの取得に失敗しました。コンソールを確認してください。");
+            document.getElementById('error-message').textContent = "データの取得に失敗しました。コンソールを確認してください。";
         });
 });
 
-// 🔹 フィルターの選択肢を更新する関数
 function updateFilters(data) {
     const artistSet = new Set();
     const genreSet = new Set();
@@ -48,17 +49,22 @@ function updateFilters(data) {
     const artistSelect = document.getElementById('filterArtist');
     artistSelect.innerHTML = '<option value="">すべて</option>';
     artistSet.forEach(artist => {
-        artistSelect.innerHTML += `<option value="${artist.toLowerCase()}">${artist}</option>`;
+        const option = document.createElement('option');
+        option.value = artist.toLowerCase();
+        option.textContent = artist;
+        artistSelect.appendChild(option);
     });
 
     const genreSelect = document.getElementById('filterGenre');
     genreSelect.innerHTML = '<option value="">すべて</option>';
     genreSet.forEach(genre => {
-        genreSelect.innerHTML += `<option value="${genre.toLowerCase()}">${genre}</option>`;
+        const option = document.createElement('option');
+        option.value = genre.toLowerCase();
+        option.textContent = genre;
+        genreSelect.appendChild(option);
     });
 }
 
-// 🔹 フィルター適用関数
 function filterTable() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase();
     const artistInput = document.getElementById('filterArtist').value.toLowerCase();
@@ -77,4 +83,3 @@ function filterTable() {
         row.style.display = matchesSearch && matchesArtist && matchesGenre ? '' : 'none';
     });
 }
-
