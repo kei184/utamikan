@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍊うたったことのある曲リスト🍊</title>
+    <title>うたったことのある曲リスト</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,24 +90,29 @@
         #load-button:hover {
             background-color: #ff6f00;
         }
+        #error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <h1>🍊うたったことのある曲🍊</h1>
+    <h1>うたったことのある曲</h1>
     <div class="filter-container">
         <div class="filter-group">
-            <label for="searchInput">🔍 検索</label>
-            <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索..." onkeyup="filterTable()">
+            <label for="searchInput"> 検索</label>
+            <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
         </div>
         <div class="filter-group">
             <label for="filterArtist">アーティストで選ぶ</label>
-            <select id="filterArtist" onchange="filterTable()">
+            <select id="filterArtist">
                 <option value="">すべて</option>
             </select>
         </div>
         <div class="filter-group">
             <label for="filterGenre">ジャンルで選ぶ</label>
-            <select id="filterGenre" onchange="filterTable()">
+            <select id="filterGenre">
                 <option value="">すべて</option>
             </select>
         </div>
@@ -115,43 +120,17 @@
     <table id="songTable">
         <thead>
             <tr>
-                <th>🎤 アーティスト</th>
-                <th>🎵 曲名</th>
-                <th>🎶 ジャンル</th>
+                <th> アーティスト</th>
+                <th> 曲名</th>
+                <th> ジャンル</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
-    <button id="load-button">🍊 データ読み込み 🍊</button>
-    
+    <button id="load-button"> データ読み込み </button>
+    <div id="error-message"></div>
+
     <script src="script.js"></script>
-    <script>
-        document.getElementById('load-button').addEventListener('click', function() {
-            fetch('https://utamikan.onrender.com/getSheetData')
-                .then(response => response.json())
-                .then(data => {
-                    console.log("取得したデータ:", data);
-                    const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
-                    tableBody.innerHTML = '';
-                    
-                    if (data.values && data.values.length > 1) {
-                        data.values.slice(1).forEach(row => {
-                            if (row.length >= 3) {
-                                const tr = document.createElement("tr");
-                                tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
-                                tableBody.appendChild(tr);
-                            }
-                        });
-                    } else {
-                        console.warn("データが空です！");
-                    }
-                })
-                .catch(error => {
-                    console.error('データ取得エラー:', error);
-                    alert("データの取得に失敗しました。コンソールを確認してください。");
-                });
-        });
-    </script>
 </body>
 </html>
