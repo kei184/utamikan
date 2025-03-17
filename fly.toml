@@ -1,4 +1,4 @@
-app = "utamikan" # アプリケーション名を指定
+app = "your-app-name" # アプリケーション名を指定
 primary_region = "hnd" # プライマリリージョンを指定
 
 [build]
