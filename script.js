@@ -7,7 +7,7 @@ loadButton.addEventListener('click', loadData);
 function loadData() {
     errorMessage.textContent = 'データ読み込み中...';
 
-    fetch('https://utamikan2.fly.dev/getSheetData') // Fly.io の API を呼び出す
+    fetch('https://utamikan2.fly.dev/api/sheets') // API エンドポイントを修正
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
@@ -15,7 +15,7 @@ function loadData() {
             return response.json();
         })
         .then(data => {
-            if (data.values) {
+            if (data && data.values) { // data 自体もチェック
                 renderTable(data.values);
             } else {
                 console.warn("データが空です！");
@@ -27,7 +27,10 @@ function loadData() {
             errorMessage.textContent = `データの取得に失敗しました: ${error.message}`;
         })
         .finally(() => {
-            errorMessage.textContent = "";
+            // エラーが発生していない場合のみメッセージをクリア
+            if (!errorMessage.textContent.startsWith("データの取得に失敗しました")) {
+                errorMessage.textContent = "";
+            }
         });
 }
 
@@ -35,7 +38,11 @@ function renderTable(values) {
     tableBody.innerHTML = '';
     values.slice(1).forEach(row => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `<td><span class="math-inline">\{row\[0\]\}</td\><td\></span>{row[1]}</td><td>${row[2]}</td>`;
+        row.forEach(cell => {
+            const td = document.createElement("td");
+            td.textContent = cell; // textContent を使用して安全に設定
+            tr.appendChild(td);
+        });
         tableBody.appendChild(tr);
     });
 }
