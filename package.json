@@ -1,5 +1,18 @@
 {
+  "name": "utamikan",
+  "version": "1.0.0",
+  "description": "Utamikan application on Fly.io",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "node-fetch": "^3.3.2"
+    "express": "^4.18.2",
+    "googleapis": "^129.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
