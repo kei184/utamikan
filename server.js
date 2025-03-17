@@ -1,46 +1,37 @@
-require('dotenv').config();
 const express = require('express');
-const { google } = require('googleapis');
+const fetch = require('node-fetch');
 const cors = require('cors');
+require('dotenv').config();
+
 const app = express();
-const port = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080; // Fly.io は 8080 を推奨！
 
-app.use(cors());
-app.use(express.static('public'));
+app.use(cors({
+    origin: '*',
+    methods: ['GET'],
+    allowedHeaders: ['Content-Type']
+}));
 
-// ルートエンドポイント
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
-});
+app.get('/getSheetData', async (req, res) => {
+    const sheetId = process.env.SPREADSHEET_ID;
+    const range = 'シート1!A1:C500';
+    const apiKey = process.env.GOOGLE_API_KEY;
 
-// APIエンドポイント
-app.get('/api/sheets', async (req, res) => {
-    console.log(`[${new Date().toISOString()}] GET /api/sheets`);
+    if (!sheetId || !apiKey) {
+        return res.status(500).json({ error: 'Missing API key or Sheet ID' });
+    }
+
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`;
 
     try {
-        const spreadsheetId = process.env.SPREADSHEET_ID;
-        const apiKey = process.env.GOOGLE_API_KEY;
-
-        if (!spreadsheetId || !apiKey) {
-            console.error('環境変数 SPREADSHEET_ID または GOOGLE_API_KEY が設定されていません。');
-            return res.status(500).json({ error: '環境変数 SPREADSHEET_ID または GOOGLE_API_KEY が設定されていません。' });
-        }
-
-        console.log('環境変数 SPREADSHEET_ID と GOOGLE_API_KEY が設定されています。');
-
-        const sheets = google.sheets({ version: 'v4', auth: apiKey });
-        const response = await sheets.spreadsheets.values.get({
-            spreadsheetId,
-            range: 'Sheet1!A1:C500',
-        });
-
-        res.json(response.data);
+        const response = await fetch(url);
+        const data = await response.json();
+        res.json(data);
     } catch (error) {
-        console.error('APIエラー:', error);
-        res.status(500).json({ error: error.message, stack: error.stack });
+        res.status(500).json({ error: 'Failed to fetch data' });
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
