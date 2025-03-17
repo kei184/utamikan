@@ -1,8 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const { google } = require('googleapis');
+const cors = require('cors'); // corsパッケージを追加
 const app = express();
 const port = process.env.PORT || 8080;
+
+app.use(cors()); // CORSミドルウェアを追加
+app.use(express.static('public')); // 静的ファイル配信
 
 app.get('/api/sheets', async (req, res) => {
     try {
