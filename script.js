@@ -1,110 +1,46 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const loadButton = document.getElementById('load-button');
-    const tableBody = document.getElementById('songTable').querySelector('tbody');
-    const searchInput = document.getElementById('searchInput');
-    const artistSelect = document.getElementById('filterArtist');
-    const genreSelect = document.getElementById('filterGenre');
-    const errorMessage = document.getElementById('error-message');
+const spreadsheetId = '1VfJK5dFMW03slpZhhVMKpyR00Nb0X4XHoidBRXRutq4'; // スプレッドシートID
+const apiKey = 'YOUR_API_KEY'; // APIキー
+const range = 'Sheet1!A1:C500'; // 取得する範囲
 
-    loadButton.addEventListener('click', loadData);
-    searchInput.addEventListener('input', filterTable);
-    artistSelect.addEventListener('change', filterTable);
-    genreSelect.addEventListener('change', filterTable);
+const loadButton = document.getElementById('load-button');
+const tableBody = document.getElementById('songTable').querySelector('tbody');
+const errorMessage = document.getElementById('error-message');
 
-    async function loadData() {
-        errorMessage.textContent = 'データ読み込み中...';
-        try {
-            const cachedData = localStorage.getItem('songData');
-            if (cachedData) {
-                const data = JSON.parse(cachedData);
-                console.log("キャッシュから取得したデータ:", data);
-                renderTable(data);
-            } else {
-                const response = await fetch('https://utamikan.onrender.com/getSheetData');
-                if (!response.ok) {
-                    throw new Error(`HTTPエラー: ${response.status}`);
-                }
-                const data = await response.json();
-                localStorage.setItem('songData', JSON.stringify(data));
-                renderTable(data);
+loadButton.addEventListener('click', loadData);
+
+function loadData() {
+    errorMessage.textContent = 'データ読み込み中...';
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTPエラー: ${response.status}`);
             }
-        } catch (error) {
-            console.error('データ取得エラー:', error);
-            errorMessage.textContent = "データの取得に失敗しました。コンソールを確認してください。";
-        } finally {
-            if (tableBody.innerHTML === '') {
-                errorMessage.textContent = "データがありません";
-            }
-        }
-    }
-
-    function renderTable(data) {
-        try {
-            tableBody.innerHTML = '';
-            if (data.values && data.values.length > 1) {
-                data.values.slice(1).forEach(row => {
-                    if (row.length >= 3) {
-                        const tr = document.createElement("tr");
-                        tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
-                        tableBody.appendChild(tr);
-                    }
-                });
-                updateFilters(data);
-                filterTable();
+            return response.json();
+        })
+        .then(data => {
+            if (data.values) {
+                renderTable(data.values);
             } else {
                 console.warn("データが空です！");
                 errorMessage.textContent = "データが空です。";
             }
-        } catch (error) {
-            console.error('テーブルレンダリングエラー:', error);
-            errorMessage.textContent = "テーブルの表示に失敗しました。コンソールを確認してください。";
-        }
-    }
-
-    function updateFilters(data) {
-        const artistSet = new Set();
-        const genreSet = new Set();
-
-        data.values.slice(1).forEach(row => {
-            if (row.length >= 3) {
-                artistSet.add(row[0]);
-                genreSet.add(row[2]);
-            }
+        })
+        .catch(error => {
+            console.error('データ取得エラー:', error);
+            errorMessage.textContent = "データの取得に失敗しました。コンソールを確認してください。";
+        })
+        .finally(() => {
+            errorMessage.textContent = ""; // ローディングメッセージを消す
         });
+}
 
-        artistSelect.innerHTML = '<option value="">すべて</option>';
-        artistSet.forEach(artist => {
-            const option = document.createElement('option');
-            option.value = artist.toLowerCase();
-            option.textContent = artist;
-            artistSelect.appendChild(option);
-        });
-
-        genreSelect.innerHTML = '<option value="">すべて</option>';
-        genreSet.forEach(genre => {
-            const option = document.createElement('option');
-            option.value = genre.toLowerCase();
-            option.textContent = genre;
-            genreSelect.appendChild(option);
-        });
-    }
-
-    function filterTable() {
-        const searchText = searchInput.value.toLowerCase();
-        const artist = artistSelect.value.toLowerCase();
-        const genre = genreSelect.value.toLowerCase();
-        const rows = tableBody.querySelectorAll('tr');
-
-        rows.forEach(row => {
-            const artistText = row.cells[0].textContent.toLowerCase();
-            const titleText = row.cells[1].textContent.toLowerCase();
-            const genreText = row.cells[2].textContent.toLowerCase();
-
-            const isArtistMatch = !artist || artistText.includes(artist);
-            const isTitleMatch = !searchText || titleText.includes(searchText);
-            const isGenreMatch = !genre || genreText.includes(genre);
-
-            row.style.display = isArtistMatch && isTitleMatch && isGenreMatch ? '' : 'none';
-        });
-    }
-});
+function renderTable(values) {
+    tableBody.innerHTML = '';
+    values.slice(1).forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+        tableBody.appendChild(tr);
+    });
+}
