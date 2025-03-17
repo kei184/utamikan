@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     genreSelect.addEventListener('change', filterTable);
 
     async function loadData() {
-        errorMessage.textContent = 'データ読み込み中...'; // ローディングメッセージを表示
+        errorMessage.textContent = 'データ読み込み中...';
         try {
             const cachedData = localStorage.getItem('songData');
             if (cachedData) {
@@ -31,24 +31,33 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('データ取得エラー:', error);
             errorMessage.textContent = "データの取得に失敗しました。コンソールを確認してください。";
+        } finally {
+            if (tableBody.innerHTML === '') {
+                errorMessage.textContent = "データがありません";
+            }
         }
     }
 
     function renderTable(data) {
-        tableBody.innerHTML = '';
-        if (data.values && data.values.length > 1) {
-            data.values.slice(1).forEach(row => {
-                if (row.length >= 3) {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
-                    tableBody.appendChild(tr);
-                }
-            });
-            updateFilters(data);
-            filterTable();
-        } else {
-            console.warn("データが空です！");
-            errorMessage.textContent = "データが空です。";
+        try {
+            tableBody.innerHTML = '';
+            if (data.values && data.values.length > 1) {
+                data.values.slice(1).forEach(row => {
+                    if (row.length >= 3) {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+                        tableBody.appendChild(tr);
+                    }
+                });
+                updateFilters(data);
+                filterTable();
+            } else {
+                console.warn("データが空です！");
+                errorMessage.textContent = "データが空です。";
+            }
+        } catch (error) {
+            console.error('テーブルレンダリングエラー:', error);
+            errorMessage.textContent = "テーブルの表示に失敗しました。コンソールを確認してください。";
         }
     }
 
