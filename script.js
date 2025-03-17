@@ -11,39 +11,45 @@ document.addEventListener('DOMContentLoaded', function() {
     artistSelect.addEventListener('change', filterTable);
     genreSelect.addEventListener('change', filterTable);
 
-    function loadData() {
-        errorMessage.textContent = ''; // エラーメッセージをクリア
-        fetch('https://utamikan.onrender.com/getSheetData')
-            .then(response => {
+    async function loadData() {
+        errorMessage.textContent = 'データ読み込み中...'; // ローディングメッセージを表示
+        try {
+            const cachedData = localStorage.getItem('songData');
+            if (cachedData) {
+                const data = JSON.parse(cachedData);
+                console.log("キャッシュから取得したデータ:", data);
+                renderTable(data);
+            } else {
+                const response = await fetch('https://utamikan.onrender.com/getSheetData');
                 if (!response.ok) {
-                    console.error(`HTTPエラー: ${response.status}`);
                     throw new Error(`HTTPエラー: ${response.status}`);
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log("取得したデータ:", data);
-                tableBody.innerHTML = '';
+                const data = await response.json();
+                localStorage.setItem('songData', JSON.stringify(data));
+                renderTable(data);
+            }
+        } catch (error) {
+            console.error('データ取得エラー:', error);
+            errorMessage.textContent = "データの取得に失敗しました。コンソールを確認してください。";
+        }
+    }
 
-                if (data.values && data.values.length > 1) {
-                    data.values.slice(1).forEach(row => {
-                        if (row.length >= 3) {
-                            const tr = document.createElement("tr");
-                            tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
-                            tableBody.appendChild(tr);
-                        }
-                    });
-                    updateFilters(data);
-                    filterTable();
-                } else {
-                    console.warn("データが空です！");
-                    errorMessage.textContent = "データが空です。";
+    function renderTable(data) {
+        tableBody.innerHTML = '';
+        if (data.values && data.values.length > 1) {
+            data.values.slice(1).forEach(row => {
+                if (row.length >= 3) {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+                    tableBody.appendChild(tr);
                 }
-            })
-            .catch(error => {
-                console.error('データ取得エラー:', error);
-                errorMessage.textContent = "データの取得に失敗しました。コンソールを確認してください。";
             });
+            updateFilters(data);
+            filterTable();
+        } else {
+            console.warn("データが空です！");
+            errorMessage.textContent = "データが空です。";
+        }
     }
 
     function updateFilters(data) {
