@@ -1,40 +1,28 @@
-const express = require('express');
-const fetch = require('node-fetch');
-const cors = require('cors');
 require('dotenv').config();
-
+const express = require('express');
+const { google } = require('googleapis');
 const app = express();
-const PORT = process.env.PORT || 8080; // Fly.io は 8080 が推奨
+const port = process.env.PORT || 8080;
 
-app.use(cors({
-    origin: '*', // 必要なら 'https://kei184.github.io' などに制限
-    methods: ['GET'],
-    allowedHeaders: ['Content-Type']
-}));
-
-app.use(express.static('public'));
-
-// Google Sheets API からデータを取得
-app.get('/getSheetData', async (req, res) => {
-    const sheetId = process.env.SPREADSHEET_ID;
-    const range = 'シート1!A1:C500';
-    const apiKey = process.env.GOOGLE_API_KEY;
-
-    if (!sheetId || !apiKey) {
-        return res.status(500).json({ error: 'Missing API key or Sheet ID' });
-    }
-
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`;
-
+app.get('/api/sheets', async (req, res) => {
     try {
-        const response = await fetch(url);
-        const data = await response.json();
-        res.json(data);
+        const spreadsheetId = process.env.SPREADSHEET_ID;
+        const range = 'Sheet1!A1:C500';
+        const apiKey = process.env.GOOGLE_API_KEY;
+
+        const sheets = google.sheets({ version: 'v4', auth: apiKey });
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId,
+            range,
+        });
+
+        res.json(response.data);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data' });
+        console.error('APIエラー:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
 });
