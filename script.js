@@ -1,6 +1,7 @@
 const loadButton = document.getElementById('load-button');
 const tableBody = document.getElementById('songTable').querySelector('tbody');
 const errorMessage = document.getElementById('error-message');
+const range = 'Sheet1!A1:C500'; // これが正しい形式
 
 loadButton.addEventListener('click', loadData);
 
