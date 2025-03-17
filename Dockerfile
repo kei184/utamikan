@@ -1,6 +1,6 @@
-FROM node:14
+FROM node:14 # 使用したいベースイメージを指定
 WORKDIR /app
-COPY package.json ./
+COPY package*.json ./
 RUN npm install
 COPY . .
-CMD ["node", "app.js"]
+CMD ["npm", "start"] # または実行したいコマンドにする
