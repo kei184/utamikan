@@ -9,11 +9,11 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 
 // 静的ファイルの配信
-app.use(express.static('public'));
+app.use(express.static(__dirname));
 
 // ルートエンドポイント
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 // APIエンドポイント
