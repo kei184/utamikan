@@ -1,54 +1,42 @@
-const loadButton = document.getElementById('load-button');
-const tableBody = document.getElementById('songTable').querySelector('tbody');
-const errorMessage = document.getElementById('error-message');
-const range = 'Sheet1!A1:C500'; // これが正しい形式
+const express = require('express');
+const { google } = require('googleapis');
+require('dotenv').config();
+const cors = require('cors');
 
-loadButton.addEventListener('click', loadData);
+const app = express();
+const port = process.env.PORT || 8080;
 
-function loadData() {
-    errorMessage.textContent = 'データ読み込み中...';
+// CORSの設定
+app.use(cors());
 
-    fetch('https://utamikan2.fly.dev/api/sheets') // ここに実際のAPIエンドポイントを指定
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // データの検証
-            if (data && data.values && Array.isArray(data.values) && data.values.length > 1) { 
-                renderTable(data.values);
-                errorMessage.textContent = ""; // 正常データの場合はエラーメッセージをクリア
-            } else {
-                console.warn("データが不正です！");
-                errorMessage.textContent = "データが空または不正です。";
-            }
-        })
-        .catch(error => {
-            console.error('データ取得エラー:', error);
-            errorMessage.textContent = `データの取得に失敗しました: ${error.message}`;
-        })
-        .finally(() => {
-            // エラーメッセージがクリアされない場合は空のメッセージにする
-            if (!errorMessage.textContent.startsWith("データの取得に失敗しました")) {
-                errorMessage.textContent = "";
-            }
+// ルートエンドポイント
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
+
+// スプレッドシートからデータを取得するAPIエンドポイント
+app.get('/api/sheets', async (req, res) => {
+    const spreadsheetId = process.env.SPREADSHEET_ID; // 環境変数からスプレッドシートIDを取得
+    const apiKey = process.env.GOOGLE_API_KEY; // 環境変数からAPIキーを取得
+
+    try {
+        const sheets = google.sheets({ version: 'v4', auth: apiKey });
+        const range = 'Sheet1!A1:C500'; // シート名と範囲を指定
+
+        const response = await sheets.spreadsheets.values.get({
+            spreadsheetId: spreadsheetId,
+            range: range,
         });
-}
 
-function renderTable(values) {
-    tableBody.innerHTML = ''; // テーブルをリセット
-    values.slice(1).forEach(row => { // 1行目を見出しとして扱う場合
-        const tr = document.createElement("tr");
-        row.forEach(cell => {
-            const td = document.createElement("td");
-            td.textContent = cell; // テキストを設定
-            tr.appendChild(td);
-        });
-        tableBody.appendChild(tr);
-    });
-}
+        console.log(response.data); // レスポンスのデータを確認
+        res.json(response.data);
+    } catch (error) {
+        console.error('データ取得エラー:', error.response ? error.response.data : error.message);
+        res.status(500).json({ error: 'データ取得に失敗しました。', details: error.message });
+    }
+});
 
-// 初期化時にテーブルをクリア
-tableBody.innerHTML = '';
+// サーバー起動
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
+});
