@@ -21,7 +21,7 @@ function loadData() {
 
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
 
-    fetch(url)
+    fetch('/api/sheets')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
