@@ -1,5 +1,3 @@
-const spreadsheetId = '1VfJK5dFMW03slpZhhVMKpyR00Nb0X4XHoidBRXRutq4'; // スプレッドシートID
-const apiKey = 'YOUR_API_KEY'; // APIキー
 const range = 'Sheet1!A1:C500'; // 取得する範囲
 
 const loadButton = document.getElementById('load-button');
@@ -10,12 +8,23 @@ loadButton.addEventListener('click', loadData);
 
 function loadData() {
     errorMessage.textContent = 'データ読み込み中...';
+
+    // 環境変数からAPIキーとスプレッドシートIDを取得
+    const apiKey = process.env.GOOGLE_API_KEY;
+    const spreadsheetId = process.env.SPREADSHEET_ID;
+
+    if (!apiKey || !spreadsheetId) {
+        console.error('APIキーまたはスプレッドシートIDが設定されていません。');
+        errorMessage.textContent = 'APIキーまたはスプレッドシートIDが設定されていません。';
+        return;
+    }
+
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
 
-    fetch('https://utamikan.fly.dev/getSheetData')
+    fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw new Error(`HTTPエラー: ${response.status}`);
+                throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
             }
             return response.json();
         })
@@ -29,10 +38,10 @@ function loadData() {
         })
         .catch(error => {
             console.error('データ取得エラー:', error);
-            errorMessage.textContent = "データの取得に失敗しました。コンソールを確認してください。";
+            errorMessage.textContent = `データの取得に失敗しました: ${error.message}`;
         })
         .finally(() => {
-            errorMessage.textContent = ""; // ローディングメッセージを消す
+            errorMessage.textContent = "";
         });
 }
 
