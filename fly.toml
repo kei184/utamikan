@@ -1,7 +1,5 @@
 app = "utamikan"
 
-[build]
-  image = "flyio/hellofly"
 
 [env]
   PORT = "8080"
