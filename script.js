@@ -21,7 +21,7 @@ function loadData() {
 
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
 
-    fetch('/api/sheets')
+    fetch(url) // Google Sheets APIのURLを使用するように修正
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
