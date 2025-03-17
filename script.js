@@ -7,7 +7,7 @@ loadButton.addEventListener('click', loadData);
 function loadData() {
     errorMessage.textContent = 'データ読み込み中...';
 
-    fetch('https://utamikan2.fly.dev/api/sheets') // API エンドポイントを修正
+    fetch('https://utamikan.fly.dev/api/sheets') // API エンドポイントを修正
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
