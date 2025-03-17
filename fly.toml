@@ -1,11 +1,8 @@
-app = "utamikan2"
-primary_region = "hnd"
+app = "utamikan" # アプリケーション名を指定
+primary_region = "hnd" # プライマリリージョンを指定
 
 [build]
   builder = "dockerfile"
-
-[env]
-  PORT = "8080"
 
 [http_service]
   internal_port = 8080
@@ -13,7 +10,3 @@ primary_region = "hnd"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
-
-[[services]]
-  internal_port = 8080
-  protocol = "tcp"
