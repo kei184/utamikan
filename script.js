@@ -12,7 +12,7 @@ function loadData() {
     errorMessage.textContent = 'データ読み込み中...';
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?key=${apiKey}`;
 
-    fetch(url)
+    fetch('https://utamikan.fly.dev/getSheetData')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTPエラー: ${response.status}`);
