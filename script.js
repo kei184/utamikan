@@ -1,12 +1,18 @@
 document.getElementById('load-button').addEventListener('click', function() {
-    fetch('https://utamikanlist.fly.dev/api/sheets') // ✅ サーバーのAPIエンドポイントをリクエスト！
-        .then(response => response.json())
+    fetch('https://utamikanlist.fly.dev/api/sheets') // サーバーのAPIエンドポイントをリクエスト
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
             console.log("取得したデータ:", data);
             const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
             tableBody.innerHTML = '';
 
-            if (data.values && data.values.length > 1) {
+            // データが取得できたかチェック
+            if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
                 data.values.slice(1).forEach(row => {
                     if (row.length >= 3) {
                         const tr = document.createElement("tr");
@@ -15,25 +21,12 @@ document.getElementById('load-button').addEventListener('click', function() {
                     }
                 });
             } else {
-                console.warn("データが空です！");
+                console.warn("データが正しく取得されませんでした:", data);
+                document.getElementById('error-message').textContent = "データが空または不正です。";
             }
         })
         .catch(error => {
             console.error('データ取得エラー:', error);
-            alert("データの取得に失敗しました。エラー詳細: " + error.message);
+            alert(`データの取得に失敗しました。エラー詳細: ${error.message}`);
         });
 });
-
-function renderTable(values) {
-    const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = ''; // テーブルをリセット
-    values.slice(1).forEach(row => {
-        const tr = document.createElement("tr");
-        row.forEach(cell => {
-            const td = document.createElement("td");
-            td.textContent = cell; // テキストを設定
-            tr.appendChild(td);
-        });
-        tableBody.appendChild(tr);
-    });
-}
