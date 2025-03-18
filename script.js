@@ -1,3 +1,4 @@
+// script.js
 document.getElementById('load-button').addEventListener('click', function() {
     fetch('https://utamikanlist.fly.dev/api/sheets') // サーバーのAPIエンドポイントをリクエスト
         .then(response => {
@@ -9,12 +10,12 @@ document.getElementById('load-button').addEventListener('click', function() {
         .then(data => {
             console.log("取得したデータ:", data);
             const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
-            tableBody.innerHTML = '';
+            tableBody.innerHTML = ''; // テーブルをリセット
 
-            // データが取得できたかチェック
+            // データが渡されたときの処理
             if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
-                data.values.slice(1).forEach(row => {
-                    if (row.length >= 3) {
+                data.values.slice(1).forEach(row => { // 最初の行を見出しとしてスキップ
+                    if (row.length >= 3) { // 行に少なくとも3つのデータがあるか
                         const tr = document.createElement("tr");
                         tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
                         tableBody.appendChild(tr);
