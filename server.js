@@ -13,27 +13,29 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/sheets', async (req, res) => {
-    const spreadsheetId = process.env.SPREADSHEET_ID; // スプレッドシートIDを取得
-    const apiKey = process.env.GOOGLE_API_KEY; // APIキーを取得
-    const range = 'Sheet1!A1:C500'; // 取得する範囲を指定
+    const spreadsheetId = process.env.SPREADSHEET_ID; // 環境変数からスプレッドシートIDを取得
+    const apiKey = process.env.GOOGLE_API_KEY; // 環境変数からAPIキーを取得
+    const range = 'Sheet1!A2:C500'; // 取得するデータの範囲を指定
 
     try {
         const sheets = google.sheets({ version: 'v4', auth: apiKey });
-        
+
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId: spreadsheetId,
             range: range,
         });
 
-        res.json(response.data); // データをJSON形式で返す
+        res.json(response.data); // 取得したデータを返す
     } catch (error) {
-        console.error('データ取得エラー:', error.response ? error.response.data : error.message);
+        console.error('データ取得エラー:', error);
         res.status(500).json({
             error: 'データ取得に失敗しました。',
-            details: error.response ? error.response.data : error.message,
+            details: error.message
         });
     }
+});
 
+// サーバーを起動
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
