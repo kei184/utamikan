@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>うたったことのある曲リスト</title>
     <style>
+        /* CSSスタイルをデザインする。各要素が見やすく、使いやすいよう調整。 */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -13,6 +15,7 @@
             background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
             color: #5c3d00;
         }
+
         h1 {
             color: #fff;
             text-align: center;
@@ -22,6 +25,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
+
         .filter-container {
             display: flex;
             flex-wrap: wrap;
@@ -33,18 +37,22 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .filter-group {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .filter-group label {
             font-weight: bold;
             font-size: 1em;
             color: #ff6f00;
             margin-bottom: 5px;
         }
-        .filter-group select, .filter-group input {
+
+        .filter-group select,
+        .filter-group input {
             padding: 10px;
             border: 2px solid #ff9800;
             border-radius: 5px;
@@ -52,6 +60,7 @@
             font-size: 1em;
             width: 220px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -60,21 +69,27 @@
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #ff9800;
             padding: 12px;
             text-align: left;
         }
+
         th {
             background-color: #ffae00;
             color: white;
         }
+
         tr:nth-child(even) {
             background-color: #fff3e0;
         }
+
         tr:hover {
             background-color: #ffcc80;
         }
+
         #load-button {
             display: block;
             margin: 20px auto;
@@ -87,9 +102,11 @@
             font-size: 1.2em;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
+
         #load-button:hover {
             background-color: #ff6f00;
         }
+
         #error-message {
             color: red;
             text-align: center;
@@ -97,11 +114,12 @@
         }
     </style>
 </head>
+
 <body>
     <h1>うたったことのある曲</h1>
     <div class="filter-container">
         <div class="filter-group">
-            <label for="searchInput"> 検索</label>
+            <label for="searchInput">検索</label>
             <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
         </div>
         <div class="filter-group">
@@ -120,17 +138,19 @@
     <table id="songTable">
         <thead>
             <tr>
-                <th> アーティスト</th>
-                <th> 曲名</th>
-                <th> ジャンル</th>
+                <th>アーティスト</th>
+                <th>曲名</th>
+                <th>ジャンル</th>
             </tr>
         </thead>
         <tbody>
+            <!-- データがここにロードされる -->
         </tbody>
     </table>
-    <button id="load-button"> データ読み込み </button>
+    <button id="load-button">データ読み込み</button>
     <div id="error-message"></div>
 
     <script src="script.js" defer></script>
 </body>
+
 </html>
