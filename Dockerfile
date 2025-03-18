@@ -1,4 +1,5 @@
-FROM node:18-alpine
+# Dockerfile
+FROM node:18
 
 WORKDIR /app
 
@@ -10,4 +11,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
