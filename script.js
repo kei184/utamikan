@@ -1,38 +1,28 @@
-const express = require('express');
-const { google } = require('googleapis');
-require('dotenv').config();
-const cors = require('cors');
-// script.js
-const loadButton = document.getElementById('load-button');
-const tableBody = document.getElementById('songTable').querySelector('tbody');
-const errorMessage = document.getElementById('error-message');
-
-loadButton.addEventListener('click', loadData);
-
-function loadData() {
-    errorMessage.textContent = 'データ読み込み中...';
-
-    fetch('http://localhost:8080/api/sheets') // サーバーのURL
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
-            }
-            return response.json();
-        })
+document.getElementById('load-button').addEventListener('click', function() {
+    fetch('https://utamikanlist.fly.dev/getSheetData') // ✅ Fly.io の API にリクエスト！
+        .then(response => response.json())
         .then(data => {
-            if (data && data.values) {
-                renderTable(data.values);
-                errorMessage.textContent = ""; // エラーメッセージをクリア
+            console.log("取得したデータ:", data);
+            const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = '';
+
+            if (data.values && data.values.length > 1) {
+                data.values.slice(1).forEach(row => {
+                    if (row.length >= 3) {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+                        tableBody.appendChild(tr);
+                    }
+                });
             } else {
                 console.warn("データが空です！");
-                errorMessage.textContent = "データが空です。";
             }
         })
         .catch(error => {
             console.error('データ取得エラー:', error);
-            errorMessage.textContent = `データの取得に失敗しました: ${error.message}`;
+            alert("データの取得に失敗しました。エラー詳細: " + error.message);
         });
-}
+});
 
 function renderTable(values) {
     tableBody.innerHTML = ''; // テーブルをリセット
