@@ -1,8 +1,6 @@
 app = "utamikan" # アプリケーション名を指定
 primary_region = "hnd" # プライマリリージョンを指定
 
-[build]
-  builder = "dockerfile"
 
 [http_service]
   internal_port = 8080

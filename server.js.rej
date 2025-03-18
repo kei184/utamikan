@@ -1,0 +1,56 @@
+diff a/server.js b/server.js	(rejected hunks)
+@@ -1,42 +0,21 @@
+-// server.js
+ const express = require('express');
+-const { google } = require('googleapis');
+-require('dotenv').config();
+ const cors = require('cors');
++require('dotenv').config();
+ 
+ const app = express();
+-const port = process.env.PORT || 8080;
++const PORT = process.env.PORT || 8080; // Fly.io では 8080 を使用
+ 
+-// CORSの設定
+-app.use(cors());
++app.use(cors({
++    origin: '*',
++    methods: ['GET'],
++    allowedHeaders: ['Content-Type']
++}));
+ 
+-// ルートエンドポイント
+ app.get('/', (req, res) => {
+-    res.send('Hello World!');
++    res.send('Fly.io サーバーが動作しています！');
+ });
+ 
+-// スプレッドシートからデータを取得するAPIエンドポイント
+-app.get('/api/sheets', async (req, res) => {
+-    const spreadsheetId = process.env.SPREADSHEET_ID; // 環境変数からスプレッドシートIDを取得
+-    const apiKey = process.env.GOOGLE_API_KEY; // 環境変数からAPIキーを取得
+-
+-    try {
+-        const sheets = google.sheets({ version: 'v4', auth: apiKey });
+-        const range = 'Sheet1!A1:C500'; // シート名と範囲を指定
+-
+-        const response = await sheets.spreadsheets.values.get({
+-            spreadsheetId: spreadsheetId,
+-            range: range,
+-        });
+-
+-        res.json(response.data); // レスポンスをJSON形式で返す
+-    } catch (error) {
+-        console.error('データ取得エラー:', error.response ? error.response.data : error.message);
+-        res.status(500).json({ error: 'データ取得に失敗しました。', details: error.message });
+-    }
++// ✅ 修正: 0.0.0.0 にバインド！
++app.listen(PORT, '0.0.0.0', () => {
++    console.log(`Server is running on port ${PORT}`);
+ });
+-
+-// サーバー起動
+-app.listen(port, () => {
+-    console.log(`Server is running at http://localhost:${port}`);
+-});
+\ No newline at end of file
