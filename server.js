@@ -6,7 +6,10 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.use(cors());
+// CORSの設定: 特定のオリジンを許可
+app.use(cors({
+    origin: 'https://kei184.github.io', // 自分のサイトを指定してください
+}));
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -30,7 +33,7 @@ app.get('/api/sheets', async (req, res) => {
         console.error('データ取得エラー:', error);
         res.status(500).json({
             error: 'データ取得に失敗しました。',
-            details: error.message
+            details: error.response ? error.response.data : error.message // より具体的なエラーメッセージを表示
         });
     }
 });
