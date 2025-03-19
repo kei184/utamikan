@@ -6,7 +6,7 @@ const filterArtist = document.getElementById('filterArtist');
 const filterGenre = document.getElementById('filterGenre');
 const errorMessage = document.getElementById('error-message');
 
-let fetchedData = []; // 取得したデータを格納する変数
+let fetchedData = []; // 取得したデータを格納するための変数
 
 loadButton.addEventListener('click', loadData);
 
@@ -25,25 +25,24 @@ function loadData() {
             tableBody.innerHTML = ''; // テーブルをリセット
             fetchedData = data.values; // データを格納
 
-            // データの表示
             if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
                 // アーティストのオプションを動的に追加
                 const artistSet = new Set();
                 const genreSet = new Set();
 
                 data.values.slice(1).forEach(row => {
-                    if (row.length >= 3) { // 曲名、アーティスト、ジャンルのデータを確認
+                    if (row.length >= 3) { // 行に曲名、アーティスト、ジャンルがある場合
                         const tr = document.createElement("tr");
                         tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
                         tableBody.appendChild(tr);
 
-                        // 有効なアーティスト名とジャンルをセットに追加
+                        // アーティストとジャンルをセットに追加
                         artistSet.add(row[0]);
                         genreSet.add(row[2]);
                     }
                 });
 
-                // アーティストフィルターの更新
+                // アーティストフィルターを更新
                 artistSet.forEach(artist => {
                     const option = document.createElement('option');
                     option.value = artist;
@@ -51,7 +50,7 @@ function loadData() {
                     filterArtist.appendChild(option);
                 });
 
-                // ジャンルフィルターの更新
+                // ジャンルフィルターを更新
                 genreSet.forEach(genre => {
                     const option = document.createElement('option');
                     option.value = genre;
