@@ -23,6 +23,13 @@
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
+        
+        .notice {
+            font-size: 0.9em; /* 小さめのフォントサイズ */
+            color: #ff6f00; /* 注意書きの色 */
+            text-align: center; /* 中央揃え */
+            margin: 10px 0; /* 上下の余白 */
+        }
 
         .filter-container {
             display: flex;
@@ -113,6 +120,7 @@
 
 <body>
     <h1>🍊うたったことのある曲🍊</h1>
+    <div class="notice">※全ての曲を今すぐ歌えるわけではありません</div>
     <div class="filter-container">
         <div class="filter-group">
             <label for="searchInput">検索</label>
