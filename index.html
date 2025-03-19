@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>うたったことのある曲リスト</title>
     <style>
+        /* CSSスタイルをデザインする。各要素が見やすく、使いやすいよう調整。 */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -23,7 +25,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-        
+
         .notice {
             font-size: 0.9em; /* 小さめのフォントサイズ */
             color: #ff6f00; /* 注意書きの色 */
@@ -56,7 +58,8 @@
             margin-bottom: 5px;
         }
 
-        .filter-group select, .filter-group input {
+        .filter-group select,
+        .filter-group input {
             padding: 10px;
             border: 2px solid #ff9800;
             border-radius: 5px;
@@ -74,7 +77,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ff9800;
             padding: 12px;
             text-align: left;
@@ -130,14 +134,14 @@
             <label for="filterArtist">アーティストで選ぶ</label>
             <select id="filterArtist">
                 <option value="">すべて</option>
-                <!-- アーティストのオプションをJavaScriptで追加 -->
+                <!-- アーティストのオプションはJavaScriptで追加 -->
             </select>
         </div>
         <div class="filter-group">
             <label for="filterGenre">ジャンルで選ぶ</label>
             <select id="filterGenre">
                 <option value="">すべて</option>
-                <!-- ジャンルのオプションをJavaScriptで追加 -->
+                <!-- ジャンルのオプションはJavaScriptで追加 -->
             </select>
         </div>
     </div>
@@ -153,8 +157,8 @@
             <!-- データがここにロードされる -->
         </tbody>
     </table>
-    <div class="notice">↓最初にボタンを押してね♡</div>
     <button id="load-button">データ読み込み</button>
+    <div class="notice">↓最初にボタンを押してね♡</div>
     <div class="notice">※随時更新しています</div>
     <div id="error-message"></div>
 
