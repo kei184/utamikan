@@ -1,11 +1,19 @@
 // script.js
-document.getElementById('load-button').addEventListener('click', loadData);
+const loadButton = document.getElementById('load-button');
+const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
+const searchInput = document.getElementById('searchInput');
+const filterArtist = document.getElementById('filterArtist');
+const filterGenre = document.getElementById('filterGenre');
+const errorMessage = document.getElementById('error-message');
+
+let fetchedData = []; // 取得したデータを格納する変数
+
+loadButton.addEventListener('click', loadData);
 
 function loadData() {
-    const errorMessage = document.getElementById('error-message');
     errorMessage.textContent = 'データ読み込み中...';
 
-    fetch('https://utamikanlist.fly.dev/api/sheets') // サーバーのAPIエンドポイントをリクエスト
+    fetch('https://utamikanlist.fly.dev/api/sheets') // APIエンドポイントをリクエスト
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
@@ -14,9 +22,10 @@ function loadData() {
         })
         .then(data => {
             console.log("取得したデータ:", data);
-            const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
             tableBody.innerHTML = ''; // テーブルをリセット
+            fetchedData = data.values; // データを格納
 
+            // データの表示
             if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
                 // アーティストのオプションを動的に追加
                 const artistSet = new Set();
@@ -34,8 +43,7 @@ function loadData() {
                     }
                 });
 
-                // アーティストフィルターを更新
-                const filterArtist = document.getElementById('filterArtist');
+                // アーティストフィルターの更新
                 artistSet.forEach(artist => {
                     const option = document.createElement('option');
                     option.value = artist;
@@ -43,8 +51,7 @@ function loadData() {
                     filterArtist.appendChild(option);
                 });
 
-                // ジャンルフィルターを更新
-                const filterGenre = document.getElementById('filterGenre');
+                // ジャンルフィルターの更新
                 genreSet.forEach(genre => {
                     const option = document.createElement('option');
                     option.value = genre;
@@ -65,10 +72,6 @@ function loadData() {
 }
 
 // 検索およびフィルター機能の実装
-const searchInput = document.getElementById('searchInput');
-const filterArtist = document.getElementById('filterArtist');
-const filterGenre = document.getElementById('filterGenre');
-
 searchInput.addEventListener('input', filterTable);
 filterArtist.addEventListener('change', filterTable);
 filterGenre.addEventListener('change', filterTable);
