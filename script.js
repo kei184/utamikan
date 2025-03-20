@@ -69,6 +69,19 @@ function loadData() {
         });
 }
 
+// 🔹 ひらがな ⇔ カタカナの変換関数
+function toHiragana(str) {
+    return str.replace(/[\u30A1-\u30FA]/g, match => 
+        String.fromCharCode(match.charCodeAt(0) - 0x60)
+    );
+}
+
+function toKatakana(str) {
+    return str.replace(/[\u3041-\u3096]/g, match => 
+        String.fromCharCode(match.charCodeAt(0) + 0x60)
+    );
+}
+
 // 🔹 フィルターオプションを更新する関数
 function updateFilterOptions(selectElement, dataSet) {
     selectElement.innerHTML = '<option value="">すべて</option>';
@@ -86,16 +99,22 @@ filterArtist.addEventListener('change', filterTable);
 filterGenre.addEventListener('change', filterTable);
 
 function filterTable() {
-    const searchQuery = searchInput.value.toLowerCase();
+    let searchQuery = searchInput.value.toLowerCase();
+    searchQuery = toHiragana(searchQuery); // 🔹 ひらがなに統一
+
     const artistFilter = filterArtist.value;
     const genreFilter = filterGenre.value;
 
     const rows = document.querySelectorAll('#songTable tbody tr');
 
     rows.forEach(row => {
-        const artist = row.cells[0].textContent.toLowerCase(); // 1列目（アーティスト）
-        const song = row.cells[1].textContent.toLowerCase();   // 2列目（曲名）
-        const genre = row.cells[2].textContent.toLowerCase();  // 3列目（ジャンル）
+        let artist = row.cells[0].textContent.toLowerCase();
+        let song = row.cells[1].textContent.toLowerCase();
+        let genre = row.cells[2].textContent.toLowerCase();
+
+        // 🔹 アーティストと曲名もひらがなに変換
+        artist = toHiragana(artist);
+        song = toHiragana(song);
 
         const matchesSearch = artist.includes(searchQuery) || song.includes(searchQuery);
         const matchesArtist = artistFilter === "" || artistFilter === artist;
