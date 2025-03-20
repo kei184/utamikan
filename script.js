@@ -26,7 +26,7 @@ function loadData() {
             fetchedData = data.values; // データを格納
 
             if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
-                // アーティストのオプションを動的に追加
+                // アーティストとジャンルのオプションを動的に追加
                 const artistSet = new Set();
                 const genreSet = new Set();
 
@@ -54,8 +54,8 @@ function loadData() {
 
                 // アーティストフィルターを更新
                 updateFilterOptions(filterArtist, artistSet);
-                // ジャンルフィルターを更新
-                updateFilterOptions(filterGenre, genreSet);
+                // ジャンルフィルターを特定の順序で並び替えて更新
+                updateGenreOptions(filterGenre, genreSet);
 
                 errorMessage.textContent = ""; // エラーメッセージをクリア
             } else {
@@ -85,10 +85,26 @@ function toKatakana(str) {
 // 🔹 フィルターオプションを更新する関数
 function updateFilterOptions(selectElement, dataSet) {
     selectElement.innerHTML = '<option value="">すべて</option>';
-    dataSet.forEach(value => {
+    [...dataSet].sort().forEach(value => {
         const option = document.createElement('option');
         option.value = value;
         option.textContent = value;
+        selectElement.appendChild(option);
+    });
+}
+
+// 🔹 ジャンルのフィルターを「令和 → 平成 → 昭和 → その他昇順」に並べる関数
+function updateGenreOptions(selectElement, genreSet) {
+    const fixedOrder = ["令和", "平成", "昭和"]; // 優先的に表示する順番
+    let sortedGenres = [...genreSet].filter(genre => !fixedOrder.includes(genre)).sort(); // それ以外を昇順ソート
+
+    const orderedGenres = [...fixedOrder, ...sortedGenres]; // すべてを結合
+
+    selectElement.innerHTML = '<option value="">すべて</option>';
+    orderedGenres.forEach(genre => {
+        const option = document.createElement('option');
+        option.value = genre;
+        option.textContent = genre;
         selectElement.appendChild(option);
     });
 }
@@ -128,4 +144,3 @@ function filterTable() {
         }
     });
 }
-
