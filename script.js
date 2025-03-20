@@ -37,7 +37,8 @@ function loadData() {
                         const genre = row[2];
 
                         // 🎵 Google検索リンク付きの曲名
-                        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(songTitle)}+歌詞`;
+                        const searchQuery = `${songTitle} ${artist} 歌詞`;
+                        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
                         const songLink = `<a href="${searchUrl}" target="_blank" rel="noopener noreferrer">${songTitle}</a>`;
 
                         // 🎤 テーブルに行を追加
