@@ -28,7 +28,7 @@ function loadData() {
             if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
                 // アーティストとジャンルのオプションを動的に追加
                 const artistSet = new Set();
-                const genreSet = new Set();
+                const genreCount = {}; // ジャンルごとの曲数をカウント
 
                 data.values.slice(1).forEach(row => {
                     if (row.length >= 3) { // 行に曲名、アーティスト、ジャンルがある場合
@@ -46,16 +46,18 @@ function loadData() {
                         tr.innerHTML = `<td>${artist}</td><td>${songLink}</td><td>${genre}</td>`;
                         tableBody.appendChild(tr);
 
-                        // アーティストとジャンルをセットに追加
+                        // アーティストをセットに追加
                         artistSet.add(artist);
-                        genreSet.add(genre);
+
+                        // ジャンルごとの曲数をカウント
+                        genreCount[genre] = (genreCount[genre] || 0) + 1;
                     }
                 });
 
                 // アーティストフィルターを更新
                 updateFilterOptions(filterArtist, artistSet);
-                // ジャンルフィルターを特定の順序で並び替えて更新
-                updateGenreOptions(filterGenre, genreSet);
+                // ジャンルフィルターを「令和 → 平成 → 昭和 → その他の曲数が多い順」に並べて更新
+                updateGenreOptions(filterGenre, genreCount);
 
                 errorMessage.textContent = ""; // エラーメッセージをクリア
             } else {
@@ -69,34 +71,13 @@ function loadData() {
         });
 }
 
-// 🔹 ひらがな ⇔ カタカナの変換関数
-function toHiragana(str) {
-    return str.replace(/[\u30A1-\u30FA]/g, match => 
-        String.fromCharCode(match.charCodeAt(0) - 0x60)
-    );
-}
-
-function toKatakana(str) {
-    return str.replace(/[\u3041-\u3096]/g, match => 
-        String.fromCharCode(match.charCodeAt(0) + 0x60)
-    );
-}
-
-// 🔹 フィルターオプションを更新する関数
-function updateFilterOptions(selectElement, dataSet) {
-    selectElement.innerHTML = '<option value="">すべて</option>';
-    [...dataSet].sort().forEach(value => {
-        const option = document.createElement('option');
-        option.value = value;
-        option.textContent = value;
-        selectElement.appendChild(option);
-    });
-}
-
-// 🔹 ジャンルのフィルターを「令和 → 平成 → 昭和 → その他昇順」に並べる関数
-function updateGenreOptions(selectElement, genreSet) {
+// 🔹 ジャンルのフィルターを「令和 → 平成 → 昭和 → その他の曲数が多い順」に並べる関数
+function updateGenreOptions(selectElement, genreCount) {
     const fixedOrder = ["令和", "平成", "昭和"]; // 優先的に表示する順番
-    let sortedGenres = [...genreSet].filter(genre => !fixedOrder.includes(genre)).sort(); // それ以外を昇順ソート
+    let sortedGenres = Object.entries(genreCount)
+        .filter(([genre]) => !fixedOrder.includes(genre)) // 固定ジャンル以外を抽出
+        .sort((a, b) => b[1] - a[1]) // 曲数が多い順に並べる
+        .map(([genre]) => genre); // ジャンル名のみ取得
 
     const orderedGenres = [...fixedOrder, ...sortedGenres]; // すべてを結合
 
@@ -104,7 +85,18 @@ function updateGenreOptions(selectElement, genreSet) {
     orderedGenres.forEach(genre => {
         const option = document.createElement('option');
         option.value = genre;
-        option.textContent = genre;
+        option.textContent = `${genre} (${genreCount[genre] || 0})`; // 曲数も表示
+        selectElement.appendChild(option);
+    });
+}
+
+// 🔹 フィルターオプションを更新する関数（アーティスト用）
+function updateFilterOptions(selectElement, dataSet) {
+    selectElement.innerHTML = '<option value="">すべて</option>';
+    [...dataSet].sort().forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
         selectElement.appendChild(option);
     });
 }
@@ -143,4 +135,11 @@ function filterTable() {
             row.style.display = "none"; // 非表示
         }
     });
+}
+
+// 🔹 ひらがな ⇔ カタカナの変換関数
+function toHiragana(str) {
+    return str.replace(/[\u30A1-\u30FA]/g, match => 
+        String.fromCharCode(match.charCodeAt(0) - 0x60)
+    );
 }
