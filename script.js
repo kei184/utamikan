@@ -32,31 +32,29 @@ function loadData() {
 
                 data.values.slice(1).forEach(row => {
                     if (row.length >= 3) { // 行に曲名、アーティスト、ジャンルがある場合
+                        const artist = row[0];
+                        const songTitle = row[1];
+                        const genre = row[2];
+
+                        // 🎵 Google検索リンク付きの曲名
+                        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(songTitle)}+歌詞`;
+                        const songLink = `<a href="${searchUrl}" target="_blank" rel="noopener noreferrer">${songTitle}</a>`;
+
+                        // 🎤 テーブルに行を追加
                         const tr = document.createElement("tr");
-                        tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+                        tr.innerHTML = `<td>${artist}</td><td>${songLink}</td><td>${genre}</td>`;
                         tableBody.appendChild(tr);
 
                         // アーティストとジャンルをセットに追加
-                        artistSet.add(row[0]);
-                        genreSet.add(row[2]);
+                        artistSet.add(artist);
+                        genreSet.add(genre);
                     }
                 });
 
                 // アーティストフィルターを更新
-                artistSet.forEach(artist => {
-                    const option = document.createElement('option');
-                    option.value = artist;
-                    option.textContent = artist;
-                    filterArtist.appendChild(option);
-                });
-
+                updateFilterOptions(filterArtist, artistSet);
                 // ジャンルフィルターを更新
-                genreSet.forEach(genre => {
-                    const option = document.createElement('option');
-                    option.value = genre;
-                    option.textContent = genre;
-                    filterGenre.appendChild(option);
-                });
+                updateFilterOptions(filterGenre, genreSet);
 
                 errorMessage.textContent = ""; // エラーメッセージをクリア
             } else {
@@ -70,7 +68,18 @@ function loadData() {
         });
 }
 
-// 検索およびフィルター機能の実装
+// 🔹 フィルターオプションを更新する関数
+function updateFilterOptions(selectElement, dataSet) {
+    selectElement.innerHTML = '<option value="">すべて</option>';
+    dataSet.forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        selectElement.appendChild(option);
+    });
+}
+
+// 🔹 検索およびフィルター機能の実装
 searchInput.addEventListener('input', filterTable);
 filterArtist.addEventListener('change', filterTable);
 filterGenre.addEventListener('change', filterTable);
