@@ -144,37 +144,36 @@ function toHiragana(str) {
     );
 }
 
-if (navigator.userAgent.indexOf('Instagram') > -1) {
-  // Instagramアプリ内ブラウザで開かれた場合
-  var message = document.createElement('div');
-  message.textContent = 'Instagramアプリ内で開いています。外部ブラウザで開くには、メニューから「ブラウザで開く」を選択してください。';
-  message.style.position = 'fixed';
-  message.style.top = '0';
-  message.style.left = '0';
-  message.style.width = '100%';
-  message.style.backgroundColor = 'white';
-  message.style.zIndex = '9999';
-  document.body.appendChild(message);
-} else if (navigator.userAgent.indexOf('TikTok') > -1) {
-  // TikTokアプリ内ブラウザで開かれた場合
-  var message = document.createElement('div');
-  message.textContent = 'TikTokアプリ内で開いています。外部ブラウザで開くには、メニューから「ブラウザで開く」を選択してください。';
-  message.style.position = 'fixed';
-  message.style.top = '0';
-  message.style.left = '0';
-  message.style.width = '100%';
-  message.style.backgroundColor = 'white';
-  message.style.zIndex = '9999';
-  document.body.appendChild(message);
-} else if (navigator.userAgent.indexOf('Twitter') > -1 || navigator.userAgent.indexOf('XApp') > -1) {
-  // Xアプリ内ブラウザで開かれた場合
-  var message = document.createElement('div');
-  message.textContent = 'Xアプリ内で開いています。外部ブラウザで開くには、メニューから「ブラウザで開く」を選択してください。';
-  message.style.position = 'fixed';
-  message.style.top = '0';
-  message.style.left = '0';
-  message.style.width = '100%';
-  message.style.backgroundColor = 'white';
-  message.style.zIndex = '9999';
-  document.body.appendChild(message);
-}
+    function isInAppBrowser() {
+        const ua = navigator.userAgent.toLowerCase();
+        return (
+            ua.includes("instagram") || 
+            ua.includes("line") || 
+            ua.includes("fbav") ||  // Facebookアプリ内
+            ua.includes("twitter") || 
+            ua.includes("micromessenger") // WeChat
+        );
+    }
+
+    if (isInAppBrowser()) {
+        document.body.innerHTML = `
+            <div style="
+                position: fixed; 
+                top: 0; 
+                left: 0; 
+                width: 100%; 
+                height: 100vh; 
+                background: white; 
+                display: flex; 
+                flex-direction: column; 
+                justify-content: center; 
+                align-items: center; 
+                text-align: center; 
+                padding: 20px;
+            ">
+                <p style="font-size: 1.5em; font-weight: bold; color: #ff0000;">⚠ アプリ内ブラウザでは正しく表示されません</p>
+                <p style="font-size: 1.2em;">Safari や Chrome などの外部ブラウザで開いてください</p>
+                <p style="font-size: 1.1em;">右上の <strong>「…」や「共有ボタン」</strong> から「外部ブラウザで開く」を選択してください</p>
+            </div>
+        `;
+    }
