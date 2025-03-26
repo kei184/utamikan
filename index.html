@@ -29,32 +29,28 @@
             object-fit: cover;
             margin-bottom: 15px;
         }
-    .link-button {
+.link-button {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px; /* 高さを2倍にするためにpaddingを増やす */
-    margin-bottom: 10px;
+    max-width: 300px; /* ボタンの最大幅を設定 */
+    margin: 0 auto 10px auto; /* 左右中央揃え */
+    padding: 20px; /* 高さを2倍にする */
     background-color: #ff69b4;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
+    font-size: 1.2em;
     position: relative;
-    padding-left: 15%;
-    font-size: 1.2em; /* 文字サイズも調整 */
 }
         .link-button:hover {
             background-color: #e6529b;
         }
- .link-button i {
-    position: absolute;
-    left: 0;
-    width: 15%;
-    font-size: 80px; /* アイコンのサイズも調整 */
+.link-button i {
+    font-size: 1.5em; /* アイコンの大きさを調整 */
+    margin-right: 10px; /* アイコンとテキストの間隔を調整 */
 }
         .orange-mic {
             font-size: 0.5em;
