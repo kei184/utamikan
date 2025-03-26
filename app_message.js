@@ -23,7 +23,7 @@ if (navigator.userAgent.indexOf('TikTok') > -1) {
 } else if (navigator.userAgent.indexOf('trill') > -1) {
     // trillアプリ内ブラウザで開かれた場合
     var message = document.createElement('div');
-    message.textContent = 'trillアプリ内で開いています。外部ブラウザで開くには、右上の「…」から「ブラウザで開く」を選択してください。';
+    message.textContent = 'TikTokアプリ内で開いています。外部ブラウザで開くには、右上の「…」から「ブラウザで開く」を選択してください。';
     message.style.position = 'fixed';
     message.style.top = '0';
     message.style.left = '0';
