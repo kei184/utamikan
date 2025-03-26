@@ -32,7 +32,7 @@
 .link-button {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* 🔹 アイコンをボタン内左寄せ */
+    justify-content: flex-start; /* 🔹 アイコンを左寄せ */
     width: 90%;
     max-width: 300px; /* ボタンの最大幅を設定 */
     margin: 0 auto 10px auto; /* 左右中央揃え */
@@ -49,9 +49,10 @@
             background-color: #e6529b;
         }
 .link-button i {
-    font-size: 1.5em; /* アイコンの大きさを調整 */
-    margin-right: 15px; /* 🔹 アイコンとテキストの間隔を調整 */
-    margin-left: 10px; /* 🔹 アイコンをボタン内で左側に寄せる */
+    font-size: 1.5em; /* 🔹 アイコンの大きさを通常の1.5倍に拡大 */
+    margin-right: 15px; /* アイコンとテキストの間隔 */
+    margin-left: 10px; /* アイコンをボタン内で左端に寄せる */
+    flex-shrink: 0; /* 🔹 アイコンが縮まないように固定 */
 }
         .orange-mic {
             font-size: 0.5em;
@@ -62,7 +63,7 @@
 <body>
     <div class="container">
         <img src="your-profile-image.jpg" alt="Profile Image" class="profile-image">
-        <h1>うたみかん<span class="orange-mic"></span></h1>
+        <h1>うたみかん<span class="orange-mic">🍊🎤</span></h1>
         <a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3RpbmRxMQ==&utm_source=qr/" class="link-button">
             <i class="fab fa-instagram"></i> Instagram
         </a>
