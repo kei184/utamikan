@@ -2,10 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utamikan Links</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: sans-serif;
@@ -19,7 +17,7 @@
         }
         .container {
             width: 90%;
-            max-width: 300px; /* コンテナの最大幅を設定 */
+            max-width: 300px;
             margin: 0 auto;
             text-align: center;
         }
@@ -35,31 +33,33 @@
             align-items: center;
             justify-content: center;
             width: 90%;
-            margin-left: 5%;
+            margin-left: auto;
+            margin-right: auto;
             padding: 10px;
             margin-bottom: 10px;
-            background-color: #ff69b4; /* ピンク色に変更 */
+            background-color: #ff69b4;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
-            position: relative; /* アイコン配置の基準 */
-            height: 150px; /* ボタンの高さを3倍にする */
+            position: relative;
+            height: 105px; /* ボタンの高さを70%に変更 */
             padding-left: 15%;
             padding-top: 5px;
             padding-bottom: 5px;
-            margin-left: auto; /* 左マージンを自動設定 */
-            margin-right: auto; /* 右マージンを自動設定 */
         }
         .link-button:hover {
-            background-color: #e6529b; /* ホバー時の色を少し暗く */
+            background-color: #e6529b;
         }
         .link-button i {
             position: absolute;
-            margin-right: 10px; /* テキストとの間隔 */
+            margin-right: 10px;
             font-size: 30px;
             left: 0;
             width: 15%;
+        }
+        .orange-mic {
+            font-size: 0.5em; /* のサイズを半分にする */
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -67,7 +67,7 @@
 <body>
     <div class="container">
         <img src="your-profile-image.jpg" alt="Profile Image" class="profile-image">
-        <h1>うたみかん🍊🎤</h1>
+        <h1>うたみかん<span class="orange-mic"></span></h1>
         <a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3RpbmRxMQ==&utm_source=qr/" class="link-button">
             <i class="fab fa-instagram"></i> Instagram
         </a>
@@ -75,7 +75,7 @@
             <i class="fas fa-list"></i> うたリスト
         </a>
         <a href="https://lin.ee/KdjohVd" class="link-button">
-            <i class="fab fa-line"></i> ボーカル教室・ロマンツァ公式LINE
+            <i class="fab fa-line"></i> ボーカル教室<br>ロマンツァ公式LINE
         </a>
         <a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button">
             <i class="fas fa-users"></i> サブスク限定オープンチャット
