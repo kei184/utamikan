@@ -15,9 +15,9 @@
             align-items: center;
             min-height: 100vh;
             background: 
-                linear-gradient(135deg, #ffd1dc 30%, #ffebb5 70%), /* グラデーション背景 */
-                repeating-radial-gradient(circle at 20% 20%, rgba(255, 105, 180, 0.3) 0%, transparent 5%), /* ハート柄 */
-                repeating-radial-gradient(circle at 80% 80%, rgba(255, 105, 180, 0.3) 0%, transparent 5%); /* ハート柄 */
+                linear-gradient(135deg, #ffd1dc 30%, #ffebb5 70%),
+                repeating-radial-gradient(circle at 20% 20%, rgba(255, 105, 180, 0.3) 0%, transparent 5%),
+                repeating-radial-gradient(circle at 80% 80%, rgba(255, 105, 180, 0.3) 0%, transparent 5%);
             background-size: cover;
             position: relative;
         }
@@ -33,7 +33,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        /* かわいいポップなボタン */
         .link-button {
             display: flex;
             align-items: center;
@@ -52,7 +51,6 @@
             transition: transform 0.2s ease-in-out, box-shadow 0.2s;
         }
 
-        /* ボタンホバー時のポップな動き */
         .link-button:hover {
             background: linear-gradient(135deg, #e6529b, #ff6600);
             transform: scale(1.05);
@@ -66,7 +64,6 @@
             flex-shrink: 0;
         }
 
-        /* タイトルをポップに */
         h1 {
             font-size: 1.8em;
             color: #ff4500;
@@ -77,9 +74,8 @@
             font-size: 0.5em;
         }
         
-        /* 画像サイズを現在の2倍にする */
         .profile-image {
-            width: 50%; /* 25% * 2 = 50% */
+            width: 50%;
             height: auto;
         }
     </style>
@@ -105,13 +101,12 @@
             <i class="fas fa-users"></i> サブスク限定<br>オープンチャット
         </a>
     </div>
+    <script src="app_message.js"></script>
     <script>
-<script>
-  var userAgent = navigator.userAgent;
-  var displayElement = document.createElement('div');
-  displayElement.textContent = 'User Agent: ' + userAgent;
-  document.body.appendChild(displayElement);
-</script>
-    <script src="/utamikan/app_message.js"></script>
-    </body>
+        var userAgent = navigator.userAgent;
+        var displayElement = document.createElement('div');
+        displayElement.textContent = 'User Agent: ' + userAgent;
+        document.body.appendChild(displayElement);
+    </script>
+</body>
 </html>
