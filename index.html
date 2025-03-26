@@ -32,7 +32,7 @@
 .link-button {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; /* 🔹 アイコンをボタン内左寄せ */
     width: 90%;
     max-width: 300px; /* ボタンの最大幅を設定 */
     margin: 0 auto 10px auto; /* 左右中央揃え */
@@ -50,7 +50,8 @@
         }
 .link-button i {
     font-size: 1.5em; /* アイコンの大きさを調整 */
-    margin-right: 10px; /* アイコンとテキストの間隔を調整 */
+    margin-right: 15px; /* 🔹 アイコンとテキストの間隔を調整 */
+    margin-left: 10px; /* 🔹 アイコンをボタン内で左側に寄せる */
 }
         .orange-mic {
             font-size: 0.5em;
@@ -72,7 +73,7 @@
             <i class="fab fa-line"></i> ボーカル教室<br>ロマンツァ公式LINE
         </a>
         <a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button">
-            <i class="fas fa-users"></i> サブスク限定オープンチャット
+            <i class="fas fa-users"></i> サブスク限定<br>オープンチャット
         </a>
     </div>
     <script src="/utamikan/script.js"></script>
