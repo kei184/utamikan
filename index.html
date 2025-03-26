@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utamikan Links</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
             font-family: sans-serif;
@@ -16,20 +17,24 @@
             background-color: #f0f0f0;
         }
         .container {
-            width: 300px;
+            width: 90%;
+            margin: 0 auto;
             text-align: center;
         }
         .profile-image {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .link-button {
-            display: block;
-            width: 100%;
-            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            margin-left: 5%;
+            padding: 10px;
             margin-bottom: 10px;
             background-color: #ff69b4; /* ピンク色に変更 */
             color: white;
@@ -37,11 +42,10 @@
             border-radius: 5px;
             font-weight: bold;
             position: relative; /* アイコン配置の基準 */
-            height: 100px;
-            padding-left: 20%;
-            padding-right: 0;
-            padding-top: 0;
-            padding-bottom: 0;
+            height: auto;
+            padding-left: 15%;
+            padding-top: 5px;
+            padding-bottom: 5px;
         }
         .link-button:hover {
             background-color: #e6529b; /* ホバー時の色を少し暗く */
@@ -49,14 +53,9 @@
         .link-button i {
             position: absolute;
             margin-right: 10px; /* テキストとの間隔 */
-            font-size: 50px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 30px;
             left: 0;
-            width: 20%;
-            text-align: center;
+            width: 15%;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
