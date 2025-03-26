@@ -31,25 +31,42 @@
             width: 100%;
             padding: 15px;
             margin-bottom: 10px;
-            background-color: #007bff;
+            background-color: #ff69b4; /* ピンク色に変更 */
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            position: relative; /* アイコン配置の基準 */
         }
         .link-button:hover {
-            background-color: #0056b3;
+            background-color: #e6529b; /* ホバー時の色を少し暗く */
+        }
+        .link-button i {
+            position: absolute;
+            left: 10px; /* 左からの距離 */
+            top: 50%;
+            transform: translateY(-50%); /* 垂直方向中央揃え */
+            margin-right: 10px; /* テキストとの間隔 */
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
         <img src="your-profile-image.jpg" alt="Profile Image" class="profile-image">
         <h1>うたみかん🍊🎤</h1>
-        <a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3RpbmRxMQ==&utm_source=qr/" class="link-button">Instagram</a>
-        <a href="https://kei184.github.io/utamikan/list" class="link-button">うたリスト</a>
-        <a href="https://lin.ee/KdjohVd" class="link-button">ボーカル教室・ロマンツァ公式LINE</a>
-        <a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button">サブスク限定オープンチャット</a>
+        <a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3RpbmRxMQ==&utm_source=qr/" class="link-button">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://kei184.github.io/utamikan/list" class="link-button">
+            <i class="fas fa-list"></i> うたリスト
+        </a>
+        <a href="https://lin.ee/KdjohVd" class="link-button">
+            <i class="fab fa-line"></i> ボーカル教室・ロマンツァ公式LINE
+        </a>
+        <a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button">
+            <i class="fab fa-line"></i> サブスク限定オープンチャット
+        </a>
     </div>
     <script src="/utamikan/script.js"></script>
 </body>
