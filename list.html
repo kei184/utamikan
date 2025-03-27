@@ -44,11 +44,15 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* タイトル */
-        h1 {
+        /* 共通のコンテナスタイル */
+        .container {
             width: 90%;
             max-width: 800px;
             margin: 20px auto;
+        }
+
+        /* タイトル */
+        h1 {
             color: #e65100;
             text-align: center;
             font-size: 2em;
@@ -73,11 +77,9 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            margin: 20px auto;
             background: rgba(255, 255, 255, 0.9);
             padding: 15px;
             border-radius: 15px;
-            max-width: 800px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
@@ -109,9 +111,7 @@
 
         /* テーブルデザイン */
         table {
-            width: 90%;
-            max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
             border-collapse: collapse;
             background-color: #fff;
             border-radius: 15px;
@@ -180,44 +180,46 @@
         <div class="bubble" style="left: 80%; animation-delay: 6s;"></div>
     </div>
 
-    <h1>🍊レパートリー曲🍊</h1>
-    <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
-    <div class="filter-container">
-        <div class="filter-group">
-            <label for="searchInput">検索</label>
-            <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
+    <div class="container">
+        <h1>🍊レパートリー曲🍊</h1>
+        <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
+        <div class="filter-container">
+            <div class="filter-group">
+                <label for="searchInput">検索</label>
+                <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
+            </div>
+            <div class="filter-group">
+                <label for="filterArtist">アーティストで選ぶ</label>
+                <select id="filterArtist">
+                    <option value="">すべて</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filterGenre">ジャンルで選ぶ</label>
+                <select id="filterGenre">
+                    <option value="">すべて</option>
+                </select>
+            </div>
         </div>
-        <div class="filter-group">
-            <label for="filterArtist">アーティストで選ぶ</label>
-            <select id="filterArtist">
-                <option value="">すべて</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label for="filterGenre">ジャンルで選ぶ</label>
-            <select id="filterGenre">
-                <option value="">すべて</option>
-            </select>
-        </div>
+        <table id="songTable">
+            <thead>
+                <tr>
+                    <th>アーティスト</th>
+                    <th>曲名</th>
+                    <th>ジャンル</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- データがここにロードされる -->
+            </tbody>
+        </table>
+
+        <div class="notice">↓最初にボタンを押してね♡</div>
+        <button id="load-button">データ読み込み</button>
+        <div class="notice">※随時更新しています</div>
+        <div id="error-message"></div>
     </div>
-    <table id="songTable">
-        <thead>
-            <tr>
-                <th>アーティスト</th>
-                <th>曲名</th>
-                <th>ジャンル</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- データがここにロードされる -->
-        </tbody>
-    </table>
-
-    <div class="notice">↓最初にボタンを押してね♡</div>
-    <button id="load-button">データ読み込み</button>
-    <div class="notice">※随時更新しています</div>
-    <div id="error-message"></div>
-
+    
     <script src="script.js" defer></script>
 </body>
 
