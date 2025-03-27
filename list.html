@@ -11,15 +11,19 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
+            background: 
+                url('https://www.transparenttextures.com/patterns/food.png'), 
+                #ffebc6;
+            background-size: auto, cover;
+            background-attachment: fixed;
             color: #5c3d00;
             min-height: 100vh;
+            overflow-x: hidden;
             position: relative;
-            overflow: hidden;
         }
 
         .background {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
