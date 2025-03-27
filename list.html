@@ -6,56 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レパートリー曲</title>
     <style>
-/* 🎨 背景（food.png + #ffebc6） */
 body {
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: "Kosugi Maru", "Cute Font", cursive, sans-serif;
     line-height: 1.6;
-    margin: 20px;
+    margin: 0;
     padding: 20px;
-    background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
-    color: #5c3d00;
+    background: 
+        linear-gradient(135deg, #FFF0F5, #FFD1DC),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><g fill="rgba(255,182,193,0.1)"><circle cx="50" cy="50" r="40"/></g></svg>');
+    background-size: cover, 100px 100px;
+    color: #FF69B4;
 }
 
-        /* 🌟 背景の動くポップなデザイン */
-        .background {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
-        }
+/* 背景の動くポップなデザイン */
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+}
 
-        .bubble {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255, 105, 180, 0.3);
-            border-radius: 50%;
-            animation: float 10s infinite linear;
-        }
+.bubble {
+    position: absolute;
+    background: radial-gradient(
+        circle at 30% 30%, 
+        rgba(255,182,193,0.5), 
+        rgba(255,105,180,0.3)
+    );
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+}
 
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
-/* タイトル（🍊が目立つように薄いオレンジ系） */
+@keyframes float {
+    0% { 
+        transform: translateY(100vh) scale(0.5); 
+        opacity: 0; 
+    }
+    50% { 
+        opacity: 0.7; 
+    }
+    100% { 
+        transform: translateY(-10vh) scale(1.5); 
+        opacity: 0; 
+    }
+}
+
+/* タイトル */
 h1 {
-    color: #ff6f00;
+    color: white;
     text-align: center;
-    font-size: 1.8em;
-    background: linear-gradient(135deg, #ffb347, #ffcc80);
-    padding: 15px;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 2em;
+    background: linear-gradient(135deg, #FF69B4, #FF1493);
+    padding: 20px;
+    border-radius: 40px;
+    box-shadow: 0 6px 12px rgba(255,105,180,0.4);
+    transform: rotate(-3deg);
+    transition: all 0.3s ease;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+h1:hover {
+    transform: rotate(0deg) scale(1.05);
 }
 
 /* 注意書き */
 .notice {
     font-size: 1em;
-    color: #ff6f00;
+    color: #FF69B4;
     text-align: center;
-    margin: 8px 0;
+    margin: 15px 0;
+    font-weight: bold;
 }
 
 /* フィルターコンテナ */
@@ -63,12 +87,13 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    gap: 20px;
+    margin-bottom: 30px;
+    background: rgba(255,255,255,0.9);
+    padding: 25px;
+    border-radius: 30px;
+    border: 3px dotted #FF69B4;
+    box-shadow: 0 8px 16px rgba(255,105,180,0.2);
 }
 
 /* フィルターグループ */
@@ -80,81 +105,108 @@ h1 {
 
 .filter-group label {
     font-weight: bold;
-    font-size: 1.1em;
-    color: #ff69b4;
-    margin-bottom: 5px;
+    font-size: 1.2em;
+    color: #FF1493;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(255,105,180,0.3);
 }
 
 /* フィルターの入力・選択 */
 .filter-group select,
 .filter-group input {
-    padding: 12px;
-    border: 2px solid #ff69b4;
-    border-radius: 10px;
-    background-color: #fff0f5;
+    padding: 15px;
+    border: 3px solid #FF69B4;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #FFF0F5, #FFFFFF);
     font-size: 1.1em;
-    width: 220px;
+    width: 250px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(255,105,180,0.2);
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    outline: none;
+    border-color: #FF1493;
+    transform: scale(1.05);
 }
 
 /* テーブルデザイン */
 table {
     width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    border-radius: 15px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 30px;
     overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(255,105,180,0.3);
 }
 
 th, td {
-    border: 1px solid #ff69b4;
-    padding: 14px;
+    border: 2px solid #FF69B4;
+    padding: 15px;
     text-align: left;
 }
 
 th {
-    background-color: #ffb6c1;
+    background: linear-gradient(135deg, #FF69B4, #FF1493);
     color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 tr:nth-child(even) {
-    background-color: #fff0f5;
+    background-color: #FFF0F5;
 }
 
 tr:hover {
-    background-color: #ffccd5;
+    background-color: #FFD1DC;
     transform: scale(1.02);
-    transition: 0.3s ease-in-out;
+    transition: all 0.3s ease;
 }
 
-/* ボタンデザイン（やさしいオレンジ系） */
+/* ボタンデザイン */
 #load-button {
     display: block;
-    margin: 10px auto;
-    padding: 15px 25px;
-    background: linear-gradient(135deg, #ffb347, #ffcc80);
+    margin: 20px auto;
+    padding: 20px 40px;
+    background: linear-gradient(135deg, #FF69B4, #FF1493);
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 50px;
     cursor: pointer;
-    font-size: 1.4em;
+    font-size: 1.5em;
     font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 6px 12px rgba(255,105,180,0.4);
+    transition: all 0.3s ease;
 }
 
 #load-button:hover {
-    background: linear-gradient(135deg, #ffa726, #ffb74d);
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0 10px 20px rgba(255,20,147,0.5);
 }
 
 /* エラーメッセージ */
 #error-message {
-    color: red;
+    color: #FF1493;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    font-weight: bold;
 }
 
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    .filter-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .filter-group select,
+    .filter-group input {
+        width: 100%;
+        max-width: 300px;
+    }
+}
     </style>
 </head>
 
