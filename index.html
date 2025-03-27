@@ -66,23 +66,24 @@
             text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
         }
 
-        .link-button {
-            display: inline-block;
-            align-items: center;
-            justify-content: flex-start;
-            width: 90%;
-            max-width: 300px;
-            margin: 0 auto 10px auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #ff69b4, #ff8c00);
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1.2em;
-            position: relative;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
-        }
+.link-button {
+    display: flex; /* ← フレックスボックスでレイアウト */
+    align-items: center;
+    justify-content: flex-start; /* ← アイコンを左端に */
+    width: 90%;
+    max-width: 300px;
+    margin: 0 auto 10px auto;
+    padding: 15px 20px; /* ← 余白を調整 */
+    background: linear-gradient(135deg, #ff69b4, #ff8c00);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: relative;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+}
+        
 
         .link-button:hover {
             background: linear-gradient(135deg, #e6529b, #ff6600);
@@ -93,10 +94,14 @@
         .link-button i {
             font-size: 1.5em;
             margin-right: 15px;
-            margin-left: 10px;
+            margin-left: 5px;
             flex-shrink: 0;
         }
-
+        
+/* 🍊🎤を半分の大きさに */
+.orange-mic {
+    font-size: 0.5em; /* ← 半分のサイズ */
+}
         /* 🌸 ふんわり浮かぶ背景要素をJSでランダムに配置 */
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
