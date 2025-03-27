@@ -23,13 +23,13 @@
         }
 
         .background {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -1;
+            z-index: 1;  /* 背景よりも手前にくるように */
             pointer-events: none;
         }
 
@@ -52,6 +52,8 @@
             width: 90%;
             max-width: 800px;
             margin: 40px auto;
+            position: relative;
+            z-index: 2;  /* バブルより手前に配置 */
         }
 
         h1 {
