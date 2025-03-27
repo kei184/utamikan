@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>レパートリー曲</title>
+    <title>Utamikan Links</title>
     <style>
-        /* 🎨 背景デザイン */
         body {
             font-family: "Comic Sans MS", cursive, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f8f5f0 0%, #faf0e6 100%);
+            background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
             color: #5c3d00;
-            overflow-x: hidden;
+            display: flex; /* フレックスボックスでレイアウト */
+            justify-content: center; /* 水平方向中央揃え */
+            align-items: center; /* 垂直方向中央揃え */
+            min-height: 100vh; /* ビューポート全体の高さを占める */
             position: relative;
         }
 
-        /* 🌟 ポップな背景の動くデザイン */
+        /* 🌟 背景の動くポップなデザイン */
         .background {
             position: absolute;
-            top: 0;
+            top: 0; /* 修正：上端に詰める */
             left: 0;
             width: 100%;
             height: 100%;
@@ -31,11 +32,11 @@
 
         .bubble {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            background-color: rgba(255, 182, 193, 0.8);
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
-            animation: float 8s infinite linear;
+            animation: float 10s infinite linear;
         }
 
         @keyframes float {
@@ -44,181 +45,99 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        /* タイトル */
-        h1 {
-            color: #e65100;
-            text-align: center;
-            font-size: 2em;
-            background: linear-gradient(135deg, #ffd194, #ff7e5f);
-            padding: 20px;
-            border-radius: 25px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        /* 注意書き */
-        .notice {
-            font-size: 1em;
-            color: #d2691e;
-            text-align: center;
-            margin: 8px 0;
-            font-weight: bold;
-        }
-
-        /* フィルターコンテナ */
-        .filter-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px auto;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 15px;
-            max-width: 800px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-
-        /* フィルターグループ */
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .filter-group label {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #ff69b4;
-            margin-bottom: 5px;
-        }
-
-        /* フィルターの入力・選択 */
-        .filter-group select,
-        .filter-group input {
-            padding: 12px;
-            border: 2px solid #ff69b4;
-            border-radius: 10px;
-            background-color: #fff0f5;
-            font-size: 1.1em;
-            width: 220px;
-        }
-
-        /* テーブルデザイン */
-        table {
+        .container {
             width: 90%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background-color: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-        }
-
-        th, td {
-            border: 1px solid #ff69b4;
-            padding: 14px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #ffb6c1;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #fff0f5;
-        }
-
-        tr:hover {
-            background-color: #ffccd5;
-            transform: scale(1.02);
-            transition: all 0.3s ease-in-out;
-        }
-
-        /* ボタンデザイン */
-        #load-button {
-            display: block;
-            margin: 20px auto;
-            padding: 15px 25px;
-            background: linear-gradient(135deg, #f6d365, #fda085);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 1.4em;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s, background 0.3s;
-        }
-
-        #load-button:hover {
-            background: linear-gradient(135deg, #ffcc33, #ff9966);
-            transform: scale(1.05);
-        }
-
-        /* エラーメッセージ */
-        #error-message {
-            color: red;
+            max-width: 320px;
             text-align: center;
-            margin-top: 10px;
-            font-weight: bold;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
         }
-    </style>
-</head>
 
+        .profile-image {
+            width: 50%;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            color: #ff4500;
+            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 300px;
+            margin: 0 auto 10px auto;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #ff69b4, #ff8c00);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2em;
+            position: relative;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+        }
+        
+        .link-button:hover {
+            background: linear-gradient(135deg, #e6529b, #ff6600);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-button i {
+            font-size: 1.5em;
+            position: absolute;
+            left: 15px;
+        }
+        
+        /* 🍊🎤を半分の大きさに */
+        .orange-mic {
+            font-size: 0.5em;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
 <body>
     <div class="background">
-        <!-- バブルの例 -->
-        <div class="bubble" style="left: 20%; animation-delay: 0s;"></div>
-        <div class="bubble" style="left: 40%; animation-delay: 2s;"></div>
-        <div class="bubble" style="left: 60%; animation-delay: 4s;"></div>
-        <div class="bubble" style="left: 80%; animation-delay: 6s;"></div>
+        <script>
+            for (let i = 0; i < 20; i++) {
+                let bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.style.left = Math.random() * 100 + "vw";
+                bubble.style.animationDuration = Math.random() * 10 + 5 + "s";
+                bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
+                document.querySelector(".background").appendChild(bubble);
+            }
+        </script>
     </div>
-
-    <h1>🍊レパートリー曲🍊</h1>
-    <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
-    <div class="filter-container">
-        <div class="filter-group">
-            <label for="searchInput">検索</label>
-            <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
-        </div>
-        <div class="filter-group">
-            <label for="filterArtist">アーティストで選ぶ</label>
-            <select id="filterArtist">
-                <option value="">すべて</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label for="filterGenre">ジャンルで選ぶ</label>
-            <select id="filterGenre">
-                <option value="">すべて</option>
-            </select>
-        </div>
+    <div class="container">
+        <img src="/utamikan/mikan.png" alt="Profile Image" class="profile-image">
+        <h1>うたみかん<span class="orange-mic">🍊🎤</span></h1>
+        <a href="https://www.tiktok.com/@utamikan.boitore" class="link-button">
+            <i class="fab fa-tiktok"></i> TikTok
+        </a>
+        <a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3RpbmRxMQ==&utm_source=qr/" class="link-button">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https:/utamikan/list" class="link-button">
+            <i class="fas fa-list"></i> うたリスト
+        </a>
+        <a href="https://lin.ee/KdjohVd" class="link-button">
+            <i class="fab fa-line"></i> ボーカル教室<br>ロマンツァ公式LINE
+        </a>
+        <a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button">
+            <i class="fas fa-users"></i> サブスク限定<br>オープンチャット
+        </a>
     </div>
-    <table id="songTable">
-        <thead>
-            <tr>
-                <th>アーティスト</th>
-                <th>曲名</th>
-                <th>ジャンル</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- データがここにロードされる -->
-        </tbody>
-    </table>
-
-    <div class="notice">↓最初にボタンを押してね♡</div>
-    <button id="load-button">データ読み込み</button>
-    <div class="notice">※随時更新しています</div>
-    <div id="error-message"></div>
-
-    <script src="script.js" defer></script>
+    <script src="/utamikan/app_message.js"></script>
 </body>
-
 </html>
