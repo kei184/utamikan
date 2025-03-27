@@ -154,3 +154,9 @@ function toHiragana(str) {
             ua.includes("micromessenger") // WeChat
         );
     }
+
+for (let i = 0; i < 10; i++) {
+    let bubble = document.createElement('div');
+    bubble.classList.add('bubble');
+    document.body.appendChild(bubble);
+}
