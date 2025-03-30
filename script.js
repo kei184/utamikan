@@ -110,8 +110,8 @@ function filterTable() {
     let searchQuery = searchInput.value.toLowerCase();
     searchQuery = toHiragana(searchQuery); // 🔹 ひらがなに統一
 
-    const artistFilter = filterArtist.value;
-    const genreFilter = filterGenre.value;
+    const artistFilter = filterArtist.value.toLowerCase();
+    const genreFilter = filterGenre.value.toLowerCase();
 
     const rows = document.querySelectorAll('#songTable tbody tr');
 
@@ -125,8 +125,8 @@ function filterTable() {
         song = toHiragana(song);
 
         const matchesSearch = artist.includes(searchQuery) || song.includes(searchQuery);
-        const matchesArtist = artistFilter === "" || artistFilter === artist;
-        const matchesGenre = genreFilter === "" || genreFilter === genre;
+        const matchesArtist = artistFilter === "" || artistFilter.toLowerCase() === artist;
+        const matchesGenre = genreFilter === "" || genreFilter.toLowerCase() === genre;
 
         // 検索・フィルターの条件を満たす場合、行を表示
         if (matchesSearch && matchesArtist && matchesGenre) {
@@ -144,13 +144,13 @@ function toHiragana(str) {
     );
 }
 
-    function isInAppBrowser() {
-        const ua = navigator.userAgent.toLowerCase();
-        return (
-            ua.includes("instagram") || 
-            ua.includes("line") || 
-            ua.includes("fbav") ||  // Facebookアプリ内
-            ua.includes("twitter") || 
-            ua.includes("micromessenger") // WeChat
-        );
-    }
+function isInAppBrowser() {
+    const ua = navigator.userAgent.toLowerCase();
+    return (
+        ua.includes("instagram") || 
+        ua.includes("line") || 
+        ua.includes("fbav") ||  // Facebookアプリ内
+        ua.includes("twitter") || 
+        ua.includes("micromessenger") // WeChat
+    );
+}
