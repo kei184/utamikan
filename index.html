@@ -11,20 +11,46 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6; /* 背景を元に戻しました */
+            background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
             color: #5c3d00;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             position: relative;
+            overflow: hidden; /* バブルが外に出ないように */
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bubble {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 165, 0, 0.3); /* バブルのオレンジ色 */
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         .container {
             width: 90%;
             max-width: 360px;
             text-align: center;
-            background: linear-gradient(to bottom, #faf3e0, #efe4d2); /* クリーム色のデザイン */
+            background: linear-gradient(to bottom, #faf3e0, #efe4d2);
             padding: 40px 20px;
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -33,7 +59,7 @@
             color: black;
             margin: 0 20px;
             overflow: hidden;
-            border: 2px solid #d1c4b0; /* 少し濃いクリーム色のボーダー */
+            border: 2px solid #d1c4b0;
         }
 
         .profile-image {
@@ -87,11 +113,22 @@
         .orange-mic {
             font-size: 0.5em;
         }
-
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+    <div class="background">
+        <script>
+            for (let i = 0; i < 20; i++) {
+                let bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.style.left = Math.random() * 100 + "vw";
+                bubble.style.animationDuration = Math.random() * 10 + 5 + "s";
+                bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
+                document.querySelector(".background").appendChild(bubble);
+            }
+        </script>
+    </div>
     <div class="container">
         <img src="/utamikan/mikan.png" alt="Profile Image" class="profile-image">
         <h1>うたみかん<span class="orange-mic">🍊🎤</span></h1>
