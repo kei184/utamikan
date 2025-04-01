@@ -203,17 +203,14 @@
 <body>
     <div class="background">
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                for (let i = 0; i < 20; i++) {
-                    let bubble = document.createElement('div');
-                    bubble.className = 'bubble';
-                    bubble.style.left = Math.random() * 100 + 'vw';
-                    bubble.style.animationDuration = Math.random() * 5 + 5 + 's'; // アニメーション速度調整
-                    bubble.style.animationDelay = Math.random() * 2 + 's';  // 少し遅延を追加
-                    bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + 'px';
-                    document.querySelector('.background').appendChild(bubble);
-                }
-            });
+            for (let i = 0; i < 20; i++) {
+                let bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.style.left = Math.random() * 100 + "vw";
+                bubble.style.animationDuration = Math.random() * 10 + 5 + "s";
+                bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
+                document.querySelector(".background").appendChild(bubble);
+            }
         </script>
     </div>
 
