@@ -39,14 +39,14 @@
 
         .bubble {
             position: absolute;
-            bottom: -100px;
+            bottom: -100px; /* 画面下部から出現するように設定 */
             background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
             animation: float 8s infinite linear;
         }
 
         @keyframes float {
-            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
             25% { opacity: 1; }
             100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
         }
@@ -65,7 +65,7 @@
         h1 {
             color: #fff;
             text-align: center;
-            font-size: 1.6em;
+            font-size: 2em;
             background: linear-gradient(135deg, #ffa500, #ff7e5f);
             padding: 20px;
             border-radius: 25px;
@@ -98,7 +98,7 @@
         .filter-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
             gap: 15px;
             background: rgba(255, 255, 255, 0.9);
             padding: 20px;
@@ -112,8 +112,8 @@
             flex-direction: column;
             align-items: flex-start;
             margin-bottom: 10px;
-            flex: 1;
-            min-width: 200px; /* 最小幅を設定 */
+            flex: 1 1 30%;
+            min-width: 220px;
         }
 
         .filter-group label {
@@ -130,7 +130,7 @@
             border-radius: 10px;
             background-color: #fff0f5;
             font-size: 1.1em;
-            width: 100%; /* 幅を100%にしてトラップ */
+            width: 100%;
         }
 
         table {
@@ -192,10 +192,9 @@
             font-weight: bold;
         }
 
-        /* メディアクエリでレスポンシブデザインを実現 */
         @media (max-width: 768px) {
             .filter-container {
-                flex-direction: column; /* フォームを縦に並べる */
+                flex-direction: column;
                 align-items: center;
             }
         }
@@ -210,7 +209,7 @@
                     let bubble = document.createElement("div");
                     bubble.className = "bubble";
                     bubble.style.left = Math.random() * 100 + "vw";
-                    bubble.style.animationDuration = Math.random() * 5 + "s";
+                    bubble.style.animationDuration = Math.random() * 10 + 5 + "s"; /* バブルが出る時間を調整 */
                     bubble.style.animationDelay = Math.random() * 5 + "s";
                     bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
                     document.querySelector(".background").appendChild(bubble);
@@ -222,7 +221,7 @@
     <div class="container">
         <h1>
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
-            レパートリー曲
+            🍊レパートリー曲🍊
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
         </h1>
         <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
