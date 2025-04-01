@@ -78,13 +78,6 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: none;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
-}
-
-h1:hover {
-    transform: scale(1.08);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* ホバー時に影を追加 */
 }
 
 h1 img {
@@ -145,17 +138,12 @@ a {
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #f9f0e6; /* テーブルの背景色を変更 */
+    background-color: #f9f0e6;
     border-radius: 15px;
     overflow: hidden;
     border: 2px solid white; /* 白い縁を追加 */
     margin-bottom: 20px;
     box-shadow: none;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
-}
-
-table:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* ホバー時に影を追加 */
 }
 
 th, td {
@@ -165,7 +153,7 @@ th, td {
 }
 
 th {
-    background-color: #ffcc99;
+    background: linear-gradient(135deg, #ffaa00, #ff8c00); /* ボタンと同じ色に設定 */
     color: white;
 }
 
