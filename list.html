@@ -51,8 +51,8 @@
 
         .container {
             width: 100%;
-            max-width: 1200px;
-            padding: 20px 20px;
+            max-width: 1000px;
+            padding: 30px 20px;
             background: linear-gradient(to bottom, #faf3e0, #efe4d2);
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -66,9 +66,9 @@
             text-align: center;
             font-size: 1.6em;
             background: linear-gradient(135deg, #ffa500, #ff7e5f);
-            padding: 10px;
+            padding: 20px;
             border-radius: 25px;
-            margin: 20px auto;
+            margin: 40px auto;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -93,47 +93,31 @@
             font-weight: bold;
         }
 
-        .filter-container {
+        .search-form, .filter-form {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 15px;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
-        .filter-group {
-            display: flex;
+            width: calc(33.33% - 20px);
             flex-direction: column;
             align-items: flex-start;
-            min-width: 120px; /* フィルターフォームの最小幅 */
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .filter-group:first-child {
-            flex: 1 1 20%; /* 検索フォームを広く */
-        }
-
-        .filter-group:not(:first-child) {
-            flex: 1 1 20%; /* フィルターフォームを狭く */
-        }
-
-        .filter-group label {
+        .search-form label, .filter-form label {
             font-weight: bold;
             font-size: 1.1em;
             color: #ff8c00;
             margin-bottom: 5px;
         }
 
-        .filter-group select,
-        .filter-group input {
+        .search-form input, .filter-form select {
             padding: 10px;
             border: 2px solid #ff8c00;
             border-radius: 10px;
             background-color: #fff0f5;
-            font-size: 0.8em;
+            font-size: 1em;
             width: 100%;
         }
 
@@ -199,15 +183,9 @@
             .container {
                 max-width: 100%;
             }
-            .filter-container {
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-                padding: 10px;
-            }
-            .filter-group {
-                flex: 1 1 100%;
-                margin-bottom: 15px;
+            .search-form, .filter-form {
+                width: 80%;
+                margin: 0 auto 15px auto;
             }
         }
     </style>
@@ -235,25 +213,26 @@
             レパートリー曲
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
         </h1>
-        <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
-        <div class="filter-container">
-            <div class="filter-group">
-                <label for="searchInput">検索</label>
-                <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
-            </div>
-            <div class="filter-group">
-                <label for="filterArtist">アーティストで選ぶ</label>
-                <select id="filterArtist">
-                    <option value="">すべて</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="filterGenre">ジャンルで選ぶ</label>
-                <select id="filterGenre">
-                    <option value="">すべて</option>
-                </select>
-            </div>
+        
+        <div class="search-form">
+            <label for="searchInput">検索</label>
+            <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
         </div>
+
+        <div class="filter-form">
+            <label for="filterArtist">アーティストで選ぶ</label>
+            <select id="filterArtist">
+                <option value="">すべて</option>
+            </select>
+        </div>
+
+        <div class="filter-form">
+            <label for="filterGenre">ジャンルで選ぶ</label>
+            <select id="filterGenre">
+                <option value="">すべて</option>
+            </select>
+        </div>
+
         <table id="songTable">
             <thead>
                 <tr>
