@@ -39,16 +39,17 @@
 
         .bubble {
             position: absolute;
-            bottom: -100px; /* 画面下部から出現するように設定 */
+            width: 50px;
+            height: 50px;
             background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
-            animation: float 8s infinite linear;
+            animation: float 10s infinite linear;
         }
 
         @keyframes float {
             0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
-            25% { opacity: 1; }
-            100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         .container {
@@ -65,7 +66,7 @@
         h1 {
             color: #fff;
             text-align: center;
-            font-size: 2em;
+            font-size: 1.6em;
             background: linear-gradient(135deg, #ffa500, #ff7e5f);
             padding: 20px;
             border-radius: 25px;
@@ -112,7 +113,7 @@
             flex-direction: column;
             align-items: flex-start;
             margin-bottom: 10px;
-            flex: 1 1 30%;
+            flex: 1;
             min-width: 220px;
         }
 
@@ -196,6 +197,11 @@
             .filter-container {
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
+            }
+            .filter-group {
+                width: 90%; /* モバイルでの幅調整 */
+                margin-bottom: 15px;
             }
         }
     </style>
@@ -209,8 +215,7 @@
                     let bubble = document.createElement("div");
                     bubble.className = "bubble";
                     bubble.style.left = Math.random() * 100 + "vw";
-                    bubble.style.animationDuration = Math.random() * 10 + 5 + "s"; /* バブルが出る時間を調整 */
-                    bubble.style.animationDelay = Math.random() * 5 + "s";
+                    bubble.style.animationDuration = Math.random() * 10 + 5 + "s";
                     bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
                     document.querySelector(".background").appendChild(bubble);
                 }
@@ -221,7 +226,7 @@
     <div class="container">
         <h1>
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
-            🍊レパートリー曲🍊
+            レパートリー曲
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
         </h1>
         <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
