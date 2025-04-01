@@ -21,6 +21,9 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            display: flex; /* 中央揃えのためにフレックスボックスを使用 */
+            justify-content: center;
+            align-items: center;
         }
 
         .background {
@@ -51,11 +54,10 @@
         .container {
             width: 90%;
             max-width: 800px;
-            margin: 40px auto;
             padding: 30px 20px;
             background: linear-gradient(to bottom, #faf3e0, #efe4d2);
             border-radius: 50px;
-            box-shadow: none; /* シャドウを削除して缶の塗装のように */
+            box-shadow: none;
             position: relative;
             z-index: 2;
         }
@@ -80,6 +82,15 @@
             margin: 0 10px;
         }
 
+        a {
+            color: #ff8c00; /* オレンジ色のリンクテキスト */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         .notice {
             font-size: 1em;
             color: #d2691e;
@@ -96,7 +107,7 @@
             background: rgba(255, 255, 255, 0.9);
             padding: 15px;
             border-radius: 15px;
-            box-shadow: none; /* シャドウを削除 */
+            box-shadow: none;
             margin-bottom: 30px;
         }
 
@@ -130,7 +141,7 @@
             background-color: #fff;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: none; /* シャドウを削除 */
+            box-shadow: none;
             margin-bottom: 20px;
         }
 
@@ -166,14 +177,14 @@
             cursor: pointer;
             font-size: 1.4em;
             font-weight: bold;
-            box-shadow: none; /* 通常時のシャドウは無し */
+            box-shadow: none;
             transition: transform 0.2s, background 0.3s, box-shadow 0.2s;
         }
 
         #load-button:hover {
             background: linear-gradient(135deg, #ffcc33, #ff9966);
             transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ホバー時にシャドウ追加 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         #error-message {
@@ -205,7 +216,7 @@
     <div class="container">
         <h1>
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
-            レパートリー曲
+            🍊レパートリー曲🍊
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
         </h1>
         <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
