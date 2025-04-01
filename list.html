@@ -51,13 +51,14 @@
 
         .container {
             width: 100%;
-            max-width: 1200px; /* PCとタブレットでコンテナ幅を広く */
+            max-width: 1000px; /* コンテナ幅を広げてフォームの重なりを解消 */
             padding: 30px 20px;
             background: linear-gradient(to bottom, #faf3e0, #efe4d2);
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 2;
+            margin: 20px;
         }
 
         h1 {
@@ -105,11 +106,11 @@
         }
 
         .filter-group {
-            flex: 1;
-            min-width: 250px; /* フォームが重ならないように最小幅設定 */
+            flex: 1 1 30%; /* 各フォームグループの幅を調整 */
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            min-width: 250px; /* 最小幅を設定して重なりを防止 */
         }
 
         .filter-group label {
@@ -189,13 +190,13 @@
 
         @media (max-width: 768px) {
             .container {
-                max-width: 100%; /* スマホ用に幅を調整 */
+                max-width: 100%; /* スマホでの調整 */
             }
             .filter-container {
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
-                padding: 10px; /* スマホ表示時のパディング調整 */
+                padding: 10px; /* スマホ表示のパディング調整 */
             }
             .filter-group {
                 flex: 1 1 100%;
