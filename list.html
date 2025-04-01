@@ -93,15 +93,21 @@
             font-weight: bold;
         }
 
-        .search-form, .filter-form {
+        .form-container {
             display: flex;
-            width: calc(33.33% - 20px);
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            width: 100%;
             margin-bottom: 20px;
+        }
+
+        .search-form, .filter-form {
+            flex: 1 1 calc(33.33% - 20px); /* 3つ横並びにするために幅を設定 */
+            min-width: 220px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
@@ -119,6 +125,7 @@
             background-color: #fff0f5;
             font-size: 1em;
             width: 100%;
+            box-sizing: border-box; /* フォーム全体の幅を固定 */
         }
 
         table {
@@ -180,12 +187,14 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                max-width: 100%;
+            .form-container {
+                flex-direction: column;
+                align-items: center;
             }
             .search-form, .filter-form {
-                width: 80%;
-                margin: 0 auto 15px auto;
+                flex: 1 1 100%;
+                min-width: 80%;
+                margin-bottom: 15px;
             }
         }
     </style>
@@ -214,23 +223,25 @@
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
         </h1>
         
-        <div class="search-form">
-            <label for="searchInput">検索</label>
-            <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
-        </div>
+        <div class="form-container">
+            <div class="search-form">
+                <label for="searchInput">検索</label>
+                <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
+            </div>
 
-        <div class="filter-form">
-            <label for="filterArtist">アーティストで選ぶ</label>
-            <select id="filterArtist">
-                <option value="">すべて</option>
-            </select>
-        </div>
+            <div class="filter-form">
+                <label for="filterArtist">アーティストで選ぶ</label>
+                <select id="filterArtist">
+                    <option value="">すべて</option>
+                </select>
+            </div>
 
-        <div class="filter-form">
-            <label for="filterGenre">ジャンルで選ぶ</label>
-            <select id="filterGenre">
-                <option value="">すべて</option>
-            </select>
+            <div class="filter-form">
+                <label for="filterGenre">ジャンルで選ぶ</label>
+                <select id="filterGenre">
+                    <option value="">すべて</option>
+                </select>
+            </div>
         </div>
 
         <table id="songTable">
