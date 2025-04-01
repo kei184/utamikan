@@ -37,7 +37,7 @@
         .bubble {
             position: absolute;
             bottom: -100px;
-            background-color: rgba(255, 105, 180, 0.3); /* ピンク色のバブル */
+            background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
             animation: float 8s infinite linear;
         }
@@ -55,7 +55,7 @@
             padding: 30px 20px;
             background: linear-gradient(to bottom, #faf3e0, #efe4d2);
             border-radius: 50px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 6px 15px rgba(0, 0, 0, 0.3) inset;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 影を軽くして缶っぽさを調整 */
             position: relative;
             z-index: 2;
         }
@@ -101,14 +101,14 @@
         .filter-group label {
             font-weight: bold;
             font-size: 1.1em;
-            color: #ff8c00; /* オレンジ色に変更 */
+            color: #ff8c00;
             margin-bottom: 5px;
         }
 
         .filter-group select,
         .filter-group input {
             padding: 12px;
-            border: 2px solid #ff8c00; /* オレンジ色に変更 */
+            border: 2px solid #ff8c00;
             border-radius: 10px;
             background-color: #fff0f5;
             font-size: 1.1em;
@@ -126,22 +126,22 @@
         }
 
         th, td {
-            border: 1px solid #ff8c00; /* オレンジ色に変更 */
+            border: 1px solid #ff8c00;
             padding: 14px;
             text-align: left;
         }
 
         th {
-            background-color: #ffcc99; /* オレンジ系に変更 */
+            background-color: #ffcc99;
             color: white;
         }
 
         tr:nth-child(even) {
-            background-color: #fff4e6; /* 今までのピンクの代わりにオレンジ系に変更 */
+            background-color: #fff4e6;
         }
 
         tr:hover {
-            background-color: #ffdab9; /* オレンジ系のホバー効果 */
+            background-color: #ffdab9;
             transform: scale(1.02);
             transition: all 0.3s ease-in-out;
         }
