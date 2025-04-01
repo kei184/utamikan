@@ -7,23 +7,22 @@
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet"> <!-- 日本語フォントを追加 -->
     <style>
         body {
-            font-family: "M PLUS 1p", sans-serif; /* 日本語フォントを指定 */
+            font-family: "M PLUS 1p", sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
             background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
             color: #5c3d00;
-            display: flex; /* フレックスボックスでレイアウト */
-            justify-content: center; /* 水平方向中央揃え */
-            align-items: center; /* 垂直方向中央揃え */
-            min-height: 100vh; /* ビューポート全体の高さを占める */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             position: relative;
         }
 
-        /* 🌟 背景の動くポップなデザイン */
         .background {
             position: absolute;
-            top: 0; /* 修正：上端に詰める */
+            top: 0;
             left: 0;
             width: 100%;
             height: 100%;
@@ -50,23 +49,28 @@
             width: 90%;
             max-width: 320px;
             text-align: center;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: radial-gradient(circle, #ffa500, #ff4500); /* ミカンジュース風の背景 */
+            padding: 40px 20px;
+            border-radius: 50% 50% 5px 5px; /* 缶のような形状 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
+            color: white;
+            border: 5px solid #ff8c00; /* 缶の輪郭をはっきりさせる */
         }
 
         .profile-image {
             width: 50%;
             height: auto;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
         }
 
         h1 {
             font-size: 1.8em;
-            color: #ff4500;
-            text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         .link-button {
@@ -75,9 +79,9 @@
             justify-content: center;
             width: 90%;
             max-width: 300px;
-            margin: 0 auto 10px auto;
+            margin: 10px auto;
             padding: 15px 20px;
-            background: linear-gradient(135deg, #ff69b4, #ff8c00);
+            background: linear-gradient(135deg, #ffaa00, #ff8c00);
             color: white;
             text-decoration: none;
             border-radius: 25px;
@@ -85,12 +89,13 @@
             font-size: 1.2em;
             position: relative;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+            border: 2px solid white;
         }
         
         .link-button:hover {
-            background: linear-gradient(135deg, #e6529b, #ff6600);
-            transform: scale(1.05);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #ffcc33, #ff9933);
+            transform: scale(1.08);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .link-button i {
@@ -99,7 +104,6 @@
             left: 15px;
         }
         
-        /* 🍊🎤を半分の大きさに */
         .orange-mic {
             font-size: 0.5em;
         }
