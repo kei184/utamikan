@@ -21,18 +21,22 @@
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* 上側に配置 */
+        }
+
+        body {
+            padding-top: 20px; /* 上に20pxのマージンを全体に設定 */
         }
 
         .background {
-            position: fixed; /* スクロールに応じて背景に固定 */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
             z-index: 1;
-            pointer-events: none; /* バブルがクリック操作を妨げないように設定 */
+            pointer-events: none;
         }
 
         .bubble {
@@ -59,7 +63,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 3;
-            margin: 20px;
+            margin: 0 20px; /* 上下のマージンを調整 */
         }
 
         h1 {
@@ -96,17 +100,16 @@
 
         .form-container {
             display: flex;
-            justify-content: space-between; /* スペースを均等に配置 */
+            justify-content: space-between;
             gap: 15px;
             width: 100%;
             margin-bottom: 20px;
-            /* デフォルトで横に並ぶ */
+            flex-wrap: nowrap;
             flex-direction: row;
-            flex-wrap: nowrap; /* 無理に改行しないように設定 */
         }
 
         .search-form, .filter-form {
-            flex: 1 1 30%; /* 3つ横に並ぶ */
+            flex: 1 1 30%;
             min-width: 200px;
             background: rgba(255, 255, 255, 0.9);
             padding: 10px;
@@ -266,9 +269,25 @@
                 bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
                 backgroundEl.appendChild(bubble);
             }
+
+            const loadButton = document.getElementById('load-button');
+            loadButton.addEventListener('click', function() {
+                loadData(); // ここでデータをロードする関数を呼び出す
+            });
+
+            function loadData() {
+                // データロードロジック（サンプル）
+                const tbody = document.querySelector('#songTable tbody');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>アーティスト名</td>
+                    <td>曲名</td>
+                    <td>ジャンル</td>
+                `;
+                tbody.appendChild(newRow);
+            }
         });
     </script>
-    <script src="script.js" defer></script>
 </body>
 
 </html>
