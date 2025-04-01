@@ -257,37 +257,8 @@
         <div class="notice">※随時更新しています</div>
         <div id="error-message"></div>
     </div>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const backgroundEl = document.querySelector(".background");
-            for (let i = 0; i < 20; i++) {
-                let bubble = document.createElement("div");
-                bubble.className = "bubble";
-                bubble.style.left = Math.random() * 100 + "vw";
-                bubble.style.animationDuration = Math.random() * 10 + 5 + "s";
-                bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
-                backgroundEl.appendChild(bubble);
-            }
 
-            const loadButton = document.getElementById('load-button');
-            loadButton.addEventListener('click', function() {
-                loadData(); // ここでデータをロードする関数を呼び出す
-            });
-
-            function loadData() {
-                // データロードロジック（サンプル）
-                const tbody = document.querySelector('#songTable tbody');
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                    <td>アーティスト名</td>
-                    <td>曲名</td>
-                    <td>ジャンル</td>
-                `;
-                tbody.appendChild(newRow);
-            }
-        });
-    </script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
