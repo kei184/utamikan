@@ -6,20 +6,21 @@
     <title>Utamikan Links</title>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: "M PLUS 1p", sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
-            color: #5c3d00;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
+body {
+    font-family: "M PLUS 1p", sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
+    color: #5c3d00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    padding-top: 20px; /* ページ全体の上のマージン */
+}
 
         .background {
             position: absolute;
@@ -46,21 +47,21 @@
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        .container {
-            width: 90%;
-            max-width: 360px;
-            text-align: center;
-            background: linear-gradient(to bottom, #faf3e0, #efe4d2);
-            padding: 40px 20px;
-            border-radius: 50px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            position: relative;
-            z-index: 1;
-            color: black;
-            margin: 0 20px;
-            overflow: hidden;
-            border: 2px solid #d1c4b0;
-        }
+.container {
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    background: linear-gradient(to bottom, #faf3e0, #efe4d2);
+    padding: 40px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+    color: black;
+    margin: 20px 20px; /* 上に20pxのマージンを追加 */
+    overflow: hidden;
+    border: 2px solid #d1c4b0;
+}
 
         .profile-image {
             width: 50%;
