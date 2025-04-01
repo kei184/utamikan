@@ -100,11 +100,13 @@
             gap: 15px;
             width: 100%;
             margin-bottom: 20px;
-            flex-wrap: wrap;
+            /* デフォルトで横に並ぶ */
+            flex-direction: row;
+            flex-wrap: nowrap; /* 無理に改行しないように設定 */
         }
 
         .search-form, .filter-form {
-            flex: 1 1 calc(33.33% - 20px);
+            flex: 1 1 30%; /* 3つ横に並ぶ */
             min-width: 200px;
             background: rgba(255, 255, 255, 0.9);
             padding: 10px;
