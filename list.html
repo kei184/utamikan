@@ -21,7 +21,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-            display: flex; /* 中央揃えのためにフレックスボックスを使用 */
+            display: flex;
             justify-content: center;
             align-items: center;
         }
@@ -84,11 +84,7 @@
 
         a {
             color: #ff8c00; /* オレンジ色のリンクテキスト */
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
+            text-decoration: underline; /* アンダーラインを保持 */
         }
 
         .notice {
@@ -101,7 +97,6 @@
 
         .filter-container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
             background: rgba(255, 255, 255, 0.9);
@@ -114,7 +109,7 @@
         .filter-group {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 10px;
         }
 
@@ -132,7 +127,7 @@
             border-radius: 10px;
             background-color: #fff0f5;
             font-size: 1.1em;
-            width: 220px;
+            width: 200px; /* 少し幅を調整 */
         }
 
         table {
@@ -216,7 +211,7 @@
     <div class="container">
         <h1>
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
-            🍊レパートリー曲🍊
+            レパートリー曲
             <img src="/utamikan/mikan.png" alt="Mikan Icon">
         </h1>
         <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
