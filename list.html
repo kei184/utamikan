@@ -103,7 +103,7 @@
         }
 
         .search-form, .filter-form {
-            flex: 1 1 calc(33.33% - 20px); /* 3つ横並びにするために幅を設定 */
+            flex: 1 1 calc(33.33% - 20px);
             min-width: 220px;
             background: rgba(255, 255, 255, 0.9);
             padding: 10px;
@@ -125,7 +125,7 @@
             background-color: #fff0f5;
             font-size: 1em;
             width: 100%;
-            box-sizing: border-box; /* フォーム全体の幅を固定 */
+            box-sizing: border-box;
         }
 
         table {
@@ -209,6 +209,7 @@
                     bubble.className = "bubble";
                     bubble.style.left = Math.random() * 100 + "vw";
                     bubble.style.animationDuration = Math.random() * 10 + 5 + "s";
+                    bubble.style.animationDelay = Math.random() * 5 + "s";  // アニメーションの遅延を追加
                     bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
                     document.querySelector(".background").appendChild(bubble);
                 }
