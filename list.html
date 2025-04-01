@@ -55,7 +55,7 @@
             padding: 30px 20px;
             background: linear-gradient(to bottom, #faf3e0, #efe4d2);
             border-radius: 50px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 影を軽くして缶っぽさを調整 */
+            box-shadow: none; /* シャドウを削除して缶の塗装のように */
             position: relative;
             z-index: 2;
         }
@@ -67,8 +67,17 @@
             background: linear-gradient(135deg, #ffa500, #ff7e5f);
             padding: 20px;
             border-radius: 25px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 40px auto 20px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 img {
+            width: 40px;
+            height: auto;
+            margin: 0 10px;
         }
 
         .notice {
@@ -87,7 +96,7 @@
             background: rgba(255, 255, 255, 0.9);
             padding: 15px;
             border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            box-shadow: none; /* シャドウを削除 */
             margin-bottom: 30px;
         }
 
@@ -121,7 +130,7 @@
             background-color: #fff;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: none; /* シャドウを削除 */
             margin-bottom: 20px;
         }
 
@@ -157,13 +166,14 @@
             cursor: pointer;
             font-size: 1.4em;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s, background 0.3s;
+            box-shadow: none; /* 通常時のシャドウは無し */
+            transition: transform 0.2s, background 0.3s, box-shadow 0.2s;
         }
 
         #load-button:hover {
             background: linear-gradient(135deg, #ffcc33, #ff9966);
             transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ホバー時にシャドウ追加 */
         }
 
         #error-message {
@@ -193,7 +203,11 @@
     </div>
 
     <div class="container">
-        <h1>🍊レパートリー曲🍊</h1>
+        <h1>
+            <img src="/utamikan/mikan.png" alt="Mikan Icon">
+            レパートリー曲
+            <img src="/utamikan/mikan.png" alt="Mikan Icon">
+        </h1>
         <div class="notice">※忘れちゃってる曲もあります🙇‍♀️</div>
         <div class="filter-container">
             <div class="filter-group">
