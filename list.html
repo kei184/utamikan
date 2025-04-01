@@ -51,8 +51,8 @@
 
         .container {
             width: 100%;
-            max-width: 1000px; /* コンテナ幅を広げてフォームの重なりを解消 */
-            padding: 10px 20px;
+            max-width: 1000px;
+            padding: 30px 20px;
             background: linear-gradient(to bottom, #faf3e0, #efe4d2);
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -99,18 +99,18 @@
             justify-content: space-between;
             gap: 15px;
             background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
+            padding: 20px;
             border-radius: 15px;
             margin-bottom: 30px;
             width: 100%;
         }
 
         .filter-group {
-            flex: 1 1 30%; /* 各フォームグループの幅を調整 */
+            flex: 1 1 calc(33.33% - 20px); /* 各グループの幅を縮小 */
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            min-width: 250px; /* 最小幅を設定して重なりを防止 */
+            min-width: 180px; /* フォームの最小幅 */
         }
 
         .filter-group label {
@@ -122,11 +122,11 @@
 
         .filter-group select,
         .filter-group input {
-            padding: 12px;
+            padding: 10px; /* フォームの内側パディングを縮小 */
             border: 2px solid #ff8c00;
             border-radius: 10px;
             background-color: #fff0f5;
-            font-size: 1.1em;
+            font-size: 1em; /* フォントサイズも微調整 */
             width: 100%;
         }
 
@@ -190,13 +190,13 @@
 
         @media (max-width: 768px) {
             .container {
-                max-width: 100%; /* スマホでの調整 */
+                max-width: 100%;
             }
             .filter-container {
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
-                padding: 10px; /* スマホ表示のパディング調整 */
+                padding: 10px;
             }
             .filter-group {
                 flex: 1 1 100%;
