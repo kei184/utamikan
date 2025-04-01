@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>レパートリー曲</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html, body {
-            font-family: "Comic Sans MS", "Arial", sans-serif;
+            font-family: "M PLUS 1p", sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -35,8 +36,8 @@
 
         .bubble {
             position: absolute;
-            bottom: -100px; /* 画面下部から出現させる */
-            background-color: rgba(255, 105, 180, 0.3);
+            bottom: -100px;
+            background-color: rgba(255, 105, 180, 0.3); /* ピンク色のバブル */
             border-radius: 50%;
             animation: float 8s infinite linear;
         }
@@ -51,12 +52,16 @@
             width: 90%;
             max-width: 800px;
             margin: 40px auto;
+            padding: 30px 20px;
+            background: linear-gradient(to bottom, #faf3e0, #efe4d2); /* クリーム色のデザイン */
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 2;
         }
 
         h1 {
-            color: #e65100;
+            color: #ff4500;
             text-align: center;
             font-size: 2em;
             background: linear-gradient(135deg, #ffd194, #ff7e5f);
