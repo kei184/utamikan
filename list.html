@@ -58,7 +58,7 @@ body {
     width: 100%;
     max-width: 1000px;
     padding: 30px 20px;
-    background: linear-gradient(to bottom, #faf3e0, #efe4d2);
+    background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
     border-radius: 50px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -70,10 +70,10 @@ h1 {
     color: #fff;
     text-align: center;
     font-size: 1.6em;
-    background: linear-gradient(135deg, #ffaa00, #ff8c00); /* グラデーションカラーを統一 */
+    background: linear-gradient(135deg, #ffaa00, #ff8c00);
     padding: 10px;
     border-radius: 25px;
-    border: 2px solid white; /* 白い縁を追加 */
+    border: 2px solid white;
     margin: 40px auto;
     display: flex;
     align-items: center;
@@ -142,22 +142,22 @@ table {
     border-radius: 15px;
     overflow: hidden;
     margin-bottom: 20px;
-    border: 2px solid white; /* テーブル全体に白い縁を追加 */
+    border: 2px solid white;
     box-shadow: none;
 }
 
 .gradient-header {
-    background: linear-gradient(135deg, #ffaa00, #ff8c00); /* グラデーションを行に適用 */
+    background: linear-gradient(135deg, #ffaa00, #ff8c00);
     color: white;
-    border: 2px solid white; /* 行全体を白い縁で囲む */
+    border: 2px solid white;
 }
 
 th {
     padding: 14px;
     text-align: left;
     font-weight: bold;
-    background: transparent; /* 背景を透明に設定 */
-    border: none; /* 個々のセルの間に境界を持たせない */
+    background: transparent;
+    border: none;
 }
 
 tr:nth-child(even) {
@@ -180,7 +180,7 @@ td {
     padding: 15px 25px;
     background: linear-gradient(135deg, #ffaa00, #ff8c00);
     color: white;
-    border: 2px solid white; /* 白い縁を追加 */
+    border: 2px solid white;
     border-radius: 25px;
     cursor: pointer;
     font-size: 1.4em;
@@ -192,7 +192,7 @@ td {
 #load-button:hover {
     background: linear-gradient(135deg, #ffcc33, #ff9933);
     transform: scale(1.08);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* ホバー時に影を追加 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #error-message {
@@ -251,7 +251,7 @@ td {
 
         <table id="songTable">
             <thead>
-                <tr class="gradient-header"> <!-- 行全体にクラスを付与 -->
+                <tr class="gradient-header">
                     <th>アーティスト</th>
                     <th>曲名</th>
                     <th>ジャンル</th>
