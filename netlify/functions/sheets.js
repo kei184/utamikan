@@ -33,3 +33,28 @@ exports.handler = async function (event, context) {
         };
     }
 };
+exports.handler = async function(event, context) {
+  try {
+    console.log("Google Sheets API リクエスト開始");
+
+    const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/YOUR_SHEET_ID/values/Sheet1!A1:C500?key=YOUR_API_KEY`);
+    
+    console.log("Google Sheets API 応答:", response.status, response.statusText);
+
+    if (!response.ok) {
+      throw new Error(`HTTPエラー: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return {
+      statusCode: 200,
+      body: JSON.stringify(data),
+    };
+  } catch (error) {
+    console.error("データ取得エラー:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "データ取得エラー", details: error.message }),
+    };
+  }
+};
