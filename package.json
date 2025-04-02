@@ -17,3 +17,8 @@
     "node": ">=22.14.0"
   }
 }
+{
+  "dependencies": {
+    "node-fetch": "^3.3.0"
+  }
+}
