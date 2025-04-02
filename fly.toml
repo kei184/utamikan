@@ -10,3 +10,8 @@ app = "utamikanlist"
     { port = "80", handlers = ["http"] },
     { port = "443", handlers = ["tls", "http"] }
   ]
+
+[[redirects]]
+  from = "/list"
+  to = "/list.html"
+  status = 200
