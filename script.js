@@ -166,3 +166,5 @@ function isInAppBrowser() {
                 backgroundEl.appendChild(bubble);
             }
         });
+
+        
