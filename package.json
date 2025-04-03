@@ -9,16 +9,11 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "googleapis": "^129.0.0",
-    "node-fetch": "^3.3.2"
+    "express": "^4.18.2", // express のバージョンを修正
+    "googleapis": "^129.0.0"
+    // node-fetch は Node.js 18 以降では不要になるため、削除
   },
   "engines": {
-    "node": ">=22.14.0"
-  }
-}
-{
-  "dependencies": {
-    "node-fetch": "^3.3.0"
+    "node": ">=18.0.0" // Node.js バージョンを LTS に修正
   }
 }
