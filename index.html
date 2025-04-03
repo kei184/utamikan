@@ -5,31 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Utamikan Links</title>
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-W8VREJZ0RY');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-W8VREJZ0RY');
+    </script>
     <style>
-body {
-    font-family: "M PLUS 1p", sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
-    color: #5c3d00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-    padding-top: 20px; /* ページ全体の上のマージン */
-}
+        body {
+            font-family: "M PLUS 1p", sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: url('https://www.transparenttextures.com/patterns/food.png'), #ffebc6;
+            color: #5c3d00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            padding-top: 20px; /* ページ全体の上のマージン */
+        }
 
         .background {
             position: absolute;
@@ -56,21 +54,21 @@ body {
             100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-.container {
-    width: 90%;
-    max-width: 360px;
-    text-align: center;
-    background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
-    padding: 40px 20px;
-    border-radius: 50px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 1;
-    color: black;
-    margin: 20px 20px; /* 上に20pxのマージンを追加 */
-    overflow: hidden;
-    border: 2px solid #d1c4b0;
-}
+        .container {
+            width: 90%;
+            max-width: 360px;
+            text-align: center;
+            background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
+            padding: 40px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            color: black;
+            margin: 20px 20px; /* 上に20pxのマージンを追加 */
+            overflow: hidden;
+            border: 2px solid #d1c4b0;
+        }
 
         .profile-image {
             width: 50%;
@@ -106,7 +104,7 @@ body {
             transition: transform 0.2s ease-in-out, box-shadow 0.2s;
             border: 2px solid white;
         }
-        
+
         .link-button:hover {
             background: linear-gradient(135deg, #ffcc33, #ff9933);
             transform: scale(1.08);
@@ -118,7 +116,7 @@ body {
             position: absolute;
             left: 15px;
         }
-        
+
         .orange-mic {
             font-size: 0.5em;
         }
@@ -140,20 +138,20 @@ body {
     </div>
     <div class="container">
         <img src="/mikan.png" alt="Profile Image" class="profile-image">
-        <h1>うたみかん<span class="orange-mic">🍊🎤</span></h1>
-        <a href="https://www.tiktok.com/@utamikan.boitore" class="link-button">
+        <h1>うたみかん<span class="orange-mic"></span></h1>
+        <a href="https://www.tiktok.com/@utamikan.boitore" class="link-button" data-ga-category="外部リンク" data-ga-action="クリック" data-ga-label="TikTok">
             <i class="fab fa-tiktok"></i> TikTok
         </a>
-        <a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3RpbmRxMQ==&utm_source=qr/" class="link-button">
+        <a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3RpbmRxMQ==&utm_source=qr/" class="link-button" data-ga-category="外部リンク" data-ga-action="クリック" data-ga-label="Instagram">
             <i class="fab fa-instagram"></i> Instagram
         </a>
-        <a href="/list" class="link-button" data-ga-category="外部リンク" data-ga-action="クリック" data-ga-label="うたリスト">
+        <a href="/list" class="link-button" data-ga-category="内部リンク" data-ga-action="クリック" data-ga-label="うたリスト">
             <i class="fas fa-list"></i> うたリスト
         </a>
-        <a href="https://lin.ee/KdjohVd" class="link-button">
+        <a href="https://lin.ee/KdjohVd" class="link-button" data-ga-category="外部リンク" data-ga-action="クリック" data-ga-label="ボーカル教室LINE">
             <i class="fab fa-line"></i> ボーカル教室<br>ロマンツァ公式LINE
         </a>
-        <a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button">
+        <a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button" data-ga-category="外部リンク" data-ga-action="クリック" data-ga-label="サブスク限定オープンチャット">
             <i class="fas fa-users"></i> サブスク限定<br>オープンチャット
         </a>
     </div>
