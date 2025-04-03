@@ -38,3 +38,18 @@ if (navigator.userAgent.indexOf('TikTok') > -1) {
     message.style.borderRadius = '5px';
     document.body.appendChild(message);
 }
+<script>
+const links = document.querySelectorAll('a[data-ga-category]');
+links.forEach(link => {
+    link.addEventListener('click', () => {
+        const category = link.dataset.gaCategory;
+        const action = link.dataset.gaAction;
+        const label = link.dataset.gaLabel;
+        gtag('event', 'link_click', {
+            'event_category': category,
+            'event_action': action,
+            'event_label': label
+        });
+    });
+});
+</script>
