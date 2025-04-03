@@ -107,7 +107,7 @@ filterArtist.addEventListener('change', filterTable);
 filterGenre.addEventListener('change', filterTable);
 
 function filterTable() {
-    let searchQuery = searchInput.value.toLowerCase();
+    let searchQuery = searchInput.value;
 
     const artistFilter = filterArtist.value;
     const genreFilter = filterGenre.value;
@@ -119,17 +119,22 @@ function filterTable() {
         let song = row.cells[1].textContent;
         let genre = row.cells[2].textContent;
 
+        // 検索対象をひらがなに統一
+        const hiraganaArtist = toHiragana(artist.toLowerCase());
+        const hiraganaSong = toHiragana(song.toLowerCase());
+        const hiraganaSearchQuery = toHiragana(searchQuery.toLowerCase());
+
         const matchesSearch =
-            song.toLowerCase().includes(searchQuery) ||
-            artist.toLowerCase().includes(searchQuery);
+            hiraganaSong.includes(hiraganaSearchQuery) ||
+            hiraganaArtist.includes(hiraganaSearchQuery);
 
         const matchesArtist =
             artistFilter === "" ||
-            artist.localeCompare(artistFilter, 'ja', { sensitivity: 'accent' }) === 0;
+            toHiragana(artist.toLowerCase()).localeCompare(toHiragana(artistFilter.toLowerCase()), 'ja', { sensitivity: 'accent' }) === 0;
 
         const matchesGenre =
             genreFilter === "" ||
-            genre.localeCompare(genreFilter, 'ja', { sensitivity: 'accent' }) === 0;
+            toHiragana(genre.toLowerCase()).localeCompare(toHiragana(genreFilter.toLowerCase()), 'ja', { sensitivity: 'accent' }) === 0;
 
         if (matchesSearch && matchesArtist && matchesGenre) {
             row.style.display = "";
@@ -137,6 +142,13 @@ function filterTable() {
             row.style.display = "none";
         }
     });
+}
+
+// ひらがな ⇔ カタカナの変換関数
+function toHiragana(str) {
+    return str.replace(/[\u30A1-\u30FA]/g, match =>
+        String.fromCharCode(match.charCodeAt(0) - 0x60)
+    );
 }
 
 function isInAppBrowser() {
