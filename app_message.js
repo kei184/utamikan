@@ -38,7 +38,7 @@ if (navigator.userAgent.indexOf('TikTok') > -1) {
     message.style.borderRadius = '5px';
     document.body.appendChild(message);
 }
-<script>
+
 const links = document.querySelectorAll('a[data-ga-category]');
 links.forEach(link => {
     link.addEventListener('click', () => {
@@ -52,4 +52,3 @@ links.forEach(link => {
         });
     });
 });
-</script>
