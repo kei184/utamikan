@@ -108,40 +108,35 @@ filterGenre.addEventListener('change', filterTable);
 
 function filterTable() {
     let searchQuery = searchInput.value.toLowerCase();
-    searchQuery = toHiragana(searchQuery); // 🔹 ひらがなに統一
 
-    const artistFilter = filterArtist.value.toLowerCase();
-    const genreFilter = filterGenre.value.toLowerCase();
+    const artistFilter = filterArtist.value;
+    const genreFilter = filterGenre.value;
 
     const rows = document.querySelectorAll('#songTable tbody tr');
 
     rows.forEach(row => {
-        let artist = row.cells[0].textContent.toLowerCase();
-        let song = row.cells[1].textContent.toLowerCase();
-        let genre = row.cells[2].textContent.toLowerCase();
+        let artist = row.cells[0].textContent;
+        let song = row.cells[1].textContent;
+        let genre = row.cells[2].textContent;
 
-        // 🔹 アーティストと曲名もひらがなに変換
-        artist = toHiragana(artist);
-        song = toHiragana(song);
+        const matchesSearch =
+            song.toLowerCase().includes(searchQuery) ||
+            artist.toLowerCase().includes(searchQuery);
 
-        const matchesSearch = artist.includes(searchQuery) || song.includes(searchQuery);
-        const matchesArtist = artistFilter === "" || artistFilter.toLowerCase() === artist;
-        const matchesGenre = genreFilter === "" || genreFilter.toLowerCase() === genre;
+        const matchesArtist =
+            artistFilter === "" ||
+            artist.localeCompare(artistFilter, 'ja', { sensitivity: 'accent' }) === 0;
 
-        // 検索・フィルターの条件を満たす場合、行を表示
+        const matchesGenre =
+            genreFilter === "" ||
+            genre.localeCompare(genreFilter, 'ja', { sensitivity: 'accent' }) === 0;
+
         if (matchesSearch && matchesArtist && matchesGenre) {
-            row.style.display = ""; // 表示
+            row.style.display = "";
         } else {
-            row.style.display = "none"; // 非表示
+            row.style.display = "none";
         }
     });
-}
-
-// 🔹 ひらがな ⇔ カタカナの変換関数
-function toHiragana(str) {
-    return str.replace(/[\u30A1-\u30FA]/g, match => 
-        String.fromCharCode(match.charCodeAt(0) - 0x60)
-    );
 }
 
 function isInAppBrowser() {
