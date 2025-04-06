@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && cp public/sitemap.xml out/"  # 明示的コピー
+  command = "npm run build && cp public/sitemap.xml out/"  # 修正不要だが、ビルドスクリプト必須
   publish = "out"
 
   [[redirects]]
@@ -7,8 +7,7 @@
   to = "/list.html"
   status = 200
 
-# netlify.toml
 [[headers]]
-  for = "/public/sitemap.xml"
+  for = "/sitemap.xml"  # パス修正（/public/削除）
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
