@@ -5,7 +5,8 @@
   "main": "server.js",
 "scripts": {
   "start": "node server.js",
-  "build": "echo 'ビルド処理 (静的ページ)' && rm -rf out && mkdir -p out && cp -r index.html out && cp -r css out",
+  "build": "next build && next-sitemap",
+  "postbuild": "cp public/sitemap.xml out/",
   "generate-sitemap": "node scripts/sitemap-generator.js",
   "postinstall": "node scripts/sitemap-generator.js"
 },
