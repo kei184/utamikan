@@ -1,5 +1,7 @@
 [build]
   functions = "netlify/functions"
+  command = "npm run build && cp /sitemap.xml out/" # 明示的コピー
+  publish = "out"
 
   [[redirects]]
   from = "/list"
@@ -11,4 +13,3 @@
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
-    Cache-Control = "public, max-age=3600"
