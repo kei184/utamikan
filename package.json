@@ -5,9 +5,10 @@
   "main": "server.js",
 "scripts": {
   "start": "node server.js",
-  "build": "echo 'ビルド不要な構成です。空コマンドを設定'",
+  "build": "npm install --omit=dev && npm audit fix",
   "generate-sitemap": "node scripts/sitemap-generator.js"
 }
+
 
   "dependencies": {
     "cors": "^2.8.5",
