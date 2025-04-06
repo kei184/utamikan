@@ -8,6 +8,6 @@
 
 # netlify.toml
 [[headers]]
-  for = "/sitemap.xml"
+  for = "public/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
