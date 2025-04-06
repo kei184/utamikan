@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "echo 'ビルド不要 (静的ページ)' && mkdir -p out && cp -r * out",
+    "build": "echo 'ビルド不要 (静的ページ)' && mkdir -p out && cp -r !(out) out",
     "generate-sitemap": "node scripts/sitemap-generator.js",
     "postinstall": "node scripts/sitemap-generator.js"
   },
