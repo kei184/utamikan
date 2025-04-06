@@ -13,3 +13,11 @@
   to = "/sitemap.xml"
   status = 200
   force = true  # 必須設定[^1][^3]
+
+[[plugins]]
+package = "@netlify/plugin-sitemap"
+[plugins.inputs]
+buildDir = "public"
+changeFreq = "weekly"
+priority = 0.5
+exclude = ["/secret-page"]
