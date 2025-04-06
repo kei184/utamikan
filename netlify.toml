@@ -6,9 +6,9 @@
   to = "/list.html"
   status = 200
 
-# 追加推奨設定（キャッシュ制御例）
+# netlify.toml
 [[headers]]
-  for = "/*"
+  for = "/sitemap.xml"
   [headers.values]
+    Content-Type = "application/xml"
     Cache-Control = "public, max-age=3600"
-    X-Frame-Options = "DENY"
