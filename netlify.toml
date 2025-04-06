@@ -1,9 +1,17 @@
 [build]
   command = "npm run build"
-  publish = "out"
+  publish = "out"  # 実際のビルド出力先に合わせる
 
-  [[redirects]]
+# リダイレクト設定（[build]とは独立したセクション）
+[[redirects]]
   from = "/list"
   to = "/list.html"
   status = 200
+  force = false  # 明示的な設定推奨（デフォルトfalse）
 
+# 追加推奨設定（キャッシュ制御例）
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    X-Frame-Options = "DENY"
