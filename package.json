@@ -7,10 +7,10 @@
   "start": "node server.js",
   "build": "npm install --omit=dev && npm audit fix",
   "generate-sitemap": "node scripts/sitemap-generator.js"
-}
+},
 "scripts": {
   "postinstall": "node scripts/sitemap-generator.js"
-}
+},
 
   "dependencies": {
     "cors": "^2.8.5",
