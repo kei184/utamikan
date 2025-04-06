@@ -1,6 +1,6 @@
 [build]
-  publish = "out"
-
+  publish = "." 
+  
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
