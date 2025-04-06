@@ -16,3 +16,7 @@
     "node": ">=18.0.0"
   }
 }
+"scripts": {
+  "build": "next build && next-sitemap",
+  "postbuild": "next-sitemap"
+}
