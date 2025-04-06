@@ -5,12 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-<<<<<<< HEAD
-=======
     "build": "npm install --omit=dev && npm audit fix",
     "dev": "nodemon server.js",
     "lint": "eslint .",
->>>>>>> 35a858008d3ce72feff69139c4d7d7f58a935c35
     "test": "jest"
   },
   "dependencies": {
