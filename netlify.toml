@@ -1,5 +1,5 @@
 [build]
-  command = "npm install && npm run build && cp public/sitemap.xml out/"
+  command = "npm install && npm run build"
   publish = "out"
 
   [[redirects]]
