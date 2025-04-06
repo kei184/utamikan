@@ -1,3 +1,2 @@
 User-agent: *
 Allow: /
-Sitemap: https://utamikan.netlify.app/sitemap.xml
