@@ -1,8 +1,6 @@
 [build]
   functions = "netlify/functions"
-  command = "npm run build && cp public/sitemap.xml out/"  # 明示的コピー
-  publish = "out"
-  
+
   [[redirects]]
   from = "/list"
   to = "/list.html"
