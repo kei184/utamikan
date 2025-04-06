@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "Utamikan application on Fly.io",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "build": "echo 'ビルド不要'",
-    "generate-sitemap": "node scripts/sitemap-generator.js",
-    "postinstall": "node scripts/sitemap-generator.js"
-  },
+"scripts": {
+  "start": "node server.js",
+  "build": "mkdir -p out && echo 'ビルド処理 (必要に応じて)'",
+  "generate-sitemap": "node scripts/sitemap-generator.js",
+  "postinstall": "node scripts/sitemap-generator.js"
+},
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
