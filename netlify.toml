@@ -1,6 +1,6 @@
 [build]
   command = "npm install && npm run build && cp public/sitemap.xml out/"
-  publish = "/opt/build/repo/out"
+  publish = "out/"
 
   [[redirects]]
   from = "/list"
