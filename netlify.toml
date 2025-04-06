@@ -1,13 +1,15 @@
 [build]
-  command = "npm install"
+  command = "npm run build && cp public/sitemap.xml out/"
   publish = "out"
 
-  [[redirects]]
-  from = "/list"
-  to = "/list.html"
-  status = 200
-
 [[headers]]
-  for = "/sitemap.xml"  # パス修正（/public/削除）
+  for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap.xml"
+  status = 200
+  force = true  # 必須設定[^1][^3]
