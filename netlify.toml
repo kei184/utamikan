@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && cp public/sitemap.xml out/"  # 修正不要だが、ビルドスクリプト必須
+  command = "npm install && npm run build && cp public/sitemap.xml out/"
   publish = "out"
 
   [[redirects]]
