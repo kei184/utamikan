@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "Utamikan application on Fly.io",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "build": "npm install --omit=dev && npm audit fix",
-    "dev": "nodemon server.js",
-    "lint": "eslint .",
-    "test": "jest"
-  },
+"scripts": {
+  "start": "node server.js",
+  "build": "echo 'ビルド不要な構成です。空コマンドを設定'",
+  "generate-sitemap": "node scripts/sitemap-generator.js"
+}
+
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
