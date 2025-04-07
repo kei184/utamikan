@@ -50,3 +50,7 @@
   },
   "homepage": "https://github.com/kei184/utamikan#readme"
 }
+"scripts": {
+  "build": "node image_optimize.js && astro build",
+  "optimize": "node image_optimize.js"
+}
