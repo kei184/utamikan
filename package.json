@@ -13,8 +13,10 @@
     "imagemin-pngquant": "^9.0.0",
     "serve": "^14.2.1"
   },
+  "dependencies": {
+    "googleapis": "^129.0.0"
+  },
   "engines": {
     "node": ">=18.0.0"
   }
 }
-
