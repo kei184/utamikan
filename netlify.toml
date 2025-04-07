@@ -50,19 +50,6 @@ package = "@netlify/plugin-sitemap"
   changeFreq = "daily"
   priority = 0.7
 
-[[plugins]]
-package = "@netlify/plugin-image-optim"
-[plugins.inputs]
-  quality = 80
-  webp = true
-  avif = true
-
-# フォーム機能（必要な場合）
-[[plugins]]
-package = "@netlify/plugin-lighthouse"
-[plugins.inputs]
-  output_path = "lighthouse-report.json"
-
 # 開発環境向け追加設定
 [dev]
   framework = "#static"
