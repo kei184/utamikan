@@ -7,11 +7,12 @@
     "optimize": "node scripts/image_optimize.js"
   },
   "devDependencies": {
-    "sharp": "^0.33.2",
+    "@netlify/plugin-lighthouse": "^6.0.1",
     "imagemin": "^8.0.0",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^9.0.0",
-    "serve": "^14.2.1"
+    "serve": "^14.2.1",
+    "sharp": "^0.33.2"
   },
   "dependencies": {
     "googleapis": "^129.0.0"
