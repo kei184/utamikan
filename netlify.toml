@@ -1,6 +1,6 @@
 [build]
-  publish = "."  # 静的ファイルがルート直下に存在[^context]
-  command = "echo 'Static site - no build required'"
+  command = "next build && next export"
+  publish = "out"
 
 # 必須リダイレクト設定
 [[redirects]]
