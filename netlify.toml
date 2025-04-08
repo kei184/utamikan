@@ -50,6 +50,9 @@ package = "@netlify/plugin-sitemap"
   changeFreq = "daily"
   priority = 0.7
 
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
 # 開発環境向け追加設定
 [dev]
   framework = "#static"
