@@ -53,9 +53,6 @@ package = "@netlify/plugin-sitemap"
 package = "netlify-plugin-lighthouse"
   [plugins.inputs]
   output_path = "reports/lighthouse.html"  # フォルダ作成必須
-  thresholds:  # オプションでスコア基準設定
-    performance = 0.9
-    accessibility = 0.9
     
 [dev]
   framework = "nextjs"
