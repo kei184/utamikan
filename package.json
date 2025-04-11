@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npx serve public",
-    "build": "echo '静的な HTML ページのため、ビルドは不要です。public ディレクトリをそのままデプロイします。'",
+    "build": "", // または、必要なビルドコマンド
     "optimize": "node scripts/image_optimize.js"
   },
   "devDependencies": {
@@ -11,13 +11,12 @@
     "imagemin": "^8.0.0",
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^9.0.0",
-    "netlify-plugin-lighthouse": "^0.1.3",
     "serve": "^14.2.1",
     "sharp": "^0.33.2"
   },
   "dependencies": {
     "googleapis": "^129.0.0",
-    "next": "13.4.19",
+    // "next": "13.4.19", // 静的 HTML ページの場合、不要な依存関係
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
