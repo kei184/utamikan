@@ -6,16 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterGenre = document.getElementById('filterGenre');
     const errorMessage = document.getElementById('error-message');
 
-    let fetchedData = []; // Stores fetched data
+    let fetchedData = []; // 取得したデータを格納する変数
 
-    // Load data when document is loaded
+    // ドキュメントロード時にデータを取得
     loadData();
 
-    // Re-load data on button click
-    loadButton?.addEventListener('click', loadData);
+    // ボタンクリックでデータを再ロード
+    if (loadButton) {
+        loadButton.addEventListener('click', loadData);
+    }
 
     function loadData() {
-        displayError('Loading data...');
+        displayError('データ読み込み中...');
         fetch('/.netlify/functions/sheets', {
             method: 'GET',
             headers: {
@@ -24,16 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .then(response => {
-            if (!response.ok) throw new Error(`HTTP error: ${response.status} ${response.statusText}`);
-            return response.json();
+            if (!response.ok) {
+                throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
+            }
+            return response.text(); // レスポンスをテキストとして取得
         })
-        .then(processData)
+        .then(text => {
+            try {
+                const data = JSON.parse(text); // JSONパースを試みる
+                processData(data);
+            } catch (e) {
+                console.error('パースエラー:', e);
+                console.error('レスポンステキスト:', text); // 問題のあるレスポンスをログに出力
+                throw new Error("レスポンスは有効なJSONではありません");
+            }
+        })
         .catch(handleError);
     }
 
     function processData(data) {
         if (!data || !Array.isArray(data.values) || data.values.length <= 1) {
-            throw new Error("Invalid or empty data");
+            throw new Error("データが不正または空です");
         }
 
         tableBody.innerHTML = '';
@@ -64,8 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleError(error) {
-        console.error('Error fetching data:', error);
-        displayError(`Failed to fetch data: ${error.message}`);
+        console.error('データ取得エラー:', error);
+        displayError(`データの取得に失敗しました: ${error.message}`);
         if (navigator.onLine) {
             setTimeout(loadData, 3000);
         }
@@ -97,11 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function filterTable() {
-        // Add logic for filtering data based on input and selection
+        // フィルター処理のロジックをここに追加
     }
 
     function toHiragana(str) {
-        // Add conversion logic here
+        // 文字列をひらがなに変換するロジックをここに追加
     }
 
     searchInput?.addEventListener('input', filterTable);
