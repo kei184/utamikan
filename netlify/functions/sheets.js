@@ -3,15 +3,19 @@ const { google } = require('googleapis');
 exports.handler = async function (event, context) {
     try {
         const auth = new google.auth.GoogleAuth({
-            credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS), // 環境変数から認証情報を取得
+            credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
             scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
         });
 
         const sheets = google.sheets({ version: 'v4', auth });
         const response = await sheets.spreadsheets.values.get({
-            spreadsheetId: process.env.SPREADSHEET_ID, // 環境変数からスプレッドシートIDを取得
+            spreadsheetId: process.env.SPREADSHEET_ID,
             range: 'Sheet1!A1:C500'
         });
+
+        if (!response.data || !response.data.values) {
+            throw new Error('No data found in the specified range');
+        }
 
         return {
             statusCode: 200,
@@ -22,10 +26,10 @@ exports.handler = async function (event, context) {
         };
 
     } catch (error) {
-        console.error(error);
+        console.error('Error fetching data from Google Sheets:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to fetch data' })
+            body: JSON.stringify({ error: 'Failed to fetch data', details: error.message })
         };
     }
 };
