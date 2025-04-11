@@ -1,23 +1,21 @@
 [build]
   command = "" # または、必要なビルドコマンド
   publish = "." # 公開ディレクトリを明示的に指定（例: public）
+  functions = "functions"
 
-# 必須リダイレクト設定
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
   force = true
 
-# サイトマップ設定
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
-    Cache-Control = "public, max-age=86400, stale-while-revalidate=3600"
-    Link = "</sitemap.xml>; rel=\"sitemap\""
+    Cache-Control = "public, max-age=3600"
+    Link = "</sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\""
 
-# セキュリティヘッダー
 [[headers]]
   for = "/*"
   [headers.values]
@@ -25,8 +23,10 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com;"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
 
-# キャッシュ戦略
 [[headers]]
   for = "/assets/*.js"
   [headers.values]
@@ -42,19 +42,21 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
-# プラグイン設定
 [[plugins]]
   package = "@netlify/plugin-sitemap"
   [plugins.inputs]
-    exclude = ["/admin/*", "/temp/*"]
-    changeFreq = "daily"
-    priority = 0.7
+    exclude = ["/admin/*", "/secret/*"]
+    changeFreq = "weekly"
+    priority = 0.5
 
 [[plugins]]
-  package = "@netlify/plugin-lighthouse" # 設定オプションがないため、[plugins.inputs] セクションを削除
+  package = "netlify-plugin-lighthouse"
+  [plugins.inputs]
+    outputPath = "lighthouse-report.html"
 
-# 開発環境向け追加設定
 [dev]
-  framework = "#static"
-  targetPort = 80
-  autoLaunch = false
+  framework = "nextjs"
+  targetPort = 3000
+  autoLaunch = true
+  command = "npm run dev"
+
