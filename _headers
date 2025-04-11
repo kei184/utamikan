@@ -1,0 +1,6 @@
+/*
+  Content-Security-Policy: default-src 'self'; 
+  font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; 
+  img-src 'self' data: https://www.transparenttextures.com https://*.google-analytics.com https://*.googletagmanager.com;
+  style-src 'self' https://fonts.googleapis.com;
+  script-src 'self' https://www.googletagmanager.com;
