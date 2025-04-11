@@ -7,8 +7,8 @@ const nextConfig = {
   }
 }
 
+// next.config.js
 module.exports = {
-  experimental: {
-    optimizeCss: true, // 最適化オプションの一例
-  },
+  // 静的出力として動作するように設定
+  output: 'export', 
 };
