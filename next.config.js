@@ -7,8 +7,4 @@ const nextConfig = {
   }
 }
 
-// next.config.js
-module.exports = {
-  // 静的出力として動作するように設定
-  output: 'export', 
-};
+module.exports = nextConfig
