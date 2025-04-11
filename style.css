@@ -78,7 +78,7 @@ ul {
 }
 
 .link-button {
-    display: inline-block;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 90%;
@@ -110,3 +110,4 @@ ul {
 .orange-mic {
     font-size: 0.5em;
 }
+
