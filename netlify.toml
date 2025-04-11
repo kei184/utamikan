@@ -1,20 +1,23 @@
 [build]
-  command = "npm run build && npm run export"
-  publish = "."
+  command = "echo 'Static site - no build required'" # または、空のコマンドでも可
+  publish = "." # ルートディレクトリに静的ファイルがある場合
 
+# 必須リダイレクト設定
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true
+  force = true  # SPAフォールバック[4][6]
 
+# サイトマップ設定
 [[headers]]
   for = "/sitemap.xml"
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
-    Cache-Control = "public, max-age=3600"
-    Link = "</sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\""
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=3600"
+    Link = "</sitemap.xml>; rel=\"sitemap\""
 
+# セキュリティヘッダー
 [[headers]]
   for = "/*"
   [headers.values]
@@ -22,10 +25,8 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://*.google-analytics.com https://www.transparenttextures.com; "
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
-    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
 
+# キャッシュ戦略
 [[headers]]
   for = "/assets/*.js"
   [headers.values]
@@ -41,18 +42,19 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
+# プラグイン設定
 [[plugins]]
-  package = "@netlify/plugin-sitemap"
-  [plugins.inputs]
-    exclude = ["/admin/*", "/secret/*"]
-    changeFreq = "weekly"
-    priority = 0.5
+package = "@netlify/plugin-sitemap"
+[plugins.inputs]
+  exclude = ["/admin/*", "/temp/*"]
+  changeFreq = "daily"
+  priority = 0.7
 
 [[plugins]]
-  package = "@netlify/plugin-lighthouse" # netlify-plugin-lighthouse を @netlify/plugin-lighthouse に修正
-
+  package = "@netlify/plugin-lighthouse"
+  
+# 開発環境向け追加設定
 [dev]
-  framework = "nextjs"
-  targetPort = 3000
-  autoLaunch = true
-  command = "npm run dev"
+  framework = "#static"
+  targetPort = 80
+  autoLaunch = false
