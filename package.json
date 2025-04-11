@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npx serve public",
-    "build": "",
+    "build": "echo '静的な HTML ページのため、ビルドは不要です。public ディレクトリをそのままデプロイします。'",
     "optimize": "node scripts/image_optimize.js"
   },
   "devDependencies": {
@@ -15,6 +15,7 @@
     "sharp": "^0.33.2"
   },
   "dependencies": {
+    "next": "13.4.19",
     "googleapis": "^129.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
