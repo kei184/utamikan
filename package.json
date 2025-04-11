@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "npx serve public",
-    "build": "", // または、必要なビルドコマンド
+    "build": "",
     "optimize": "node scripts/image_optimize.js"
   },
   "devDependencies": {
@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "googleapis": "^129.0.0",
-    // "next": "13.4.19", // 静的 HTML ページの場合、不要な依存関係
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
