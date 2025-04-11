@@ -1,148 +1,194 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const loadButton = document.getElementById('load-button');
-    const tableBody = document.getElementById('songTable').querySelector('tbody');
-    const searchInput = document.getElementById('searchInput');
-    const filterArtist = document.getElementById('filterArtist');
-    const filterGenre = document.getElementById('filterGenre');
-    const errorMessage = document.getElementById('error-message');
+// script.js
+const loadButton = document.getElementById('load-button');
+const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
+const searchInput = document.getElementById('searchInput');
+const filterArtist = document.getElementById('filterArtist');
+const filterGenre = document.getElementById('filterGenre');
+const errorMessage = document.getElementById('error-message');
 
-    let fetchedData = []; // 取得したデータを格納する変数
+let fetchedData = []; // 取得したデータを格納するための変数
 
-    // ドキュメントロード時にデータを取得
-    loadData();
+loadButton.addEventListener('click', loadData);
 
-    // ボタンクリックでデータを再ロード
-    if (loadButton) {
-        loadButton.addEventListener('click', loadData);
-    }
+function loadData() {
+    errorMessage.textContent = 'データ読み込み中...';
 
-    function loadData() {
-        displayError('データ読み込み中...');
-        fetch('/.netlify/functions/sheets', {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Cache-Control': 'no-cache'
-            }
-        })
+    fetch('/.netlify/functions/sheets') // APIエンドポイントをリクエスト
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
             }
-            return response.text(); // レスポンスをテキストとして取得
+            return response.json();
         })
-        .then(text => {
-            try {
-                const data = JSON.parse(text); // JSONパースを試みる
-                processData(data);
-            } catch (e) {
-                console.error('パースエラー:', e);
-                console.error('レスポンステキスト:', text); // 問題のあるレスポンスをログに出力
-                throw new Error("レスポンスは有効なJSONではありません");
+        .then(data => {
+            console.log("取得したデータ:", data);
+            tableBody.innerHTML = ''; // テーブルをリセット
+            fetchedData = data.values; // データを格納
+
+            if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
+                // アーティストとジャンルのオプションを動的に追加
+                const artistSet = new Set();
+                const genreCount = {}; // ジャンルごとの曲数をカウント
+
+                data.values.slice(1).forEach(row => {
+                    if (row.length >= 3) { // 行に曲名、アーティスト、ジャンルがある場合
+                        const artist = row[0];
+                        const songTitle = row[1];
+                        const genre = row[2];
+
+                        // 🎵 Google検索リンク付きの曲名
+                        const searchQuery = `${songTitle} ${artist} 歌詞`;
+                        const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+                        const songLink = `<a href="${searchUrl}" target="_blank" rel="noopener noreferrer">${songTitle}</a>`;
+
+                        // 🎤 テーブルに行を追加
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `<td>${artist}</td><td>${songLink}</td><td>${genre}</td>`;
+                        tableBody.appendChild(tr);
+
+                        // アーティストをセットに追加
+                        artistSet.add(artist);
+
+                        // ジャンルごとの曲数をカウント
+                        genreCount[genre] = (genreCount[genre] || 0) + 1;
+                    }
+                });
+
+                // アーティストフィルターを更新
+                updateFilterOptions(filterArtist, artistSet);
+                // ジャンルフィルターを「令和 → 平成 → 昭和 → その他の曲数が多い順」に並べて更新
+                updateGenreOptions(filterGenre, genreCount);
+
+                errorMessage.textContent = ""; // エラーメッセージをクリア
+            } else {
+                console.warn("データが正しく取得されませんでした:", data);
+                errorMessage.textContent = "データが空または不正です。";
             }
         })
-        .catch(handleError);
-    }
+        .catch(error => {
+            console.error('データ取得エラー:', error);
+            errorMessage.textContent = `データの取得に失敗しました: ${error.message}`;
+        });
+}
 
-    function processData(data) {
-        if (!data || !Array.isArray(data.values) || data.values.length <= 1) {
-            throw new Error("データが不正または空です");
+// 🔹 ジャンルのフィルターを「令和 → 平成 → 昭和 → その他の曲数が多い順」に並べる関数
+function updateGenreOptions(selectElement, genreCount) {
+    const fixedOrder = ["令和", "平成", "昭和"]; // 優先的に表示する順番
+    let sortedGenres = Object.entries(genreCount)
+        .filter(([genre]) => !fixedOrder.includes(genre)) // 固定ジャンル以外を抽出
+        .sort((a, b) => b[1] - a[1]) // 曲数が多い順に並べる
+        .map(([genre]) => genre); // ジャンル名のみ取得
+
+    const orderedGenres = [...fixedOrder, ...sortedGenres]; // すべてを結合
+
+    selectElement.innerHTML = '<option value="">すべて</option>';
+    orderedGenres.forEach(genre => {
+        const option = document.createElement('option');
+        option.value = genre;
+        option.textContent = `${genre} (${genreCount[genre] || 0})`; // 曲数も表示
+        selectElement.appendChild(option);
+    });
+}
+
+// 🔹 フィルターオプションを更新する関数（アーティスト用）
+function updateFilterOptions(selectElement, dataSet) {
+    selectElement.innerHTML = '<option value="">すべて</option>';
+    [...dataSet].sort().forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        selectElement.appendChild(option);
+    });
+}
+
+// 🔹 検索およびフィルター機能の実装
+searchInput.addEventListener('input', filterTable);
+filterArtist.addEventListener('change', filterTable);
+filterGenre.addEventListener('change', filterTable);
+
+function filterTable() {
+    let searchQuery = searchInput.value;
+
+    const artistFilter = filterArtist.value;
+    const genreFilter = filterGenre.value;
+
+    const rows = document.querySelectorAll('#songTable tbody tr');
+
+    rows.forEach(row => {
+        let artist = row.cells[0].textContent;
+        let song = row.cells[1].textContent;
+        let genre = row.cells[2].textContent;
+
+        // 検索対象をひらがなに統一
+        const hiraganaArtist = toHiragana(artist.toLowerCase());
+        const hiraganaSong = toHiragana(song.toLowerCase());
+        const hiraganaSearchQuery = toHiragana(searchQuery.toLowerCase());
+
+        const matchesSearch =
+            hiraganaSong.includes(hiraganaSearchQuery) ||
+            hiraganaArtist.includes(hiraganaSearchQuery);
+
+        const matchesArtist =
+            artistFilter === "" ||
+            toHiragana(artist.toLowerCase()).localeCompare(toHiragana(artistFilter.toLowerCase()), 'ja', { sensitivity: 'accent' }) === 0;
+
+        const matchesGenre =
+            genreFilter === "" ||
+            toHiragana(genre.toLowerCase()).localeCompare(toHiragana(genreFilter.toLowerCase()), 'ja', { sensitivity: 'accent' }) === 0;
+
+        if (matchesSearch && matchesArtist && matchesGenre) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
         }
+    });
+}
 
-        tableBody.innerHTML = '';
-        fetchedData = data.values;
+// ひらがな ⇔ カタカナの変換関数
+function toHiragana(str) {
+    return str.replace(/[\u30A1-\u30FA]/g, match =>
+        String.fromCharCode(match.charCodeAt(0) - 0x60)
+    );
+}
 
-        const artistSet = new Set();
-        const genreCount = {};
+function isInAppBrowser() {
+    const ua = navigator.userAgent.toLowerCase();
+    return (
+        ua.includes("instagram") || 
+        ua.includes("line") || 
+        ua.includes("fbav") ||  // Facebookアプリ内
+        ua.includes("twitter") || 
+        ua.includes("micromessenger") // WeChat
+    );
+}
 
-        data.values.slice(1).forEach(row => {
-            if (row.length >= 3) {
-                const [artist, songTitle, genre] = row;
-                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(`${songTitle} ${artist} 歌詞`)}`;
-                const songLink = `<a href="${searchUrl}" target="_blank" rel="noopener noreferrer">${songTitle}</a>`;
-
-                const tr = document.createElement("tr");
-                tr.innerHTML = `<td>${artist}</td><td>${songLink}</td><td>${genre}</td>`;
-                tableBody.appendChild(tr);
-
-                artistSet.add(artist);
-                genreCount[genre] = (genreCount[genre] || 0) + 1;
+        document.addEventListener("DOMContentLoaded", function() {
+            const backgroundEl = document.querySelector(".background");
+            for (let i = 0; i < 20; i++) {
+                let bubble = document.createElement("div");
+                bubble.className = "bubble";
+                bubble.style.left = Math.random() * 100 + "vw";
+                bubble.style.animationDuration = Math.random() * 10 + 5 + "s";
+                bubble.style.width = bubble.style.height = Math.random() * 50 + 20 + "px";
+                backgroundEl.appendChild(bubble);
             }
         });
 
-        updateFilterOptions(filterArtist, artistSet);
-        updateGenreOptions(filterGenre, genreCount);
-
-        displayError('');
-    }
-
-    function handleError(error) {
-        console.error('データ取得エラー:', error);
-        displayError(`データの取得に失敗しました: ${error.message}`);
-        if (navigator.onLine) {
-            setTimeout(loadData, 3000);
-        }
-    }
-
-    function displayError(message) {
-        errorMessage.textContent = message;
-        errorMessage.style.display = message ? 'block' : 'none';
-    }
-
-    function updateGenreOptions(selectElement, genreCount) {
-        selectElement.innerHTML = '<option value="">All</option>';
-        Object.keys(genreCount).forEach(genre => {
-            const option = document.createElement('option');
-            option.value = genre;
-            option.textContent = `${genre} (${genreCount[genre]})`;
-            selectElement.appendChild(option);
-        });
-    }
-
-    function updateFilterOptions(selectElement, dataSet) {
-        selectElement.innerHTML = '<option value="">All</option>';
-        dataSet.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item;
-            option.textContent = item;
-            selectElement.appendChild(option);
-        });
-    }
-
-    function filterTable() {
-        // フィルター処理のロジックをここに追加
-    }
-
-    function toHiragana(str) {
-        // 文字列をひらがなに変換するロジックをここに追加
-    }
-
-    searchInput?.addEventListener('input', filterTable);
-    filterArtist?.addEventListener('change', filterTable);
-    filterGenre?.addEventListener('change', filterTable);
-});
-
-document.addEventListener("DOMContentLoaded", function() {
-    const backgroundEl = document.querySelector(".background");
-    if (backgroundEl) {
-        for (let i = 0; i < 20; i++) {
-            const bubble = document.createElement("div");
-            bubble.className = "bubble";
-            bubble.style.left = `${Math.random() * 100}vw`;
-            bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
-            bubble.style.width = bubble.style.height = `${Math.random() * 50 + 20}px`;
-            backgroundEl.appendChild(bubble);
-        }
-    }
-});
-
-document.querySelectorAll('a[data-ga-category]').forEach(link => {
+const links = document.querySelectorAll('a[data-ga-category]');
+links.forEach(link => {
     link.addEventListener('click', () => {
-        const { gaCategory: category, gaAction: action, gaLabel: label } = link.dataset;
+        const category = link.dataset.gaCategory;
+        const action = link.dataset.gaAction;
+        const label = link.dataset.gaLabel;
         if (typeof gtag === 'function') {
-            gtag('event', 'link_click', { event_category: category, event_action: action, event_label: label });
+            gtag('event', 'link_click', {
+                event_category: category,
+                event_action: action,
+                event_label: label
+            });
         } else if (typeof ga === 'function') {
             ga('send', 'event', category, action, label);
         }
     });
 });
+        
