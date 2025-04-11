@@ -24,7 +24,3 @@
     "node": ">=18.0.0"
   }
 }
-"scripts": {
-  "build": "next build",
-  "export": "next export"
-}
