@@ -2,20 +2,31 @@ const { google } = require('googleapis');
 
 exports.handler = async function (event, context) {
     try {
+        // 環境変数の検証
+        const credentials = process.env.GOOGLE_CREDENTIALS;
+        const spreadsheetId = process.env.SPREADSHEET_ID;
+
+        if (!credentials || !spreadsheetId) {
+            throw new Error('GOOGLE_CREDENTIALS または SPREADSHEET_ID が設定されていません。');
+        }
+
         const auth = new google.auth.GoogleAuth({
-            credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS), // 環境変数から認証情報を取得
+            credentials: JSON.parse(credentials),
             scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
         });
 
         const sheets = google.sheets({ version: 'v4', auth });
         const response = await sheets.spreadsheets.values.get({
-            spreadsheetId: process.env.SPREADSHEET_ID, // 環境変数からスプレッドシートIDを取得
+            spreadsheetId: spreadsheetId,
             range: 'Sheet1!A1:C500'
         });
 
+        // 必要なデータのみを返す
+        const values = response.data.values;
+
         return {
             statusCode: 200,
-            body: JSON.stringify(response.data),
+            body: JSON.stringify(values),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -25,7 +36,7 @@ exports.handler = async function (event, context) {
         console.error(error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to fetch data' })
+            body: JSON.stringify({ error: error.message || 'Failed to fetch data' }) // より具体的なエラーメッセージ
         };
     }
 };
