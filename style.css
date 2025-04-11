@@ -71,6 +71,12 @@ h1 {
     margin: 0;
 }
 
+ul { /* 追加 */
+  list-style: none; /* 追加 */
+  padding: 0; /* 追加 */
+  margin: 0; /* 追加 */
+} /* 追加 */
+
 .link-button {
     display: flex;
     align-items: center;
