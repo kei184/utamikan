@@ -1,7 +1,6 @@
 [build]
-  command = "" # または、必要なビルドコマンド
-  publish = "." # 公開ディレクトリを明示的に指定（例: public）
-  functions = "functions"
+command = "next build"
+publish = ".next"
 
 [[redirects]]
   from = "/*"
