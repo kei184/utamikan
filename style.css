@@ -104,7 +104,12 @@ ul {
 
 .link-button i {
     font-size: 1.5em;
+    position: absolute;
     left: 15px;
+    top: 50%; /* 追加 */
+    transform: translateY(-50%); /* 追加 */
+    font-weight: 900; /* 追加 */
+    text-decoration: none; /* 追加 */
 }
 
 .orange-mic {
@@ -113,4 +118,5 @@ ul {
 
 .fab, .fas {
     font-family: "Font Awesome 5 Free";
+    font-weight: 900; /* 追加 */
 }
