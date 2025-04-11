@@ -55,12 +55,6 @@ package = "@netlify/plugin-sitemap"
 
   [[plugins]]
 package = "netlify-plugin-image-optim"
-  [plugins.inputs]
-  quality = 75       # JPEG画質（1-100）
-  webp = true        # WebP変換有効化
-  avif = true        # AVIF変換有効化
-  pngCompression = 3 # PNG圧縮レベル（1-6）
-  skipLarger = true  # 最適化後サイズが大きくなる場合スキップ
   
 # 開発環境向け追加設定
 [dev]
