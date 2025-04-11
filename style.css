@@ -106,10 +106,10 @@ ul {
     font-size: 1.5em;
     position: absolute;
     left: 15px;
-    top: 50%; /* 追加 */
-    transform: translateY(-50%); /* 追加 */
-    font-weight: 900; /* 追加 */
-    text-decoration: none; /* 追加 */
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 900;
+    text-decoration: none;
 }
 
 .orange-mic {
@@ -118,4 +118,5 @@ ul {
 
 .fab, .fas {
     font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
+    font-weight: 900;
 }
