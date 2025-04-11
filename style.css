@@ -1,0 +1,116 @@
+body {
+    font-family: "M PLUS 1p", sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: url(https://www.transparenttextures.com/patterns/food.png), #ffebc6;
+    color: #5c3d00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bubble {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 105, 180, 0.3);
+    border-radius: 50%;
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+.container {
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
+    padding: 40px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 1;
+    color: black;
+    margin: 20px 20px;
+    overflow: hidden;
+    border: 2px solid #d1c4b0;
+}
+
+.profile-image {
+    width: 50%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 1.8em;
+    color: #ff4500;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #ffaa00, #ff8c00);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.2em;
+    position: relative;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+    border: 2px solid white;
+}
+
+.link-button:hover {
+    background: linear-gradient(135deg, #ffcc33, #ff9933);
+    transform: scale(1.08);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.link-button i {
+    font-size: 1.5em;
+    left: 15px;
+}
+
+.orange-mic {
+    font-size: 0.5em;
+}
+
+.fab, .fas {
+    font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
+}
