@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,35 +8,21 @@
     <title>うたみかんlinks</title>
     <link rel="icon" href="/favicon.ico" type="image/png">
     <link rel="canonical" href="https://utamikan.netlify.app/">
-    <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' https://www.googletagmanager.com;">
-    <!-- ローカルのFont Awesomeのスタイルシート -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap"></noscript>
     <link rel="stylesheet" href="css/all.min.css">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "MusicGroup",
-        "name": "うたみかん",
-        "url": "https://utamikan.netlify.app/",
-        "genre": "J-Pop",
-        "sameAs": [
-            "https://www.youtube.com/@utamikan",
-            "https://twitter.com/utamikan"
-        ]
-    }
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-W8VREJZ0RY');
     </script>
-    <script src="loadStyles.js" defer></script>
-    <script src="analytics.js" defer></script>
 </head>
 <body>
     <div class="background">
-        <script src="bubble.js" defer></script>
+        <script src="bubble.js"></script>
     </div>
     <div class="container">
         <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image" width="300" height="300">
@@ -47,7 +32,7 @@
                 <i class="fab fa-tiktok"></i> TikTok
             </a></li>
 
-            <li><a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3pti2RxMQ==&utm_source=qr/" class="link-button" aria-label="Instagram" title="うたみかんInstagram">
+            <li><a href="https://www.instagram.com/uta_mikan?igsh=MTMyNXlqa3RpbmRxMQ==&utm_source=qr/" class="link-button" aria-label="Instagram" title="うたみかんInstagram">
                 <i class="fab fa-instagram"></i> Instagram
             </a></li>
 
@@ -56,7 +41,7 @@
             </a></li>
 
             <li><a href="https://lin.ee/KdjohVd" class="link-button" aria-label="ボーカル教室ロマンツァLINE" title="うたみかんボーカル教室ロマンツァLINE">
-                <i class="fab fa-line"></i> ボーカル教室<br>ロマンツザ公式LINE
+                <i class="fab fa-line"></i> ボーカル教室<br>ロマンツァ公式LINE
             </a></li>
 
             <li><a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button" aria-label="サブスク限定オープンチャット" title="うたみかんサブスクオープンチャット">
