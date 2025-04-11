@@ -8,13 +8,19 @@
     <title>うたみかんlinks</title>
     <link rel="icon" href="/favicon.ico" type="image/png">
     <link rel="canonical" href="https://utamikan.netlify.app/">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap"></noscript>
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'nonce-randomNonce' https://www.googletagmanager.com;
+        style-src 'self' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' https://www.transparenttextures.com;">
+
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
-    <script type="application/ld+json">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY" nonce="randomNonce"></script>
+    <script type="application/ld+json" nonce="randomNonce">
     {
         "@context": "https://schema.org",
         "@type": "MusicGroup",
@@ -28,10 +34,10 @@
     }
     </script>
     <script src="analytics.js" defer></script>
+    <script src="loadStyles.js" defer></script>
 </head>
 <body>
     <div class="background">
-        <!-- bubble.js を外部スクリプトとしてインポート -->
         <script src="bubble.js" defer></script>
     </div>
     <div class="container">
