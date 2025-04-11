@@ -1,13 +1,13 @@
 [build]
-  command = "echo 'Static site - no build required'" # または、空のコマンドでも可
-  publish = "." # ルートディレクトリに静的ファイルがある場合
+  command = "" # または、必要なビルドコマンド
+  publish = "." # 公開ディレクトリを明示的に指定（例: public）
 
 # 必須リダイレクト設定
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true  # SPAフォールバック[4][6]
+  force = true
 
 # サイトマップ設定
 [[headers]]
@@ -44,15 +44,15 @@
 
 # プラグイン設定
 [[plugins]]
-package = "@netlify/plugin-sitemap"
-[plugins.inputs]
-  exclude = ["/admin/*", "/temp/*"]
-  changeFreq = "daily"
-  priority = 0.7
+  package = "@netlify/plugin-sitemap"
+  [plugins.inputs]
+    exclude = ["/admin/*", "/temp/*"]
+    changeFreq = "daily"
+    priority = 0.7
 
 [[plugins]]
-  package = "@netlify/plugin-lighthouse"
-  
+  package = "@netlify/plugin-lighthouse" # 設定オプションがないため、[plugins.inputs] セクションを削除
+
 # 開発環境向け追加設定
 [dev]
   framework = "#static"
