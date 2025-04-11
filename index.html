@@ -10,10 +10,11 @@
     <link rel="canonical" href="https://utamikan.netlify.app/">
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self' 'nonce-randomNonce' https://www.googletagmanager.com;
-        style-src 'self' https://fonts.googleapis.com;
-        font-src 'self' https://fonts.gstatic.com; /* フォントの読み込み許可 */
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com;
         img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://www.transparenttextures.com;
+        connect-src 'self' https://www.googletagmanager.com;
     ">
     
     <!-- ローカルのFont Awesomeのスタイルシート -->
@@ -23,8 +24,8 @@
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY" nonce="randomNonce"></script>
-    <script type="application/ld+json" nonce="randomNonce">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
+    <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "MusicGroup",
@@ -61,7 +62,7 @@
             </a></li>
 
             <li><a href="https://lin.ee/KdjohVd" class="link-button" aria-label="ボーカル教室ロマンツァLINE" title="うたみかんボーカル教室ロマンツァLINE">
-                <i class="fab fa-line"></i> ボーカル教室<br>ロマンツァ公式LINE
+                <i class="fab fa-line"></i> ボーカル教室<br>ロマンツザ公式LINE
             </a></li>
 
             <li><a href="https://line.me/ti/g2/_9_PtWiimOf4lzsFMYQhhnPwxN56jlE8siv7xA?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" class="link-button" aria-label="サブスク限定オープンチャット" title="うたみかんサブスクオープンチャット">
