@@ -111,27 +111,3 @@ ul {
 .orange-mic {
     font-size: 0.5em;
 }
-
-.fab, .fas {
-    font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
-}
-
-.fab.fa-tiktok:before {
-    content: "\\e07b";
-}
-
-.fab.fa-instagram:before {
-    content: "\\f16d";
-}
-
-.fab.fa-line:before {
-    content: "\\f3c0";
-}
-
-.fas.fa-list:before {
-    content: "\\f03a";
-}
-
-.fas.fa-users:before {
-    content: "\\f0c0";
-}
