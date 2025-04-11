@@ -7,4 +7,8 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+module.exports = {
+  experimental: {
+    optimizeCss: true, // 最適化オプションの一例
+  },
+};
