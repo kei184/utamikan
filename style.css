@@ -56,8 +56,8 @@ body {
 }
 
 .profile-image {
-    width: 50%;
-    height: auto;
+    aspect-ratio: 1 / 1; /* 縦横比を 1:1 に設定 */
+    width: 300px; /* 幅を指定 */
     margin-bottom: 20px;
     border-radius: 50%;
     display: block;
