@@ -1,5 +1,4 @@
 [build]
-  command = "echo 'Static site - no build required'" # または、空のコマンドでも可
   publish = "." # ルートディレクトリに静的ファイルがある場合
 
 # 必須リダイレクト設定
@@ -7,7 +6,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true  # SPAフォールバック[4][6]
+  force = true # SPAフォールバック
 
 # サイトマップ設定
 [[headers]]
@@ -15,15 +14,19 @@
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
     Cache-Control = "public, max-age=86400, stale-while-revalidate=3600"
-    Link = "</sitemap.xml>; rel=\"sitemap\""
+    # Link = "</sitemap.xml>; rel=\"sitemap\"" # SPAの場合、不要な可能性あり
 
 # セキュリティヘッダー
 [[headers]]
   for = "/*"
   [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: ;"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 # キャッシュ戦略
@@ -44,17 +47,18 @@
 
 # プラグイン設定
 [[plugins]]
-package = "@netlify/plugin-sitemap"
-[plugins.inputs]
-  exclude = ["/admin/*", "/temp/*"]
-  changeFreq = "daily"
-  priority = 0.7
+  package = "@netlify/plugin-sitemap"
+  [plugins.inputs]
+    exclude = ["/admin/*", "/temp/*"]
+    changeFreq = "daily"
+    priority = 0.7
 
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
-  
+  # [plugins.inputs] # 必要に応じてオプションを設定
+
 # 開発環境向け追加設定
 [dev]
-  framework = "#static"
+  framework = "static"
   targetPort = 80
   autoLaunch = false
