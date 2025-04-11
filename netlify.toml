@@ -43,17 +43,20 @@
     Cache-Control = "public, max-age=604800"
 
 [[plugins]]
-  package = "@netlify/plugin-sitemap"
+package = "@netlify/plugin-sitemap"
   [plugins.inputs]
-    exclude = ["/admin/*", "/secret/*"]
-    changeFreq = "weekly"
-    priority = 0.5
+  exclude = ["/admin/*", "/secret/*"]
+  changeFreq = "weekly"
+  priority = 0.5
 
 [[plugins]]
-  package = "netlify-plugin-lighthouse"
+package = "netlify-plugin-lighthouse"
   [plugins.inputs]
-    outputPath = "lighthouse-report.html"
-
+  output_path = "reports/lighthouse.html"  # フォルダ作成必須
+  thresholds:  # オプションでスコア基準設定
+    performance = 0.9
+    accessibility = 0.9
+    
 [dev]
   framework = "nextjs"
   targetPort = 3000
