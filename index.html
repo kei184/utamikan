@@ -12,21 +12,21 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-W8VREJZ0RY');
     </script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet"></noscript>
-
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="css/all.min.css" media="print" onload="this.media='all'; this.onload=null;">
-    <noscript><link rel="stylesheet" href="css/all.min.css"></noscript>
-
     <style>
+        /* 必要なCSSをインラインで記述 */
+        @font-face {
+            font-family: 'M PLUS 1p';
+            src: url('webfonts/MPLUS1p-Medium.ttf') format('ttf');  /* ローカルフォントを使用する場合のパス */
+            font-weight: 400;
+            font-style: normal;
+        }
+        
         body {
             font-family: "M PLUS 1p", sans-serif;
             line-height: 1.6;
@@ -151,7 +151,7 @@
 
 <body>
     <div class="background">
-        <!-- バブルを生成する JavaScript を追加 -->
+        <!-- バブルを生成する JavaScriptを追加 -->
         <script>
             for (let i = 0; i < 30; i++) { // 任意の数のバブルを生成
                 const bubble = document.createElement('div');
