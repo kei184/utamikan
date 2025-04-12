@@ -1,15 +1,26 @@
 {
-  "name": "functions",
+  "name": "utamikan",
   "version": "1.0.0",
-  "main": "sheets.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx serve public",
+    "build": "echo '静的な HTML ページのため、ビルドは不要です。public ディレクトリをそのままデプロイします。'",
+    "optimize": "node scripts/image_optimize.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "devDependencies": {
+    "@netlify/plugin-lighthouse": "^6.0.1",
+    "imagemin": "^8.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.0",
+    "serve": "^14.2.1",
+    "sharp": "^0.33.2"
+  },
   "dependencies": {
-    "node-fetch": "^3.3.2"
+    "googleapis": "^129.0.0",
+    "next": "13.4.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
