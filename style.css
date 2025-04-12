@@ -3,12 +3,12 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background: url(https://www.transparenttextures.com/patterns/food.png), #ffebc6;
+    background: url("food.png"), #ffebc6; /* ローカルの画像を使用 */
     color: #5c3d00;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100vh; /* レイアウトシフト対策 */
     position: relative;
     overflow: hidden;
     padding-top: 20px;
@@ -53,11 +53,12 @@ body {
     margin: 20px 20px;
     overflow: hidden;
     border: 2px solid #d1c4b0;
+    min-height: 500px; /* レイアウトシフト対策 */
 }
 
 .profile-image {
-    aspect-ratio: 1 / 1; /* 縦横比を 1:1 に設定 */
-    width: 300px; /* 幅を指定 */
+    aspect-ratio: 1 / 1;
+    width: 300px;
     margin-bottom: 20px;
     border-radius: 50%;
     display: block;
@@ -97,6 +98,7 @@ ul {
     position: relative;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s;
     border: 2px solid white;
+    aria-label: "リンクボタン"; /* アクセシビリティ向上 */
 }
 
 .link-button:hover {
@@ -117,6 +119,7 @@ ul {
 
 .orange-mic {
     font-size: 0.5em;
+    aria-label: "みかんとマイクの絵文字"; /* アクセシビリティ向上 */
 }
 
 .fab, .fas {
@@ -124,7 +127,21 @@ ul {
     font-weight: 900;
 }
 
-.heading {
-    height: 50px; /* フォント適用後の予測サイズに応じて設定 */
-    overflow: hidden;
+/* @font-face ルールに font-display: swap; を追加 */
+@font-face {
+    font-family: 'M PLUS 1p';
+    src: url('path/to/M-PLUS-1p-Regular.woff2') format('woff2'),
+         url('path/to/M-PLUS-1p-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap; /* フォントの読み込みを最適化 */
+}
+
+@font-face {
+    font-family: 'M PLUS 1p';
+    src: url('path/to/M-PLUS-1p-Bold.woff2') format('woff2'),
+         url('path/to/M-PLUS-1p-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap; /* フォントの読み込みを最適化 */
 }
