@@ -130,8 +130,7 @@ ul {
 /* @font-face ルールに font-display: swap; を追加 */
 @font-face {
     font-family: 'M PLUS 1p';
-    src: url('M-PLUS-1p-Regular.woff2') format('woff2'), /* 正しいパスに修正 */
-         url('M-PLUS-1p-Regular.woff') format('woff'); /* 正しいパスに修正 */
+    src: url('webfonts/MPLUS1p-Regular.ttf') format('ttf'), /* 正しいパスに修正 */
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -139,8 +138,7 @@ ul {
 
 @font-face {
     font-family: 'M PLUS 1p';
-    src: url('M-PLUS-1p-Bold.woff2') format('woff2'), /* 正しいパスに修正 */
-         url('M-PLUS-1p-Bold.woff') format('woff'); /* 正しいパスに修正 */
+    src: url('webfonts/MPLUS1p-Bold.ttf') format('ttf'), /* 正しいパスに修正 */
     font-weight: 700;
     font-style: normal;
     font-display: swap;
