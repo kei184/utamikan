@@ -1,4 +1,3 @@
-// script.js
 const loadButton = document.getElementById('load-button');
 const tableBody = document.getElementById('songTable').getElementsByTagName('tbody')[0];
 const searchInput = document.getElementById('searchInput');
@@ -6,25 +5,35 @@ const filterArtist = document.getElementById('filterArtist');
 const filterGenre = document.getElementById('filterGenre');
 const errorMessage = document.getElementById('error-message');
 
+// API URL
+const API_URL = '/.netlify/functions/sheets';
+
 loadButton.addEventListener('click', loadData);
 
 function loadData() {
     errorMessage.textContent = 'データ読み込み中...';
 
-    fetch('/.netlify/functions/sheets')
-        .then(response => {
+    fetch(API_URL)
+        .then(async response => {
+            const contentType = response.headers.get("Content-Type");
+
             if (!response.ok) {
                 throw new Error(`HTTPエラー: ${response.status} ${response.statusText}`);
             }
+
+            if (!contentType || !contentType.includes("application/json")) {
+                const text = await response.text();
+                throw new Error("サーバーがJSONではないレスポンスを返しました:\n" + text);
+            }
+
             return response.json();
         })
         .then(data => {
             console.log("取得したデータ:", data);
-            tableBody.innerHTML = ''; // テーブルをリセット
+            tableBody.innerHTML = '';
 
             if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
-                const fetchedData = data.values; // データをローカル変数に格納
-
+                const fetchedData = data.values;
                 const artistSet = new Set();
                 const genreCount = {};
 
@@ -51,7 +60,7 @@ function loadData() {
                 updateGenreOptions(filterGenre, genreCount);
 
                 errorMessage.textContent = "";
-                setupSearchAndFilters(fetchedData); // 検索とフィルターのセットアップ
+                setupSearchAndFilters(fetchedData);
             } else {
                 console.warn("データが正しく取得されませんでした:", data);
                 errorMessage.textContent = "データが空または不正です。";
@@ -61,8 +70,6 @@ function loadData() {
             console.error('データ取得エラー:', error);
             if (error instanceof SyntaxError) {
                 errorMessage.textContent = 'サーバーからのレスポンスがJSON形式ではありません。';
-            } else if (error.message.startsWith('HTTPエラー')) {
-                errorMessage.textContent = `HTTPエラー: ${error.message.split(': ')[1]}`;
             } else {
                 errorMessage.textContent = `データの取得に失敗しました: ${error.message}`;
             }
@@ -97,7 +104,6 @@ function updateFilterOptions(selectElement, dataSet) {
     });
 }
 
-// 検索とフィルターのセットアップ
 function setupSearchAndFilters(fetchedData) {
     searchInput.addEventListener('input', () => filterTable(fetchedData));
     filterArtist.addEventListener('change', () => filterTable(fetchedData));
@@ -112,8 +118,8 @@ function filterTable(fetchedData) {
     const rows = document.querySelectorAll('#songTable tbody tr');
 
     rows.forEach((row, index) => {
-        const data = fetchedData[index + 1]; // ヘッダー行をスキップ
-        if (!data) return; // データが存在しない場合はスキップ
+        const data = fetchedData[index + 1];
+        if (!data) return;
 
         let artist = data[0];
         let song = data[1];
@@ -124,14 +130,13 @@ function filterTable(fetchedData) {
         const hiraganaSearchQuery = toHiragana(searchQuery.toLowerCase());
 
         const matchesSearch = hiraganaSong.includes(hiraganaSearchQuery) || hiraganaArtist.includes(hiraganaSearchQuery);
-        const matchesArtist = artistFilter === "" || toHiragana(artist.toLowerCase()).localeCompare(toHiragana(artistFilter.toLowerCase()), 'ja', { sensitivity: 'accent' }) === 0;
-        const matchesGenre = genreFilter === "" || toHiragana(genre.toLowerCase()).localeCompare(toHiragana(genreFilter.toLowerCase()), 'ja', { sensitivity: 'accent' }) === 0;
+        const matchesArtist = artistFilter === "" || toHiragana(artist.toLowerCase()) === toHiragana(artistFilter.toLowerCase());
+        const matchesGenre = genreFilter === "" || toHiragana(genre.toLowerCase()) === toHiragana(genreFilter.toLowerCase());
 
         row.style.display = matchesSearch && matchesArtist && matchesGenre ? "" : "none";
     });
 }
 
-// ひらがな ⇔ カタカナの変換関数 (キャッシュ付き)
 const hiraganaCache = {};
 function toHiragana(str) {
     if (hiraganaCache[str]) return hiraganaCache[str];
@@ -140,12 +145,8 @@ function toHiragana(str) {
     return result;
 }
 
-function isInAppBrowser() {
-    const ua = navigator.userAgent.toLowerCase();
-    return /instagram|line|fbav|twitter|micromessenger/.test(ua);
-}
-
-document.addEventListener("DOMContentLoaded", function() {
+// バブルアニメーション
+document.addEventListener("DOMContentLoaded", function () {
     const backgroundEl = document.querySelector(".background");
     if (backgroundEl) {
         for (let i = 0; i < 20; i++) {
@@ -159,6 +160,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+// Google Analytics 用のリンク追跡
 const links = document.querySelectorAll('a[data-ga-category]');
 links.forEach(link => {
     link.addEventListener('click', () => {
