@@ -123,6 +123,6 @@ ul {
 
 @font-face {
   font-family: 'CustomFont';
-  src: url('path/to/font.woff2') format('woff2');
+  src: url('/webfonts/font.woff2') format('woff2');
   font-display: swap;
 }
