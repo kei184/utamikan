@@ -3,32 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="うたみかんは、楽しく歌を教えるボイストレーナー。TikTokではLIVE配信や歌ってみた動画を投稿中！インスタグラムでレッスン動画もチェック！うたリストの中からLIVE配信でリクエストしてみてね。">
-        <!-- CSP 設定をメタタグで追加 -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://www.googletagmanager.com; img-src 'self' data: https://www.transparenttextures.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
     <title>うたみかんlinks</title>
     <link rel="icon" href="/favicon.ico" type="image/png">
     <link rel="canonical" href="https://utamikan.netlify.app/">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap"></noscript>
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap">
+    </noscript>
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-W8VREJZ0RY');
-    </script>
 </head>
 <body>
     <div class="background">
         <script src="bubble.js" defer></script>
     </div>
     <div class="container">
-        <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image" width="300" height="300">
+        <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image" width="300" height="300" loading="lazy">
         <h1>うたみかん<span class="orange-mic" aria-label="みかんとマイクの絵文字">🍊🎤</span></h1>
         <ul>
             <li><a href="https://www.tiktok.com/@utamikan.boitore" class="link-button" aria-label="TikTok" title="うたみかんTikTok">
@@ -48,6 +41,24 @@
             </a></li>
         </ul>
     </div>
+    
+    <!-- Google Tag Manager の動的読み込み -->
+    <script>
+        window.addEventListener('load', function() {
+            var gtagScript = document.createElement('script');
+            gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY";
+            gtagScript.async = true;
+            document.head.appendChild(gtagScript);
+            
+            gtagScript.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-W8VREJZ0RY');
+            };
+        });
+    </script>
+
     <script src="app_message.js" defer></script>
 </body>
 </html>
