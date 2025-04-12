@@ -7,7 +7,11 @@ exports.handler = async function (event, context) {
         const spreadsheetId = process.env.SPREADSHEET_ID;
 
         if (!credentials || !spreadsheetId) {
-            throw new Error('GOOGLE_CREDENTIALS または SPREADSHEET_ID が設定されていません。');
+            console.error('環境変数 GOOGLE_CREDENTIALS または SPREADSHEET_ID が設定されていません。');
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: '環境変数が設定されていません。' })
+            };
         }
 
         const auth = new google.auth.GoogleAuth({
@@ -33,10 +37,26 @@ exports.handler = async function (event, context) {
         };
 
     } catch (error) {
-        console.error(error);
+        console.error('Google Sheets API エラー:', error);
+
+        let errorMessage = 'データの取得に失敗しました。';
+        let errorType = 'unknown_error';
+
+        if (error.code === 'ERR_INVALID_CREDENTIALS') {
+            errorMessage = '認証エラー: Google Sheets APIの認証に失敗しました。';
+            errorType = 'authentication_error';
+        } else if (error.code === 'APIError') {
+            errorMessage = 'APIエラー: Google Sheets APIからのレスポンスが不正です。';
+            errorType = 'api_error';
+        }
+
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: error.message || 'Failed to fetch data' }) // より具体的なエラーメッセージ
+            body: JSON.stringify({
+                error: errorMessage,
+                details: error.message,
+                type: errorType
+            })
         };
     }
 };
