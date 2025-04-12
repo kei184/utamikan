@@ -56,7 +56,10 @@ exports.handler = async function (event, context) {
                 error: errorMessage,
                 details: error.message,
                 type: errorType
-            })
+            }),
+            headers: {
+                'Content-Type': 'application/json' // エラーレスポンスにもContent-Type: application/jsonを設定
+            }
         };
     }
 };
