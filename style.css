@@ -130,18 +130,18 @@ ul {
 /* @font-face ルールに font-display: swap; を追加 */
 @font-face {
     font-family: 'M PLUS 1p';
-    src: url('webfonts/M-PLUS-1p-Regular.woff2') format('woff2'),
-         url('webfonts/M-PLUS-1p-Regular.woff') format('woff');
+    src: url('M-PLUS-1p-Regular.woff2') format('woff2'), /* 正しいパスに修正 */
+         url('M-PLUS-1p-Regular.woff') format('woff'); /* 正しいパスに修正 */
     font-weight: 400;
     font-style: normal;
-    font-display: swap; /* フォントの読み込みを最適化 */
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'M PLUS 1p';
-    src: url('webfonts/M-PLUS-1p-Bold.woff2') format('woff2'),
-         url('webfonts/M-PLUS-1p-Bold.woff') format('woff');
+    src: url('M-PLUS-1p-Bold.woff2') format('woff2'), /* 正しいパスに修正 */
+         url('M-PLUS-1p-Bold.woff') format('woff'); /* 正しいパスに修正 */
     font-weight: 700;
     font-style: normal;
-    font-display: swap; /* フォントの読み込みを最適化 */
+    font-display: swap;
 }
