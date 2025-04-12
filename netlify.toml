@@ -15,12 +15,6 @@
     Cache-Control = "public, max-age=86400, stale-while-revalidate=3600"
     # Link = "</sitemap.xml>; rel=\"sitemap\"" # SPAの場合、不要な可能性あり
 
-# セキュリティヘッダー
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Content-Security-Policy = "default-src 'self'; script-src 'self' https://*.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: ;"
-
 [[headers]]
   for = "/*"
   [headers.values]
