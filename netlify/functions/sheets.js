@@ -28,13 +28,16 @@ exports.handler = async function (event, context) {
         // 必要なデータのみを返す
         const values = response.data.values;
 
-        return {
-            statusCode: 200,
-            body: JSON.stringify(values),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
+    return {
+        statusCode: 200,
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*', // すべてのオリジンを許可 (本番環境では制限することを推奨)
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type'
+        }
+    };
 
     } catch (error) {
         console.error('Google Sheets API エラー:', error);
