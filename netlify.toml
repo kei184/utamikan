@@ -57,12 +57,13 @@
     priority = 0.7
 
 [[plugins]]
-  package = "@netlify/plugin-lighthouse"
+package = "@netlify/plugin-lighthouse"
+
   [plugins.inputs]
-    performance = 90
-    accessibility = 100
-    bestPractices = 90
-    seo = 90
+  audit_url = "https://utamikan.netlify.app/"
+  thresholds = { performance = 90, accessibility = 100, "best-practices" = 90, seo = 90 }
+  fail_deploy_on_score_thresholds = true
+
 
 # 開発環境向け追加設定
 [dev]
