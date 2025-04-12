@@ -13,14 +13,16 @@
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
     Cache-Control = "public, max-age=86400, stale-while-revalidate=3600"
-    # Link = "</sitemap.xml>; rel=\"sitemap\"" # SPAの場合、不要な可能性あり
 
+# セキュリティヘッダー
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com;"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
 
 # キャッシュ戦略
 [[headers]]
@@ -36,7 +38,15 @@
 [[headers]]
   for = "/images/*"
   [headers.values]
-    Cache-Control = "public, max-age=604800"
+    Cache-Control = "public, max-age=3153600" # 画像ファイルのキャッシュ時間を調整
+
+# CORS設定 (APIエンドポイント用)
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"
 
 # プラグイン設定
 [[plugins]]
@@ -48,10 +58,14 @@
 
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
-  # [plugins.inputs] # 必要に応じてオプションを設定
+  [plugins.inputs]
+    performance = 90
+    accessibility = 100
+    bestPractices = 90
+    seo = 90
 
 # 開発環境向け追加設定
 [dev]
   framework = "static"
-  targetPort = 80
+  targetPort = 3000 # 適切なポート番号に変更
   autoLaunch = false
