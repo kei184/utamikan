@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="うたみかん🍊🎤は、楽しく歌を教えるボイストレーナー。TikTokではLIVE配信や歌ってみた動画を投稿中！インスタグラムでレッスン動画もチェック！うたリストの中からLIVE配信でリクエストしてみてね。">
     <title>うたみかんlinks</title>
     <link rel="icon" href="/favicon.ico" type="image/png">
-    
+
     <!-- Google Fonts with font-display: swap -->
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
 
@@ -23,6 +24,7 @@
             margin: 0;
             padding: 0;
             background: url("food.png") no-repeat center center fixed, #ffebc6;
+            background-size: cover; /* 背景画像を拡大してカバー */
             color: #5c3d00;
             display: flex;
             justify-content: center;
@@ -32,7 +34,7 @@
             overflow: hidden;
             padding-top: 20px;
         }
-        
+
         .container {
             width: 90%;
             max-width: 360px;
@@ -113,8 +115,10 @@
     </style>
 
 </head>
+
 <body>
     <div class="background">
+        <!-- バブルなどの要素をここに追加可能 -->
     </div>
     <div class="container">
         <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image" width="300" height="300"> <!-- 幅と高さを指定 -->
@@ -138,7 +142,11 @@
         </ul>
     </div>
 
-    <script src="gtag.js" defer></script> 
+    <script src="gtag.js" defer></script>
     <script src="app_message.js" defer></script>
+    
+    <!-- bubble.jsを追加 -->
+    <script src="bubble.js" defer></script> <!-- bubble.jsをここに追加 -->
 </body>
+
 </html>
