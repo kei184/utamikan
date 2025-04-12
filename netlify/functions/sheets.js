@@ -2,7 +2,6 @@ const { google } = require('googleapis');
 
 exports.handler = async function (event, context) {
     try {
-        // 環境変数の検証
         const credentials = process.env.GOOGLE_CREDENTIALS;
         const spreadsheetId = process.env.SPREADSHEET_ID;
 
@@ -10,7 +9,13 @@ exports.handler = async function (event, context) {
             console.error('環境変数 GOOGLE_CREDENTIALS または SPREADSHEET_ID が設定されていません。');
             return {
                 statusCode: 500,
-                body: JSON.stringify({ error: '環境変数が設定されていません。' })
+                body: JSON.stringify({ error: '環境変数が設定されていません。' }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type'
+                }
             };
         }
 
@@ -25,18 +30,18 @@ exports.handler = async function (event, context) {
             range: 'Sheet1!A1:C500'
         });
 
-        // 必要なデータのみを返す
         const values = response.data.values;
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type'
-        }
-    };
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ values }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',  // 必要なら Netlify ドメインを指定
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
+            }
+        };
 
     } catch (error) {
         console.error('Google Sheets API エラー:', error);
@@ -60,7 +65,10 @@ exports.handler = async function (event, context) {
                 type: errorType
             }),
             headers: {
-                'Content-Type': 'application/json' // エラーレスポンスにもContent-Type: application/jsonを設定
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type'
             }
         };
     }
