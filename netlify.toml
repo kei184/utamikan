@@ -1,7 +1,6 @@
 [build]
   publish = "." # ルートディレクトリに静的ファイルがある場合
 
-# 必須リダイレクト設定
 [[redirects]]
   from = "/*"
   to = "/index.html"
