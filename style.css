@@ -122,3 +122,15 @@ ul {
     font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
     font-weight: 900;
 }
+
+@font-face {
+    font-family: 'M PLUS 1p';
+    src: url('https://fonts.gstatic.com/s/mplus1p/v9/KtkpAKNyCBnbekWhmhXK9gs.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+.heading {
+    height: 50px; /* フォント適用後の予測サイズに応じて設定 */
+    overflow: hidden;
+}
