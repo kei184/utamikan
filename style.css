@@ -70,6 +70,7 @@ h1 {
     font-size: 2rem;
     color: #ff4500;
     line-height: 1.2;
+    min-height: 50px;
     margin: 0;
 }
 
