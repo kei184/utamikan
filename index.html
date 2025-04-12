@@ -10,8 +10,8 @@
     <link rel="icon" href="/favicon.ico" type="image/png">
     <link rel="canonical" href="https://utamikan.netlify.app/">
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -41,23 +41,6 @@
         </ul>
     </div>
 
-    <script>
-        window.addEventListener('load', function() {
-            var gtagScript = document.createElement('script');
-            gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY";
-            gtagScript.async = true;
-            gtagScript.defer = true; // defer 属性を追加
-            document.head.appendChild(gtagScript);
-
-            gtagScript.onload = function() {
-                window.dataLayer = window.dataLayer || [];
-                function gtag() { dataLayer.push(arguments); }
-                gtag('js', new Date());
-                gtag('config', 'G-W8VREJZ0RY');
-            };
-        });
-    </script>
-
-    <script src="app_message.js" defer></script>
+    <script src="gtag.js" defer></script> <script src="app_message.js" defer></script>
 </body>
 </html>
