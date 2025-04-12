@@ -31,7 +31,7 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ values }),
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'https://utamikan.netlify.app',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type'
       }
