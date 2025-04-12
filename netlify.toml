@@ -22,7 +22,7 @@
   for = "/*"
   [headers.values]
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.google-analytics.com https://www.googletagmanager.com; img-src 'self' data: https://www.transparenttextures.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
-        
+
 # キャッシュ戦略
 [[headers]]
   for = "/assets/*.js"
@@ -58,10 +58,10 @@
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
   [plugins.inputs]
-    audit_url = "https://utamikan.netlify.app/"
+    audits = ["https://utamikan.netlify.app/"] # ここで配列にする
     thresholds = { performance = 90, accessibility = 100, "best-practices" = 90, seo = 90 }
     fail_deploy_on_score_thresholds = true
-
+    
 # 開発環境向け追加設定
 [dev]
   framework = "static"
