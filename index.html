@@ -6,169 +6,118 @@
     <meta name="description" content="うたみかんは、楽しく歌を教えるボイストレーナー。">
     <title>うたみかんlinks</title>
     <link rel="icon" href="/favicon.ico" type="image/png">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Preloads -->
     <link rel="preload" href="webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Main Styles -->
     <link rel="stylesheet" href="css/all.min.css">
     <style>
         body {
-    font-family: "M PLUS 1p", sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background: url("food.png"), #ffebc6; /* ローカルの画像を使用 */
-    color: #5c3d00;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* レイアウトシフト対策 */
-    position: relative;
-    overflow: hidden;
-    padding-top: 20px;
-}
-
-.background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-}
-
-.bubble {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-color: rgba(255, 105, 180, 0.3);
-    border-radius: 50%;
-    animation: float 10s linear infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-}
-
-.container {
-    width: 90%;
-    max-width: 360px;
-    text-align: center;
-    background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
-    padding: 40px 20px;
-    border-radius: 50px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 1;
-    color: black;
-    margin: 20px 20px;
-    overflow: hidden;
-    border: 2px solid #d1c4b0;
-    min-height: 500px; /* レイアウトシフト対策 */
-}
-
-.profile-image {
-    aspect-ratio: 1 / 1;
-    width: 300px;
-    margin-bottom: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-h1 {
-    font-family: 'M PLUS 1p', sans-serif;
-    font-size: 2rem;
-    color: #ff4500;
-    line-height: 1.2;
-    min-height: 50px;
-    margin: 0;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.link-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    max-width: 300px;
-    margin: 10px auto;
-    padding: 15px 20px;
-    background: linear-gradient(135deg, #ffaa00, #ff8c00);
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: bold;
-    font-size: 1.2em;
-    position: relative;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
-    border: 2px solid white;
-    aria-label: "リンクボタン"; /* アクセシビリティ向上 */
-}
-
-.link-button:hover {
-    background: linear-gradient(135deg, #ffcc33, #ff9933);
-    transform: scale(1.08);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.link-button i {
-    font-size: 1.5em;
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 900;
-    text-decoration: none;
-}
-
-.orange-mic {
-    font-size: 0.5em;
-    aria-label: "みかんとマイクの絵文字"; /* アクセシビリティ向上 */
-}
-
-.fab, .fas {
-    font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free";
-    font-weight: 900;
-}
-
-/* @font-face ルールに font-display: swap; を追加 */
-@font-face {
-    font-family: 'M PLUS 1p';
-    src: url('webfonts/MPLUS1p-Regular.ttf') format('ttf'), /* 正しいパスに修正 */
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'M PLUS 1p';
-    src: url('webfonts/MPLUS1p-Bold.ttf') format('ttf'), /* 正しいパスに修正 */
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
+            font-family: "M PLUS 1p", sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: url("food.png") no-repeat center center fixed, #ffebc6;
+            color: #5c3d00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            padding-top: 20px;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 360px;
+            text-align: center;
+            background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
+            padding: 40px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            margin: 20px 20px;
+            overflow: hidden;
+            border: 2px solid #d1c4b0;
+            min-height: 500px;
+        }
 
         .profile-image {
             width: 300px;
-            height: 300px;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h1 {
+            font-family: 'M PLUS 1p', sans-serif;
+            font-size: 2rem;
+            color: #ff4500;
+            line-height: 1.2;
+            min-height: 50px;
+            margin: 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 300px;
+            margin: 10px auto;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #ffaa00, #ff8c00);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2em;
+            position: relative;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+            border: 2px solid white;
+        }
+
+        .link-button:hover {
+            background: linear-gradient(135deg, #ffcc33, #ff9933);
+            transform: scale(1.08);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .link-button i {
+            font-size: 1.5em;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 900;
+        }
+
+        .orange-mic {
+            font-size: 0.5em;
         }
     </style>
+
 </head>
 <body>
     <div class="background">
-        <script src="bubble.js" defer></script>
     </div>
     <div class="container">
         <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image">
-        <h1>うたみかん<span class="orange-mic" aria-label="みかんとマイクの絵文字">🍊🎤</span></h1>
+        <h1>うたみかん<span class="orange-mic">🍊🎤</span></h1>
         <ul>
             <li><a href="https://www.tiktok.com/@utamikan.boitore" class="link-button" aria-label="うたみかんTikTok" title="うたみかんTikTok">
                 <i class="fab fa-tiktok"></i> TikTok
