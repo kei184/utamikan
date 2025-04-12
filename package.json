@@ -15,7 +15,6 @@
     "sharp": "^0.33.2"
   },
   "dependencies": {
-    "@netlify/plugin-nextjs": "^5.10.5",
     "googleapis": "^129.0.0",
     "next": "13.4.19",
     "react": "^18.2.0",

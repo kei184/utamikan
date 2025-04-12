@@ -21,11 +21,6 @@
     lighthouse "^9.6.3"
     puppeteer "^18.0.0"
 
-"@netlify/plugin-nextjs@^5.10.5":
-  version "5.10.5"
-  resolved "https://registry.npmjs.org/@netlify/plugin-nextjs/-/plugin-nextjs-5.10.5.tgz"
-  integrity sha512-4Lw6fy4VMroBGcrdwjhWfnejmeqbTRgqhQKYIBT0AejzPv4HzxLndtSjqcgZp8gXQ7biEfJvk26cXW6rFnM+dw==
-
 "@next/env@13.4.19":
   version "13.4.19"
   resolved "https://registry.npmjs.org/@next/env/-/env-13.4.19.tgz"
