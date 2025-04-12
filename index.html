@@ -23,15 +23,41 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background: url("food.png") repeat, #ffebc6; /* 背景画像を繰り返し表示 */
+            background: url("food.png") repeat, #ffebc6; /* 背景画像を繰り返し */
             color: #5c3d00;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             position: relative;
-            overflow: hidden;
-            padding-top: 20px;
+            overflow: hidden; /* バブルが外にはみ出ないように */
+        }
+
+        .background {
+            position: absolute; /* バブルを背景に */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* バブルのオーバーフローを隠す */
+        }
+
+        .bubble {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            opacity: 0.5;
+            pointer-events: none; /* バブルにマウスイベントを無効に */
+            animation: rise 10s infinite; /* バブルが上に上昇 */
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(100vh); /* 画面の下から登場 */
+            }
+            100% {
+                transform: translateY(-100vh); /* 画面の上へ消える */
+            }
         }
 
         .container {
@@ -117,11 +143,23 @@
 
 <body>
     <div class="background">
-        <!-- バブルなどの要素をここに追加可能 -->
-        <div id="bubbles-container"></div> <!-- バブルが表示されるコンテナ -->
+        <!-- バブルを生成する JavaScript を追加 -->
+        <script>
+            for (let i = 0; i < 30; i++) { // 任意の数のバブルを生成
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 50 + 20; // バブルのサイズ
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + 'vw'; // ランダムな水平位置
+                bubble.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 上昇アニメーションの速度をランダム化
+                document.querySelector('.background').appendChild(bubble);
+            }
+        </script>
     </div>
+
     <div class="container">
-        <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image" width="300" height="300"> <!-- 幅と高さを指定 -->
+        <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image" width="300" height="300">
         <h1>うたみかん<span class="orange-mic">🍊🎤</span></h1>
         <ul>
             <li><a href="https://www.tiktok.com/@utamikan.boitore" class="link-button" aria-label="うたみかんTikTok" title="うたみかんTikTok">
