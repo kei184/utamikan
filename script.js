@@ -59,7 +59,13 @@ function loadData() {
         })
         .catch(error => {
             console.error('データ取得エラー:', error);
-            errorMessage.textContent = `データの取得に失敗しました: ${error.message}`;
+            if (error instanceof SyntaxError) {
+                errorMessage.textContent = 'サーバーからのレスポンスがJSON形式ではありません。';
+            } else if (error.message.startsWith('HTTPエラー')) {
+                errorMessage.textContent = `HTTPエラー: ${error.message.split(': ')[1]}`;
+            } else {
+                errorMessage.textContent = `データの取得に失敗しました: ${error.message}`;
+            }
         });
 }
 
