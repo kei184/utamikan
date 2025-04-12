@@ -1,11 +1,18 @@
+[functions]
+  directory = "netlify/functions"
+
 [build]
   publish = "." # ルートディレクトリに静的ファイルがある場合
+
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true # SPAフォールバック
 
 # サイトマップ設定
 [[headers]]
