@@ -23,8 +23,7 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background: url("food.png") no-repeat center center fixed, #ffebc6;
-            background-size: cover; /* 背景画像を拡大してカバー */
+            background: url("food.png") repeat, #ffebc6; /* 背景画像を繰り返し表示 */
             color: #5c3d00;
             display: flex;
             justify-content: center;
@@ -119,6 +118,7 @@
 <body>
     <div class="background">
         <!-- バブルなどの要素をここに追加可能 -->
+        <div id="bubbles-container"></div> <!-- バブルが表示されるコンテナ -->
     </div>
     <div class="container">
         <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image" width="300" height="300"> <!-- 幅と高さを指定 -->
@@ -146,7 +146,7 @@
     <script src="app_message.js" defer></script>
     
     <!-- bubble.jsを追加 -->
-    <script src="bubble.js" defer></script> <!-- bubble.jsをここに追加 -->
+    <script src="bubble.js" defer></script>
 </body>
 
 </html>
