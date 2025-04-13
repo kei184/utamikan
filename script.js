@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // API URL
     const API_URL = '/.netlify/functions/sheets';
 
-    // ボタンクリック時のハンドラー
-    loadButton.addEventListener('click', loadData);
+    // データを読み込む
+    loadData(); // ページを開いたときに自動でデータを読み込む
 
     function loadData() {
         errorMessage.textContent = 'データ読み込み中...';
@@ -78,15 +78,16 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-    // フィルタリング機能
-    function setupSearchAndFilters(fetchedData) {
-        const filterFunction = () => filterTable(fetchedData); // フィルタリング関数の定義
-        searchInput.addEventListener('input', filterFunction);
-        filterArtist.addEventListener('change', filterFunction);
-        filterGenre.addEventListener('change', filterFunction);
+    // フィルタリング機能の実装
+    setupSearchAndFilters();
+
+    function setupSearchAndFilters() {
+        searchInput.addEventListener('input', () => filterTable());
+        filterArtist.addEventListener('change', () => filterTable());
+        filterGenre.addEventListener('change', () => filterTable());
     }
 
-    function filterTable(fetchedData) {
+    function filterTable() {
         const searchQuery = searchInput.value.toLowerCase();
         const artistFilter = filterArtist.value.toLowerCase();
         const genreFilter = filterGenre.value.toLowerCase();
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const rows = tableBody.getElementsByTagName('tr');
 
         Array.from(rows).forEach((row, index) => {
-            const data = fetchedData[index + 1];
+            const data = songTableData[index]; // songTableDataはデータとして用意。
             if (!data) return;
 
             const artist = data[0].toLowerCase();
@@ -106,6 +107,21 @@ document.addEventListener('DOMContentLoaded', function () {
             const matchesGenre = genreFilter === "" || genre.includes(genreFilter);
 
             row.style.display = (matchesSearch && matchesArtist && matchesGenre) ? "" : "none";
+        });
+    }
+
+    // データをテーブルに描画する関数
+    function renderData(data) {
+        tableBody.innerHTML = ''; // テーブルを初期化
+
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.artist}</td>
+                <td>${item.songTitle}</td>
+                <td>${item.genre}</td>
+            `;
+            tableBody.appendChild(row); // 行をテーブルに追加
         });
     }
 
