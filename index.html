@@ -16,15 +16,36 @@
         gtag('js', new Date());
         gtag('config', 'G-W8VREJZ0RY');
     </script>
-    <!-- End Google Tag Manager -->
 
-    <!-- Font Awesome (自己ホスティング) -->
+    <!-- Font Awesome CSS (自己ホスティング) -->
     <link rel="stylesheet" href="/utamikan/css/all.min.css">
 
+    <!-- カスタムフォントの定義 -->
     <style>
         @font-face {
+            font-family: 'FontAwesomeBrands';
+            src: url('/utamikan/webfonts/fa-brands-400.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'FontAwesomeRegular';
+            src: url('/utamikan/webfonts/fa-regular-400.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'FontAwesomeSolid';
+            src: url('/utamikan/webfonts/fa-solid-900.woff2') format('woff2');
+            font-weight: 900;
+            font-style: normal;
+        }
+
+        @font-face {
             font-family: 'M PLUS 1p';
-            src: url('webfonts/MPLUS1p-Medium.ttf') format('ttf');
+            src: url('webfonts/MPLUS1p-Medium.ttf') format('truetype');
             font-weight: 400;
             font-style: normal;
         }
@@ -135,6 +156,7 @@
         }
 
         .link-button i {
+            font-family: 'FontAwesomeBrands', 'FontAwesomeRegular', 'FontAwesomeSolid';
             font-size: 1.5em;
             margin-right: 10px;
             font-weight: 900;
