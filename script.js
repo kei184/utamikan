@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // API URL
     const API_URL = '/.netlify/functions/sheets';
+    let songTableData = []; // データ全体を保持する変数
 
     // データを読み込む
     loadData(); // ページを開いたときに自動でデータを読み込む
@@ -36,11 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // データが正しく取得されているか確認
                 if (data && data.values && Array.isArray(data.values) && data.values.length > 1) {
-                    const fetchedData = data.values;
+                    songTableData = data.values.slice(1); // 先頭行はヘッダーと仮定
+
                     const artistSet = new Set();
                     const genreCount = {};
 
-                    fetchedData.slice(1).forEach(row => {
+                    songTableData.forEach(row => {
                         if (row.length >= 3) {
                             const artist = row[0];
                             const songTitle = row[1];
@@ -62,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     updateFilterOptions(filterArtist, artistSet);
                     updateGenreOptions(filterGenre, genreCount);
                     errorMessage.textContent = "";
-                    setupSearchAndFilters(fetchedData);
                 } else {
                     console.warn("データが正しく取得されませんでした:", data);
                     errorMessage.textContent = "データが空または不正です。";
@@ -92,36 +93,28 @@ document.addEventListener('DOMContentLoaded', function () {
         const artistFilter = filterArtist.value.toLowerCase();
         const genreFilter = filterGenre.value.toLowerCase();
 
-        const rows = tableBody.getElementsByTagName('tr');
+        tableBody.innerHTML = ''; // テーブルのリセット
 
-        Array.from(rows).forEach((row, index) => {
-            const data = songTableData[index]; // songTableDataはデータとして用意。
-            if (!data) return;
+        songTableData.forEach(row => {
+            if (row.length >= 3) {
+                const artist = row[0].toLowerCase();
+                const songTitle = row[1].toLowerCase();
+                const genre = row[2].toLowerCase();
 
-            const artist = data[0].toLowerCase();
-            const song = data[1].toLowerCase();
-            const genre = data[2].toLowerCase();
+                const matchesSearch = songTitle.includes(searchQuery) || artist.includes(searchQuery);
+                const matchesArtist = artistFilter === "" || artist.includes(artistFilter);
+                const matchesGenre = genreFilter === "" || genre.includes(genreFilter);
 
-            const matchesSearch = song.includes(searchQuery) || artist.includes(searchQuery);
-            const matchesArtist = artistFilter === "" || artist.includes(artistFilter);
-            const matchesGenre = genreFilter === "" || genre.includes(genreFilter);
+                if (matchesSearch && matchesArtist && matchesGenre) {
+                    const searchQuery = `${row[1]} ${row[0]} 歌詞`;
+                    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+                    const songLink = `<a href="${searchUrl}" target="_blank" rel="noopener noreferrer">${row[1]}</a>`;
 
-            row.style.display = (matchesSearch && matchesArtist && matchesGenre) ? "" : "none";
-        });
-    }
-
-    // データをテーブルに描画する関数
-    function renderData(data) {
-        tableBody.innerHTML = ''; // テーブルを初期化
-
-        data.forEach(item => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.artist}</td>
-                <td>${item.songTitle}</td>
-                <td>${item.genre}</td>
-            `;
-            tableBody.appendChild(row); // 行をテーブルに追加
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `<td>${row[0]}</td><td>${songLink}</td><td>${row[2]}</td>`;
+                    tableBody.appendChild(tr);
+                }
+            }
         });
     }
 
