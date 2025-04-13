@@ -21,7 +21,8 @@
             src: url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700&display=swap') format('woff2');
         }
 
-        body {
+        /* 重要なCSSをインラインで指定 */
+        html, body {
             font-family: "M PLUS 1p", sans-serif;
             line-height: 1.6;
             margin: 0;
@@ -42,6 +43,7 @@
             width: 100%; height: 100%;
             overflow: hidden;
             z-index: 1;
+            pointer-events: none;
         }
 
         .bubble {
@@ -65,7 +67,7 @@
             background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            margin: 20px; /* コンテナのマージンを調整 */
+            margin: 20px;
             z-index: 3; 
             display: flex;
             flex-direction: column;
@@ -75,15 +77,17 @@
         h1 {
             color: #fff;
             text-align: center;
-            font-size: 1.5em;
+            font-size: 1.5em; /* フォントサイズを1.5emに設定 */
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
             padding: 10px; 
             border-radius: 15px; 
             border: 2px solid white;
             margin: 20px auto;
-            display: flex; align-items: center; justify-content: center;
-            width: calc(100% - 20px); /* コンテナに合わせる */
-            max-width: 1000px; /* 最大幅を指定 */
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            width: calc(100% - 40px); /* 幅を調整 */
+            max-width: 1000px; 
             height: auto; /* 自動で高さを調整 */
         }
 
