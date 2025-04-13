@@ -38,18 +38,15 @@
 
         .background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             overflow: hidden;
             z-index: 1;
         }
 
         .bubble {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
             animation: float 10s infinite linear;
@@ -63,13 +60,12 @@
         }
 
         .container {
-            width: 100%; 
-            max-width: 1000px;
+            width: 100%; max-width: 1000px;
             padding: 30px 20px;
             background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            margin: 0 20px;
+            margin: 20px; /* コンテナのマージンを調整 */
             z-index: 3; 
             display: flex;
             flex-direction: column;
@@ -79,17 +75,16 @@
         h1 {
             color: #fff;
             text-align: center;
-            font-size: 3.2em; /* 2倍に設定 */
+            font-size: 2em; /* フォントサイズを2emに設定 */
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
             padding: 10px; 
-            border-radius: 15px; /* 角を丸める */
+            border-radius: 15px; 
             border: 2px solid white;
             margin: 20px auto;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            height: 60px; /* 高さを指定 */
-            width: 100%; /* 幅を指定 */
+            display: flex; align-items: center; justify-content: center;
+            width: calc(100% - 40px); /* コンテナに合わせる */
+            max-width: 1000px; /* 最大幅を指定 */
+            height: auto; /* 自動で高さを調整 */
         }
 
         h1 img {
@@ -103,27 +98,21 @@
         }
 
         .form-container {
-            display: flex; 
-            justify-content: space-between; 
-            gap: 15px;
-            width: 100%; 
-            margin-bottom: 20px; 
+            display: flex; justify-content: space-between; gap: 15px;
+            width: 100%; margin-bottom: 20px; flex-wrap: nowrap;
         }
 
         .search-form, .filter-form {
             flex: 1 1 30%; 
             min-width: 200px; 
             background: rgba(255, 255, 255, 0.9);
-            padding: 10px; 
-            border-radius: 10px; 
+            padding: 10px; border-radius: 10px; 
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .search-form label, .filter-form label {
-            font-weight: bold; 
-            font-size: 1.1em;
-            color: #ff8c00; 
-            margin-bottom: 5px; 
+            font-weight: bold; font-size: 1.1em;
+            color: #ff8c00; margin-bottom: 5px; 
         }
 
         .search-form input, .filter-form select {
@@ -166,6 +155,12 @@
 
         tr:hover {
             background-color: #ffdab9; 
+        }
+
+        /* テーブルに角を丸くする */
+        table {
+            border-radius: 15px; 
+            overflow: hidden; /* 角を丸めるためにoverflowを指定 */
         }
 
         #load-button {
@@ -229,12 +224,14 @@
                 <label for="searchInput">検索</label>
                 <input type="text" id="searchInput" placeholder="曲名またはアーティストで検索...">
             </div>
+
             <div class="filter-form">
                 <label for="filterArtist">アーティストで選ぶ</label>
                 <select id="filterArtist">
                     <option value="">すべて</option>
                 </select>
             </div>
+
             <div class="filter-form">
                 <label for="filterGenre">ジャンルで選ぶ</label>
                 <select id="filterGenre">
