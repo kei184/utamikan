@@ -7,6 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>うたみかんレパートリー曲</title>
 
+    <!-- Content Security Policy メタタグ -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: https://www.transparenttextures.com;
+        connect-src 'self' https://www.googletagmanager.com;
+    ">
+
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap"></noscript>
 
@@ -14,12 +24,12 @@
         @font-face {
             font-family: 'M PLUS 1p';
             font-weight: 400;
-            src: url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400&display=swap') format('woff2');
+            src: url('https://fonts.gstatic.com/s/mplus1p/v9/UwQq9_80Bh5iZj3gK-6FfRZF-NLf.woff2') format('woff2');
         }
         @font-face {
             font-family: 'M PLUS 1p';
             font-weight: 700;
-            src: url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@700&display=swap') format('woff2');
+            src: url('https://fonts.gstatic.com/s/mplus1p/v9/UwQq9_80Bh5iZj3gK-6FfRZfNNhf.woff2') format('woff2');
         }
 
         /* 基本スタイル設定 */
@@ -74,14 +84,14 @@
 
         h1 {
             width: 100%;
-            color: #fff; text-align: center; font-size: 1.5em; /* フォントサイズを1.5emに設定 */
+            color: #fff; text-align: center; font-size: 1.5em;
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
             padding: 10px; 
             border-radius: 15px; 
             border: 2px solid white;
             margin: 20px; 
             display: flex; align-items: center; justify-content: center;
-            height: auto; /* 高さを自動調整 */
+            height: auto;
             box-sizing: border-box; 
         }
 
@@ -127,7 +137,7 @@
             background-color: #f9f0e6; 
             border-radius: 10px; 
             margin-bottom: 20px; border: 2px solid white;
-            overflow: hidden; /* 角を丸めるためにoverflowを指定 */
+            overflow: hidden;
         }
 
         .gradient-header {
