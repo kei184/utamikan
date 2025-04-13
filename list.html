@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>うたみかんレパートリー曲</title>
 
-    <style>
-        @font-face {
-            font-family: 'M PLUS 1p';
-            font-weight: 400;
-            src: url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap') format('woff2');
-        }
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" as="style">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap"></noscript>
 
+    <style>
         /* 重要なCSSをインラインで指定 */
-        html, body {
+        body {
             font-family: "M PLUS 1p", sans-serif;
             line-height: 1.6;
             margin: 0;
@@ -27,28 +24,26 @@
             justify-content: center;
             align-items: flex-start;
             padding-top: 20px;
+            position: relative;
         }
 
-        /* バブルエフェクト */
         .background {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             overflow: hidden;
             z-index: 1;
-            pointer-events: none;
         }
+
         .bubble {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
             animation: float 10s infinite linear;
             bottom: -100px;
         }
+
         @keyframes float {
             0% { transform: translateY(0) scale(0.8); opacity: 0; }
             50% { opacity: 1; }
@@ -56,17 +51,16 @@
         }
 
         .container {
-            width: 100%;
-            max-width: 1000px;
+            width: 100%; max-width: 1000px;
             padding: 30px 20px;
             background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             margin: 0 20px;
-            z-index: 3; /* 複数階層回避 */
+            z-index: 3;
             display: flex;
             flex-direction: column;
-            align-items: center; /* 縦に中央揃え */
+            align-items: center;
         }
 
         h1 {
@@ -74,80 +68,60 @@
             text-align: center;
             font-size: 1.6em;
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
-            padding: 10px;
-            border-radius: 25px;
+            padding: 20px; /* paddingを増加 */
+            border-radius: 15px; /* 角の丸みを減少 */
             border: 2px solid white;
-            margin: 40px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 50px; /* 高さを指定 */
+            margin: 20px auto; /* 上下のマージンを減少させてコンパクトに */
+            display: flex; align-items: center; justify-content: center;
+            min-height: 60px; /* 高さを指定 */
         }
 
         h1 img {
-            width: 40px;
-            height: 40px;
+            width: 30px; height: 30px; /* 画像サイズの調整 */
             margin: 0 10px;
         }
 
         a {
-            color: #ff8c00;
-            text-decoration: underline;
+            color: #ff8c00; /* オレンジ色 */
+            text-decoration: underline; 
         }
 
         .form-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            width: 100%;
-            margin-bottom: 20px;
+            display: flex; justify-content: space-between; gap: 15px;
+            width: 100%; margin-bottom: 20px; flex-wrap: nowrap;
         }
 
         .search-form, .filter-form {
-            flex: 1 1 30%;
-            min-width: 200px;
+            flex: 1 1 30%; min-width: 200px;
             background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 10px;
+            padding: 10px; border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .search-form label, .filter-form label {
-            font-weight: bold;
-            font-size: 1.1em;
-            color: #ff8c00;
-            margin-bottom: 5px;
+            font-weight: bold; font-size: 1.1em;
+            color: #ff8c00; margin-bottom: 5px; 
         }
 
         .search-form input, .filter-form select {
-            padding: 10px;
-            border: 2px solid #ff8c00;
-            border-radius: 10px;
-            background-color: #fff0f5;
-            font-size: 1em;
-            width: 100%;
-            box-sizing: border-box;
+            padding: 10px; border: 2px solid #ff8c00; border-radius: 10px; 
+            background-color: #fff0f5; font-size: 1em;
+            width: 100%; box-sizing: border-box; 
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #f9f0e6;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            border: 2px solid white;
+            width: 100%; border-collapse: collapse; 
+            background-color: #f9f0e6; border-radius: 15px;
+            margin-bottom: 20px; border: 2px solid white;
         }
 
         .gradient-header {
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
-            color: white;
-            border: 2px solid white;
+            color: white; border: 2px solid white; 
         }
 
         th, td {
-            padding: 14px;
-            text-align: left;
+            padding: 14px; text-align: left;
         }
 
         th {
@@ -155,50 +129,38 @@
         }
 
         tr:nth-child(even) {
-            background-color: #fff4e6;
+            background-color: #fff4e6; 
         }
 
         tr:hover {
-            background-color: #ffdab9;
+            background-color: #ffdab9; 
         }
 
         #load-button {
-            display: block;
-            margin: 20px auto;
-            padding: 15px 25px;
+            display: block; margin: 20px auto; padding: 15px 25px;
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
-            color: white;
-            border: 2px solid white;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.4em;
-            font-weight: bold;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+            color: white; border: 2px solid white;
+            border-radius: 25px; cursor: pointer;
+            font-size: 1.4em; font-weight: bold; 
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s; 
         }
 
         #load-button:hover {
             background: linear-gradient(135deg, #ffcc33, #ff9933);
-            transform: scale(1.08);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: scale(1.08); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         #error-message {
-            color: red;
-            text-align: center;
-            margin-top: 10px;
-            font-weight: bold;
+            color: red; text-align: center; 
+            margin-top: 10px; font-weight: bold; 
         }
 
         @media (max-width: 768px) {
             .form-container {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: column; align-items: center; 
             }
-
             .search-form, .filter-form {
-                flex: 1 1 100%;
-                min-width: 80%;
-                margin-bottom: 15px;
+                flex: 1 1 100%; min-width: 80%; margin-bottom: 15px; 
             }
         }
     </style>
@@ -206,7 +168,6 @@
 
 <body>
     <div class="background">
-        <!-- バブルエフェクト -->
         <div class="bubble" style="left: 20%; animation-delay: 0s;"></div>
         <div class="bubble" style="left: 40%; animation-delay: 2s;"></div>
         <div class="bubble" style="left: 60%; animation-delay: 1s;"></div>
@@ -255,7 +216,6 @@
         <div id="error-message"></div>
     </div>
 
-    <!-- Google Tag Managerをdeferで読み込む -->
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -267,7 +227,7 @@
     <script src="script.js" defer></script>
     <script>
         window.addEventListener('load', function() {
-            const loadButton = document.getElementById('load-button');
+            var loadButton = document.getElementById('load-button');
             if (loadButton) {
                 loadButton.click();
             }
