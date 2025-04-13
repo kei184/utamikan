@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -8,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>うたみかんレパートリー曲</title>
 
+    <!-- Content Security Policy メタタグ -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self'; 
         script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com;
@@ -16,13 +16,15 @@
         img-src 'self' data: https://www.transparenttextures.com;
         connect-src 'self' https://www.googletagmanager.com;
     ">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap"></noscript>
+
+    <!-- Google Fonts のリンク -->
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap" rel="stylesheet"></noscript>
 
     <style>
-        /* 基本スタイル設定 */
+        /* フォントファミリーの使用方法は、Google Fontsからの指示に従って指定 */
         body {
-            font-family: "M PLUS 1p", sans-serif;
+            font-family: 'M PLUS 1p', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -61,7 +63,7 @@
 
         .container {
             width: 100%; max-width: 1000px;
-            padding: 30px 20px;
+            padding: 30px 10px;
             background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -71,16 +73,15 @@
         }
 
         h1 {
-            width: 100%; 
-            color: #fff; text-align: center; font-size: 1.5em; /* フォントサイズを1.5emに設定 */
+            width: 100%;
+            color: #fff; text-align: center; font-size: 1.5em;
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
             padding: 10px; 
             border-radius: 15px; 
             border: 2px solid white;
             margin: 20px; 
             display: flex; align-items: center; justify-content: center;
-            width: calc(100% - 20px); /* 幅を計算して調整 */
-            height: auto; /* 高さを自動調整 */
+            height: auto;
             box-sizing: border-box; 
         }
 
@@ -101,11 +102,10 @@
 
         .search-form, .filter-form {
             flex: 1 1 30%; 
-            min-width: 200px; 
             background: rgba(255, 255, 255, 0.9);
             padding: 10px; border-radius: 10px; 
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: calc(100% / 3 - 20px); /* 幅を均一にする */
+            width: 93%;
         }
 
         .search-form label, .filter-form label {
@@ -127,7 +127,7 @@
             background-color: #f9f0e6; 
             border-radius: 10px; 
             margin-bottom: 20px; border: 2px solid white;
-            overflow: hidden; /* 角を丸めるためにoverflowを指定 */
+            overflow: hidden;
         }
 
         .gradient-header {
@@ -242,13 +242,5 @@
     </script>
 
     <script src="script.js" defer></script>
-    <script>
-        window.addEventListener('load', function() {
-            var loadButton = document.getElementById('load-button');
-            if (loadButton) {
-                loadButton.click();
-            }
-        });
-    </script>
 </body>
 </html>
