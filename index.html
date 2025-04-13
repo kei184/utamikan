@@ -18,11 +18,13 @@
     </script>
     <!-- End Google Tag Manager -->
 
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMD8u+9PCBUWl5W1cJdQD2I7pVYLz7Eh5KW6IoY" crossorigin="anonymous">
+
     <style>
-        /* 必要なCSSをインラインで記述 */
         @font-face {
             font-family: 'M PLUS 1p';
-            src: url('webfonts/MPLUS1p-Medium.ttf') format('ttf');  /* ローカルフォントを使用する場合のパス */
+            src: url('webfonts/MPLUS1p-Medium.ttf') format('ttf');
             font-weight: 400;
             font-style: normal;
         }
@@ -32,40 +34,40 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background: url("food.png") repeat, #ffebc6; /* 背景画像を繰り返し */
+            background: url("food.png") repeat, #ffebc6;
             color: #5c3d00;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             position: relative;
-            overflow: hidden; /* バブルが外にはみ出ないように */
+            overflow: hidden;
         }
 
         .background {
-            position: absolute; /* バブルを背景に */
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* バブルのオーバーフローを隠す */
+            overflow: hidden;
         }
 
         .bubble {
             position: absolute;
-            background-color: rgba(255, 182, 193, 0.7); /* 薄いピンクに変更 */
+            background-color: rgba(255, 182, 193, 0.7);
             border-radius: 50%;
             opacity: 0.7;
-            pointer-events: none; /* バブルにマウスイベントを無効に */
-            animation: rise 10s infinite; /* バブルが上に上昇 */
+            pointer-events: none;
+            animation: rise 10s infinite;
         }
 
         @keyframes rise {
             0% {
-                transform: translateY(100vh); /* 画面の下から登場 */
+                transform: translateY(100vh);
             }
             100% {
-                transform: translateY(-100vh); /* 画面の上へ消える */
+                transform: translateY(-100vh);
             }
         }
 
@@ -79,15 +81,13 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
-            margin: 20px 20px;
             overflow: hidden;
             border: 2px solid #d1c4b0;
-            min-height: 500px;
         }
 
         .profile-image {
             width: 300px;
-            height: auto; /* 高さを自動に設定 */
+            height: auto;
             margin-bottom: 20px;
             display: block;
             margin-left: auto;
@@ -136,10 +136,7 @@
 
         .link-button i {
             font-size: 1.5em;
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
+            margin-right: 10px;
             font-weight: 900;
         }
 
@@ -151,16 +148,15 @@
 
 <body>
     <div class="background">
-        <!-- バブルを生成する JavaScriptを追加 -->
         <script>
-            for (let i = 0; i < 30; i++) { // 任意の数のバブルを生成
+            for (let i = 0; i < 30; i++) {
                 const bubble = document.createElement('div');
                 bubble.className = 'bubble';
-                const size = Math.random() * 50 + 20; // バブルのサイズ
+                const size = Math.random() * 50 + 20;
                 bubble.style.width = size + 'px';
                 bubble.style.height = size + 'px';
-                bubble.style.left = Math.random() * 100 + 'vw'; // ランダムな水平位置
-                bubble.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 上昇アニメーションの速度をランダム化
+                bubble.style.left = Math.random() * 100 + 'vw';
+                bubble.style.animationDuration = (Math.random() * 5 + 5) + 's';
                 document.querySelector('.background').appendChild(bubble);
             }
         </script>
