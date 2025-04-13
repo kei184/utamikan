@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>うたみかんレパートリー曲</title>
 
+    <!-- Google Fontsのインラインスタイル -->
     <style>
         @font-face {
             font-family: 'M PLUS 1p';
@@ -32,6 +33,33 @@
             align-items: flex-start;
             padding-top: 20px; /* 見出しの表示を考慮した余白 */
             position: relative; /* 子要素の絶対配置に備え */
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255, 105, 180, 0.3);
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+            bottom: -100px; /* 下から現れるように調整 */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
         }
 
         .container {
@@ -66,6 +94,7 @@
             margin: 0 10px;
         }
 
+        /* リンクテキストをオレンジ色に設定 */
         a {
             color: #ff8c00; /* オレンジ色 */
             text-decoration: underline; /* 下線を追加 */
@@ -78,6 +107,7 @@
             width: 100%;
             margin-bottom: 20px;
             flex-wrap: nowrap;
+            flex-direction: row;
         }
 
         .search-form, .filter-form {
@@ -122,13 +152,11 @@
             border: 2px solid white;
         }
 
-        th, td {
+        th {
             padding: 14px;
             text-align: left;
-        }
-
-        th {
             font-weight: bold;
+            border: none;
         }
 
         tr:nth-child(even) {
@@ -137,6 +165,12 @@
 
         tr:hover {
             background-color: #ffdab9;
+        }
+
+        td {
+            border: 1px solid #ff8c00;
+            padding: 14px;
+            text-align: left;
         }
 
         #load-button {
@@ -183,6 +217,7 @@
 
 <body>
     <div class="background">
+        <!-- バブルエフェクトを配置する -->
         <div class="bubble" style="left: 20%; animation-delay: 0s;"></div>
         <div class="bubble" style="left: 40%; animation-delay: 2s;"></div>
         <div class="bubble" style="left: 60%; animation-delay: 1s;"></div>
@@ -233,6 +268,7 @@
         <div id="error-message"></div>
     </div>
 
+    <!-- Google Tag Managerをdeferで読み込む -->
     <script defer src="https://www.googletagmanager.com/gtag/js?id=G-W8VREJZ0RY"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -244,7 +280,7 @@
     <script src="script.js" defer></script>
     <script>
         window.addEventListener('load', function() {
-            const loadButton = document.getElementById('load-button');
+            var loadButton = document.getElementById('load-button');
             if (loadButton) {
                 loadButton.click();
             }
