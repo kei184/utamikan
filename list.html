@@ -27,24 +27,7 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Google Fonts の読み込み後に適用 */
-        @font-face {
-            font-family: 'M PLUS 1p';
-            font-style: normal;
-            font-weight: 400;
-            src: url('https://fonts.gstatic.com/s/mplus1p/v12/ea8escMIHO0q0cjoDCuVAIG9VGMBZwE.woff2') format('woff2');
-            font-display: swap; /* フォントが読み込まれるまでフォールバックを使用 */
-        }
-
-        @font-face {
-            font-family: 'M PLUS 1p';
-            font-style: normal;
-            font-weight: 700;
-            src: url('https://fonts.gstatic.com/s/mplus1p/v12/ea8escMIHO0q0cjoDCuVAIG_Where0.woff2') format('woff2');
-            font-display: swap;
-        }
-
-        /* フォントファミリーの使用方法は、Google Fontsからの指示に従って指定 */
+        /* フォントファミリーの使用方法 */
         body {
             font-family: 'M PLUS 1p', sans-serif;
             line-height: 1.6;
@@ -65,7 +48,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             overflow: hidden;
-            z-index: -1; /* バブルを背景に */
+            z-index: -1;
         }
 
         .bubble {
@@ -203,7 +186,7 @@
     </style>
 
     <script>
-        // 非同期にGoogle Fontsをロード
+        // Google Fonts の非同期読み込み
         (function() {
             var wf = document.createElement('link');
             wf.href = 'https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&display=swap';
