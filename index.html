@@ -18,7 +18,7 @@
     </script>
 
     <!-- Font Awesome CSS (自己ホスティング) -->
-    <link rel="stylesheet" href="/utamikan/css/all.min.css">
+    <link rel="stylesheet" href="/css/all.min.css">
 
     <!-- カスタムフォントの定義 -->
     <style>
@@ -102,8 +102,9 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
-            overflow: hidden;
+            overflow-y: auto; /* 縦スクロールを可能にする */
             border: 2px solid #d1c4b0;
+            max-height: 80vh; /* コンテナの最大高さを制限 */
         }
 
         .profile-image {
