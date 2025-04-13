@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>うたみかんレパートリー曲</title>
 
-    <!-- Google Fontsをインラインスタイルとして追加 -->
+    <!-- Google Fontsのインラインスタイル -->
     <style>
         @font-face {
             font-family: 'M PLUS 1p';
@@ -62,8 +62,14 @@
 
         h1 img {
             width: 40px;
-            height: auto;
+            height: auto; /* 自動的に高さを調整 */
             margin: 0 10px;
+        }
+
+        /* リンクテキストをオレンジ色に設定 */
+        a {
+            color: #ff8c00; /* オレンジ色 */
+            text-decoration: underline; /* 下線を追加 */
         }
 
         .background {
@@ -99,7 +105,7 @@
         .search-form label, .filter-form label {
             font-weight: bold;
             font-size: 1.1em;
-            color: #ff8c00;
+            color: #ff8c00; /* ラベルもオレンジ色 */
             margin-bottom: 5px;
         }
 
@@ -197,9 +203,9 @@
 
     <div class="container">
         <h1>
-            <img src="/mikan.png" alt="Mikan Icon">
+            <img src="/mikan.png" alt="うたみかん Icon">
             レパートリー曲
-            <img src="/mikan.png" alt="Mikan Icon">
+            <img src="/mikan.png" alt="うたみかん Icon">
         </h1>
 
         <div class="form-container">
