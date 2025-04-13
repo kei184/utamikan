@@ -16,7 +16,7 @@
             font-weight: 400;
             src: url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400&display=swap') format('woff2');
         }
-        
+
         @font-face {
             font-family: 'M PLUS 1p';
             font-weight: 700;
@@ -49,8 +49,7 @@
 
         .bubble {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
             animation: float 10s infinite linear;
@@ -64,17 +63,14 @@
         }
 
         .container {
-            width: 100%;
-            max-width: 1000px;
+            width: 100%; max-width: 1000px;
             padding: 30px 20px;
             background: linear-gradient(135deg, #faf3e0, #efe4d2, #d1c4b0);
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            margin: 20px;
-            z-index: 3; 
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* 中央揃え */
+            margin: 20px; 
+            display: flex; flex-direction: column; align-items: center;
+            z-index: 3;
         }
 
         h1 {
@@ -85,12 +81,12 @@
             padding: 10px; 
             border-radius: 15px; 
             border: 2px solid white;
-            margin: 20px auto;
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            width: calc(100% - 40px); /* 幅を調整 */
-            height: auto; /* 自動で高さを調整 */
+            margin: 20px 0; /* 上下のマージンを調整、左右は0 */
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; /* 幅を100%に設定 */
+            max-width: calc(100% - 40px); /* コンテナ内にフィットさせる */ 
+            height: auto; /* 高さを自動調整 */
+            box-sizing: border-box; /* パディングを考慮 */
         }
 
         h1 img {
@@ -103,17 +99,19 @@
             text-decoration: underline;
         }
 
+        /* フォーム設定 */
         .form-container {
             display: flex; justify-content: space-between; gap: 15px;
             width: 100%; margin-bottom: 20px; flex-wrap: nowrap;
         }
 
         .search-form, .filter-form {
-            flex: 1 1 30%; 
+            flex: 1 1 30%;
             min-width: 200px; 
             background: rgba(255, 255, 255, 0.9);
             padding: 10px; border-radius: 10px; 
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: calc(100% / 3 - 10px); /* 幅を均等に */
         }
 
         .search-form label, .filter-form label {
@@ -122,32 +120,27 @@
         }
 
         .search-form input, .filter-form select {
-            padding: 10px; 
-            border: 2px solid #ff8c00; 
-            border-radius: 10px; 
-            background-color: #fff0f5; 
-            font-size: 1em; 
-            width: 100%; box-sizing: border-box; 
+            padding: 10px; border: 2px solid #ff8c00; 
+            border-radius: 10px; background-color: #fff0f5; 
+            font-size: 1em; width: 100%; box-sizing: border-box;
         }
 
+        /* テーブルのスタイル */
         table {
-            width: 100%; 
-            border-collapse: collapse; 
+            width: 100%; border-collapse: collapse; 
             background-color: #f9f0e6; 
             border-radius: 15px; 
-            margin-bottom: 20px; 
-            border: 2px solid white;
+            margin-bottom: 20px; border: 2px solid white;
+            overflow: hidden; /* 角を丸めるためにoverflowを指定 */
         }
 
         .gradient-header {
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
-            color: white; 
-            border: 2px solid white; 
+            color: white; border: 2px solid white; 
         }
 
         th, td {
-            padding: 14px; 
-            text-align: left;
+            padding: 14px; text-align: left;
         }
 
         th {
@@ -162,37 +155,23 @@
             background-color: #ffdab9; 
         }
 
-        /* テーブルに角を丸くする */
-        table {
-            border-radius: 15px; 
-            overflow: hidden; /* 角を丸めるためにoverflowを指定 */
-        }
-
         #load-button {
-            display: block; 
-            margin: 20px auto; 
-            padding: 15px 25px;
+            display: block; margin: 20px auto; padding: 15px 25px;
             background: linear-gradient(135deg, #ffaa00, #ff8c00);
-            color: white; 
-            border: 2px solid white;
-            border-radius: 25px; 
-            cursor: pointer; 
-            font-size: 1.4em; 
-            font-weight: bold; 
+            color: white; border: 2px solid white;
+            border-radius: 25px; cursor: pointer; 
+            font-size: 1.4em; font-weight: bold; 
             transition: transform 0.2s ease-in-out, box-shadow 0.2s; 
         }
 
         #load-button:hover {
             background: linear-gradient(135deg, #ffcc33, #ff9933);
-            transform: scale(1.08); 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+            transform: scale(1.08); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
         }
 
         #error-message {
-            color: red; 
-            text-align: center; 
-            margin-top: 10px; 
-            font-weight: bold; 
+            color: red; text-align: center; 
+            margin-top: 10px; font-weight: bold; 
         }
 
         @media (max-width: 768px) {
@@ -201,12 +180,10 @@
                 align-items: center; 
             }
             h1, .search-form, .filter-form {
-                width: 100%; /* 幅を同じにする */
-                max-width: 500px; /* 幅を制限 */
+                width: 100%; max-width: 100%; /* 幅を共通にする */
             }
             .search-form, .filter-form {
-                min-width: 80%; /* 幅を維持 */
-                margin-bottom: 15px; 
+                min-width: 80%; margin-bottom: 15px; 
             }
         }
     </style>
