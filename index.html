@@ -54,19 +54,25 @@
 
         .bubble {
             position: absolute;
-            width: 50px; height: 50px;
+            width: 50px; 
+            height: 50px;
             background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
-            animation: float 10s infinite linear;
+            animation: rise 10s infinite linear;
             bottom: -100px;
         }
 
         @keyframes rise {
             0% {
                 transform: translateY(100vh);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
             }
             100% {
                 transform: translateY(-100vh);
+                opacity: 0;
             }
         }
 
@@ -158,12 +164,7 @@
 </head>
 
 <body>
-    <div class="background">
-        <div class="bubble" style="left: 20%; animation-delay: 0s;"></div>
-        <div class="bubble" style="left: 40%; animation-delay: 2s;"></div>
-        <div class="bubble" style="left: 60%; animation-delay: 1s;"></div>
-        <div class="bubble" style="left: 80%; animation-delay: 4s;"></div>
-    </div>
+    <div class="background"></div>
 
     <div class="container">
         <img src="/mikan.png" alt="うたみかんのプロフィール画像" class="profile-image">
