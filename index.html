@@ -54,11 +54,11 @@
 
         .bubble {
             position: absolute;
-            background-color: rgba(255, 182, 193, 0.7);
+            width: 50px; height: 50px;
+            background-color: rgba(255, 105, 180, 0.3);
             border-radius: 50%;
-            opacity: 0.7;
-            pointer-events: none;
-            animation: rise 10s infinite;
+            animation: float 10s infinite linear;
+            bottom: -100px;
         }
 
         @keyframes rise {
@@ -159,18 +159,10 @@
 
 <body>
     <div class="background">
-        <script>
-            for (let i = 0; i < 30; i++) {
-                const bubble = document.createElement('div');
-                bubble.className = 'bubble';
-                const size = Math.random() * 50 + 20;
-                bubble.style.width = size + 'px';
-                bubble.style.height = size + 'px';
-                bubble.style.left = Math.random() * 100 + 'vw';
-                bubble.style.animationDuration = (Math.random() * 5 + 5) + 's';
-                document.querySelector('.background').appendChild(bubble);
-            }
-        </script>
+        <div class="bubble" style="left: 20%; animation-delay: 0s;"></div>
+        <div class="bubble" style="left: 40%; animation-delay: 2s;"></div>
+        <div class="bubble" style="left: 60%; animation-delay: 1s;"></div>
+        <div class="bubble" style="left: 80%; animation-delay: 4s;"></div>
     </div>
 
     <div class="container">
@@ -197,6 +189,7 @@
 
     <script src="gtag.js" defer></script>
     <script src="app_message.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
